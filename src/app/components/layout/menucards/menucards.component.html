@@ -1,0 +1,13 @@
+<a class="link_sin" [routerLink]="menuDetalle.direccion">
+    <div class="card text-center" style="cursor:pointer;width: 18rem;  background-color :  transparent !important;border:none !important">
+        <div [ngStyle]="{'background-image': 'url('+menuDetalle.img+')' , 'margin-top': '50px', 'min-height': '140px', 'max-width': '140px'} " class="icono_aplicacion ">
+        </div>
+        <div class="card-body center ">
+            <h5 class="card-title " style="margin:auto;font-family: 'Lucida Sans', 'Lucida Sans Regular', 
+        'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ; ">
+                {{menuDetalle.nombre_recurso}}</h5>
+
+        </div>
+
+    </div>
+</a>

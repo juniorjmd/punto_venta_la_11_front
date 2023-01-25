@@ -1,0 +1,58 @@
+<body *ngIf=" sucursal.length > 0">
+    <div id="cont_Load_gif" style='padding-left:20%;padding-right: 20%;display: none '>
+
+        <span style="float: left; color: gray;font-size: 13px ">Cargando&nbsp;</span>
+        <div class="loadingDiv" id="esperaMarcas" style="height:20px; width:100px;  ">
+            <div id="blockG_1" class="facebook_blockG"></div>
+            <div id="blockG_2" class="facebook_blockG"></div>
+            <div id="blockG_3" class="facebook_blockG"></div>
+        </div>
+    </div>
+    <br><br><br>
+
+
+    <h1>
+        {{sucursal[0].nombre_suc}}
+        <img [src]="sucursal[0].logo" alt="" width="50px" height="50px" /></h1>
+    <div class="w3ls-login box box--big">
+        <!-- form starts here -->
+        <form (ngSubmit)="login(f)" #f="ngForm">
+            <div class="agile-field-txt">
+                <label>
+                <i class="fa fa-user" aria-hidden="true"></i> Username </label>
+                <input type="text" id="identificacion" [(ngModel)]="usuario.Login" value='ADMIN' name="name" placeholder="Enter your name " required>
+            </div>
+            <div class="agile-field-txt">
+                <label>
+                <i class="fa fa-envelope" aria-hidden="true"></i> password </label>
+                <input type="password" name="password" [(ngModel)]="usuario.pass" value='123456' placeholder="Enter your password " #password required id="password">
+                <div class="agile_label">
+                    <input id="check3" name="check3" type="checkbox" value="show password" (click)="myFunction(password)">
+                    <label class="check" for="check3">Mostrar password</label>
+                </div>
+            </div>
+            <!-- script for show password -->
+
+            <!-- //script ends here -->
+            <div class="w3ls-bot">
+
+                <div class="form-end">
+                    <button id="btnIngresar" class='submit'>
+                        LOGIN
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div style="font-size: 9px;font-family: cursive;font-weight: 500;">
+                JDS-Soluciones &#169;2020</div>
+        </form>
+    </div>
+
+
+
+
+
+    <div>
+
+    </div>
+</body>

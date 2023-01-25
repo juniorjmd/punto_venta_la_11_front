@@ -1,0 +1,86 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class="centrado">Creación de Cajas</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Nombre</div>
+        <div class="col-sm-2">
+            <input type="text" class="o_input" [(ngModel)]="newCaja.nombre" placeholder="Nombre de la caja...">
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px;">Estado</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newCaja.estadoGeneral">
+                <option value=0>Estado</option>
+                <option value=1>Activo</option>
+                <option value=2>Inactivo</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Descripción</div>
+        <div class="col-sm-2">
+            <textarea [(ngModel)]="newCaja.descripcion" class="o_input" placeholder="Descripcion...">
+
+            </textarea>
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px;">Establecimiento</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newCaja.establecimiento">
+                <option value=0>Establecimiento</option>
+                <option *ngFor="let item of esta" [ngValue]="item.id">{{item.nombre}}</option> 
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-4 justify-content-center">
+            <button class="btn btn-outline-primary" role="button" (click)='guardarCaja()'>
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button class="btn btn-outline-danger" role="button" (click)='Cancelar()'>
+                <i class="fas fa-trash"></i>Cancelar
+            </button>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table" *ngIf="cajas.length > 0">
+                <tr>
+
+                    <th>nombre</th>
+                    <th>descripcion</th>
+                    <th>estadoGeneral</th>
+                    <th>estado (abierto/cerrado)</th>
+                    <th>Fecha estado</th>
+                    <th>Establecimiento</th>
+                    <th>
+                        opcion
+                    </th>
+                </tr>
+                <tr *ngFor="let caja of cajas">
+                    <td>{{caja.nombre}}</td>
+                    <td>{{caja.descripcion }}</td>
+                    <td>{{caja.nombreEstadoGeneral}}</td>
+                    <td>{{caja.nombreEstado}}</td>
+                    <td>{{caja.fechaEstadoCaja | date: 'MMMM d, y, h:mm:ss'}}</td>
+                    <td>{{caja.nombreEstablecimiento}}</td>
+                    <td>
+                        <fa-icon [icon]="faPencilAlt " (click)="setActualizaCaja(caja)"></fa-icon>
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>

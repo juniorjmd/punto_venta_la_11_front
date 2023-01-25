@@ -1,0 +1,60 @@
+<nav *ngIf=" sucursal.length > 0" class="navbar navbar-expand-lg navbar-light    " style="background-color: #c9a8a9;">
+    <div class="container-fluid">
+        <a class="navbar-brand" [routerLink]="['inicio']">
+            <img [src]="sucursal[0].logo" width="30" height="30" alt="" loading="lazy">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-nowrap">
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="[ 'DatosPos']">Datos POS</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="[ 'usuarios']">Usuarios</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="[ 'reportes']">Reportes</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" [routerLink]="[ 'cierres']">Cierres</a>
+                </li>
+
+
+            </ul>
+
+
+
+            <ul class="navbar-nav  ">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-users-cog "></i> Misceláneo
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['miUsuario']">
+                                <i class="fa fa-user-circle"></i> Mi Usuario</a>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <a class="dropdown-item" [routerLink]="['/']">
+                                <i class="fas fa-door-open"></i> Log out
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </div>
+
+
+
+    </div>
+</nav>

@@ -1,0 +1,178 @@
+/* You can add global styles to this file, and also import other style files */
+
+a {
+    text-decoration: none;
+}
+
+.menuPrincipalLink {
+    color: #4e085a !important;
+}
+
+.link_sin {
+    text-decoration: none;
+    color: #0000ee !important;
+}
+
+.icono_aplicacion {
+    margin: auto;
+    max-width: 70px;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+}
+
+.centrado {
+    text-align-last: center;
+}
+
+.container {
+    background-color: aliceblue !important;
+    height: 96% !important;
+    min-height: 565px !important;
+    border: transparent !important;
+    width: 100% !important;
+    background-image: url(assets/img/home-menu-bg-overlay.svg)!important;
+    background-size: cover;
+}
+
+.container div {
+    background-color: transparent !important;
+}
+
+.icono_aplicacion:hover {
+    box-shadow: 0 8px 15px -10px black;
+    transform: translateY(-1px);
+}
+
+.boton_activo {
+    cursor: pointer;
+}
+
+.boton_activo:hover {
+    box-shadow: 0 8px 15px -10px black;
+    transform: translateY(-1px);
+}
+
+.oculto {
+    display: none !important;
+}
+
+img.nav-avatar {
+    background-size: cover;
+    border: solid 5px #773C8A;
+    border-radius: 50%;
+    height: 60px;
+    margin-right: 2px;
+    margin-top: -40px;
+    vertical-align: middle;
+    width: 60px;
+    position: relative;
+    top: 37px;
+    background-color: #773C8A;
+}
+
+.o_input {
+    border: 1px solid #ccc !important;
+    border-top-style: none!important;
+    border-right-style: none!important;
+    border-left-style: none!important;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    /* border-radius: .25rem; */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.o_input_req {
+    border-bottom: 2px solid #666666 !important;
+    border-top-style: none!important;
+    border-right-style: none!important;
+    border-left-style: none!important;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    /* border-radius: .25rem; */
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.o_input:focus {
+    outline: 0px;
+}
+
+.o_input_req:focus {
+    outline: 0px;
+}
+
+.o_input:focus~.noMostrar {
+    display: none;
+}
+
+.o_input_req:focus~.noMostrar {
+    display: none;
+}
+
+.table td,
+.table th {
+    padding: 2px !important;
+}
+
+body {
+    background-image: url(assets/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #77717e, #c9a8a9) !important;
+    background-size: cover;
+    direction: ltr;
+    position: relative;
+    background-color: #f9f9f9;
+}
+
+.main_container {
+    margin-top: 20px;
+}
+
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+.fast {
+    -webkit-animation-duration: 0.4s;
+    animation-duration: 0.4s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    animation-name: fadeIn;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
