@@ -37,7 +37,7 @@ export class ClientesService {
           ){  
         console.log('servicios datos iniciales inicializado');   
         
-        const headers = this.requestOptions ;
+        const headers = httpOptions() ; ;
         this.requestOptions = { headers: headers };
     }
     getDatosIniClientes(){

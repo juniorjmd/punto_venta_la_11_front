@@ -32,8 +32,8 @@ export interface ClientesOdoo {
 
 
 export interface dfltAnswOdoo {
-    '0':number,
-    '1':string
+    0:number,
+   1:string
   }
   export interface dfltAnswOdoo2 {
     'dato':number,

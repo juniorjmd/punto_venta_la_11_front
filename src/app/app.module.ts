@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { CierresComponent } from './components/cierres/cierres.component';
+import { AppComponent } from './app.component'; 
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { MiUsuarioComponent } from './components/mi-usuario/mi-usuario.component';
@@ -38,8 +37,7 @@ import { CdetalleComponent } from './components/datos-pos/generales/cajas/cdetal
 import { CnuevaComponent } from './components/datos-pos/generales/cajas/cnueva/cnueva.component';
 import { CajasComponent } from './components/datos-pos/generales/cajas/cajas.component';
 import { GeneralesComponent } from './components/datos-pos/generales/generales.component';
-import { ReportesComponent } from './components/admon/reportes/reportes.component';
-import { UsuarioComponent } from './components/admon/usuario/usuario.component';
+import { ReportesComponent } from './components/admon/reportes/reportes.component'; 
 import { InventariosComponent } from './components/datos-pos/generales/inventarios/inventarios.component';
 import { cajasServices } from './services/Cajas.services';
 import { ClientesService } from './services/Clientes.services';
@@ -57,19 +55,32 @@ import { UsuarioPerfilComponent } from './components/usuario/usuario-perfil/usua
 import { usuarioService } from './services/usuario.services';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingComponent } from './components/layout/loading/loading.component'; 
-
-import { loading } from 'src/app/models/app.loading';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-import {MatIconModule} from '@angular/material/icon'; 
-import {MatTreeModule} from '@angular/material/tree';
-import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
+import {MatToolbarModule} from '@angular/material/toolbar' ; 
+import {MatRadioModule } from '@angular/material/radio' ; 
+import {MatButtonModule } from '@angular/material/button' ; 
+import {MatInputModule} from '@angular/material/input' ; 
+import {MatSelectModule} from '@angular/material/select' ; 
+import {MatTreeModule} from '@angular/material/tree' ; 
+import {MatIconModule} from '@angular/material/icon' ; 
+import {MatListModule} from '@angular/material/list' ; 
+import {MatExpansionModule} from '@angular/material/expansion' ; 
+
+
+
 import { MenucardsComponent } from './components/layout/menucards/menucards.component';
+import { DineroPipe } from './pipes/dinero.pipe';
+import { booleanpPipe } from './pipes/booleanp.pipe';
+import { dataArrayOdooPipe } from './pipes/dataArrayOdoo.pipe';
+import { ImgB64Pipe } from './pipes/imgB64.pipe';
+import { DatePipe } from '@angular/common';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { CierresComponent } from './components/admon/cierres/cierres.component';
+import { TiposEstableComponent } from './components/datos-pos/generales/establecimientos/tipos-estable/tipos-estable.component';
 
 @NgModule({
   declarations: [
@@ -109,23 +120,41 @@ import { MenucardsComponent } from './components/layout/menucards/menucards.comp
     CnuevaComponent,
     CajasComponent,
     GeneralesComponent,
-    ReportesComponent,
-    UsuarioComponent,
+    ReportesComponent, 
     InventariosComponent,
     NavbarComponent,
     UsuarioDetalleComponent,
     UsuarioEditarComponent,
     UsuarioNuevoComponent,
     UsuarioPerfilComponent,
+    UsuarioComponent,
     LoadingComponent,
-    MenucardsComponent
+    MenucardsComponent,
+    
+    DineroPipe,
+    ImgB64Pipe,
+    dataArrayOdooPipe,
+    booleanpPipe,
+    TiposEstableComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
     FormsModule, 
     HttpClientModule,
-    MatDialogModule,FontAwesomeModule
+    MatDialogModule,
+    MatCheckboxModule,
+    MatToolbarModule, 
+    MatInputModule,
+    MatSelectModule,
+    MatTreeModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule,
+    MatRadioModule ,
+    MatButtonModule,
+
+    FontAwesomeModule
   ],
   providers: [
     cajasServices,
@@ -136,7 +165,8 @@ import { MenucardsComponent } from './components/layout/menucards/menucards.comp
     DomiciliosService,
     ProductoService,
     usuarioService,
-    MaestroClienteServices
+    MaestroClienteServices,
+    DatePipe ,
   ],
   bootstrap: [AppComponent]
 })

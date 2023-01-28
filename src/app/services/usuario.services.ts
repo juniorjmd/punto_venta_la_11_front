@@ -13,10 +13,11 @@ import { UsuarioModel } from '../models/usuario.model';
 })
 export class usuarioService {
     requestOptions:any
+    loading = new loading();
     constructor(private http: HttpClient ,
-        private loading : loading ){ 
+       ){ 
         console.log('servicios usuarios inicializado');  
-        const headers = this.requestOptions ;
+        const headers = httpOptions() ; ;
             this.requestOptions = { headers: headers };
     }
     
@@ -65,17 +66,24 @@ export class usuarioService {
         return this.http.post(url.action , datos,this.requestOptions) ;
     }
     updateUsuarios(usuario : any){
-        let arrayDatos:any   ;
+        let arrayDatos:any = {} ;
         let where:any[] = []
-        for (let key in usuario){
-            if (key !== 'perfil'){
+       
+
+    for (const [key, valor] of Object.entries(usuario)) {
+        console.log("Iterando...");
+        console.log("La clave es: " + key);
+        console.log("El valor es: " + valor);
+        if (key !== 'perfil'){
             if (key !== 'ID'){
-          arrayDatos[key] = usuario[key] ;
+          arrayDatos[key] = valor;
             
         }else{
-            where=[{"columna" : key , "tipocomp" : '=' , "dato" : usuario[key]}];
-        }}}
-        console.log(arrayDatos);
+            where=[{"columna" : key , "tipocomp" : '=' , "dato" : valor}];
+        }
+    }
+    }
+        console.log('arrayDatos', arrayDatos[0]);
         
         let datos = {"action": actions.actionUpdate ,
                      "_tabla" : TABLA.usuarios,

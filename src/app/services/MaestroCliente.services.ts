@@ -27,7 +27,7 @@ export class MaestroClienteServices {
         private loading : loading ){ 
         console.log('servicios datos iniciales inicializado');  
         
-    const headers = this.requestOptions ;
+    const headers = httpOptions() ; ;
     this.requestOptions = { headers: headers };
     }
     getCiudades(){

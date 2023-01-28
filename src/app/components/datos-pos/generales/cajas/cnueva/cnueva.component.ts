@@ -8,6 +8,7 @@ import { select } from 'src/app/interfaces/generales';
 import { Establecimientos } from 'src/app/interfaces/establecimientos.interface';
 import { LoadingComponent } from 'src/app/components/layout/loading/loading.component';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cnueva',
@@ -120,11 +121,21 @@ getCajas(){
     (respuesta:any)=>{console.log(respuesta)
      
     if (respuesta.error === 'ok'){
-      alert('datos ingresados con exito');  
+      	
+		
+	Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'datos ingresados con exito',
+        showConfirmButton: false,
+        timer: 1500
+      });  
       this.newCaja =  new cajaModel(undefined);
       this.getCajas();
     }else{
-      alert(respuesta.error);
+      	   Swal.fire(
+          'ERROR',respuesta.error,
+          'error');
       this.artloading.hide();
     }
     }

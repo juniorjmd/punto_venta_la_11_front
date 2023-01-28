@@ -1,1 +1,84 @@
-<p>usuario-editar works!</p>
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class='centrado'>Editar Usuario</h2>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="email">Pri. nombre: </label>
+                <input type="text" class="o_input" [(ngModel)]="newUsuario.Nombre1" placeholder="Primer Nombre...">
+            </div>
+        </div>
+
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="email">Segundo nombre: </label>
+
+
+                <input type="text" class="o_input" [(ngModel)]="newUsuario.Nombre2" placeholder="Segundo Nombre...">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="email">Primer Apellido: </label>
+                <input type="text" class="o_input" [(ngModel)]="newUsuario.Apellido1" placeholder="Primer Apellido...">
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="email">Segundo Apellido: </label>
+                <input type="text" class="o_input" [(ngModel)]="newUsuario.Apellido2" placeholder="Segundo Apellido...">
+            </div>
+        </div>
+
+    </div><br>
+    <div class="row">
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="email">Usuario: </label>
+                <input type="text" class="o_input" [(ngModel)]="newUsuario.Login" placeholder="Segundo Apellido...">
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="email">Estado: </label>
+                <select class=" o_input " [(ngModel)]="newUsuario.estado">
+                <option value=0>Estado</option>
+                <option value=1>Activo</option>
+                <option value=2>Inactivo</option>
+            </select>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="email">Mail: </label>
+                <input type="email" [email]="true" class="o_input" [(ngModel)]="newUsuario.mail" placeholder="correo Electronico...">
+
+            </div>
+        </div>
+
+        <div class="col-sm-2">
+            <div class="form-group">
+                <label for="email">Libranza: </label>
+                <select class=" o_input " [(ngModel)]="newUsuario.libranza">
+              <option value=0>No</option>
+              <option value=1>Si</option> 
+          </select>
+            </div>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-12 justify-content-center centrado">
+            <button class="btn btn-outline-primary" role="button" (click)='guardarUsuario()'>
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button class="btn btn-outline-danger" role="button" (click)='cerrarFormulario()'>
+                <i class="fas fa-trash"></i>Cancelar
+            </button>
+        </div>
+    </div><br>
+</div>

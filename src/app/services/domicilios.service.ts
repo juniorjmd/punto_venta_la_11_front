@@ -10,7 +10,7 @@ import { vistas } from '../models/app.db.view';
 export class DomiciliosService { 
   requestOptions:any
   constructor(private http: HttpClient ) {  
-    const headers = this.requestOptions ;
+    const headers = httpOptions() ; ;
         this.requestOptions = { headers: headers };
   }
   

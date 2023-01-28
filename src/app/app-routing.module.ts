@@ -32,9 +32,10 @@ import { PosComponent } from './components/pos/pos.component';
 import { VentasComponent } from './components/pos/ventas/ventas.component';
 import { CnuevaComponent } from './components/datos-pos/generales/cajas/cnueva/cnueva.component';
 import { CdetalleComponent } from './components/datos-pos/generales/cajas/cdetalle/cdetalle.component';
-import { CierresComponent } from './components/cierres/cierres.component';
-import { ReportesComponent } from './components/admon/reportes/reportes.component';
-import { UsuarioComponent } from './components/admon/usuario/usuario.component';
+
+import { ReportesComponent } from './components/admon/reportes/reportes.component'; 
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { CierresComponent } from './components/admon/cierres/cierres.component';
 
 const routes: Routes =  
 [

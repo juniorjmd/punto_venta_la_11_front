@@ -9,7 +9,7 @@ export class TiposEstablecimientosModel {
     usuario_creador!: number;
 nombreUsuario?:string;
 nombreEstado?:string;
-constructor( tipo : TiposEstablecimientos){
+constructor( tipo ?: TiposEstablecimientos){
     if (typeof(tipo) !== 'undefined'){
         this.id = tipo.id;
         this.nombre = tipo.nombre;

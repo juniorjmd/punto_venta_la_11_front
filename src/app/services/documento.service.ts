@@ -14,7 +14,7 @@ export class DocumentoService {
   constructor(private http: HttpClient ,
     private loading : loading ) { 
       console.log('servicio documentos');
-      const headers = this.requestOptions ;
+      const headers = httpOptions() ; ;
       this.requestOptions = { headers: headers };
       
     }

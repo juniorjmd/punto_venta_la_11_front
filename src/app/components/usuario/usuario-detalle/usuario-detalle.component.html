@@ -1,1 +1,48 @@
-<p>usuario-detalle works!</p>
+<div class="container-fluid" style="min-width: 600px;">
+    <div class="row"><br>
+        <div class="col-sm-12  ">
+            <h2 class='centrado'>Asignar Cajas a Usuario</h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-1  "></div>
+        <div class="col-sm-10  ">
+            <b> {{usuarioActual.nombreCompleto}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-1  "></div>
+        <div class="col-sm-10  ">
+            usuario : <b> {{usuarioActual.Login}}</b>
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngIf="cajas.length > 0">
+        <div class="col-sm-12  ">
+            <ul class="list-group  " *ngIf="cajas.length > 0">
+
+                <li *ngFor="let caja of cajas; let i = index" class="list-group-item">
+
+                    <mat-checkbox ngDefaultControl [(ngModel)]="opciones[i]">
+                        {{caja.nombre}}</mat-checkbox>
+                </li>
+            </ul>
+            <table class='table' *ngIf="cajas.length <= 0">
+                <tbody>
+                    <tr>
+                        <td>No existen cajas para asignar al usuario</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <div class="row" *ngIf="cajas.length > 0">
+        <div class="col-sm-12  centrado">
+            <button type="button" class="btn btn-primary" (click)='guardarRelacion()'>Guardar</button>
+
+            <button type="button" class="btn btn-danger" (click)='cerrarDialog()'>Cancelar</button>
+        </div>
+    </div> <br>
+</div>

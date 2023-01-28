@@ -20,7 +20,7 @@ export class cajasServices {
     requestOptions:any
        constructor(private http: HttpClient){ 
         console.log('servicios cajas inicializado');  
-        const headers = this.requestOptions ;
+        const headers = httpOptions() ;
         this.requestOptions = { headers: headers };
          
     }
@@ -115,7 +115,7 @@ export class cajasServices {
         "_fisicas" : true
                     };
         console.log('servicios cajas - getLocacionesFisicas ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post<select>(url.action , datos,this.requestOptions) ;
     }
     getLocacionesExistencias(id:number){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
@@ -184,7 +184,8 @@ export class cajasServices {
         let datos = {"action": actions.actionSelCajaXuser ,
                      "_usuario" :usuario
                     };
-        console.log('servicios de cajas activo - getCajasPorUsuario' ,url.action , datos,this.requestOptions);
+        console.log('servicios de cajas activo - getCajasPorUsuario' ,'ACTION ' + url.action , 
+        'DATOS '+JSON.stringify( datos),'requestOptions ' +JSON.stringify(this.requestOptions));
         return this.http.post(url.action , datos,this.requestOptions) ;
     } 
 

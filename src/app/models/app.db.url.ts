@@ -12,14 +12,10 @@ const httpOptionsSinAutorizacion = {
 }; 
 
 export let httpOptions = ()=>{
-  let autoritation :any;
-  if ( typeof( localStorage.getItem('sis41254#2@') ) !== 'undefined' ){
-    autoritation = ''
-  }else {autoritation =  localStorage.getItem('sis41254#2@') ;} 
   
     return new HttpHeaders({
       'Content-type': 'application/json' ,
-      'AUTORIZACION' :autoritation
+      'AUTORIZACION' :localStorage.getItem('sis41254#2@')! 
   })
   
 }

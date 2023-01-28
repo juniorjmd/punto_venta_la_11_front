@@ -1,1 +1,49 @@
-<p>usuario-perfil works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12  ">
+            <h2 class='centrado'>Asignar un perfil al Usuario</h2>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12  ">
+            <b> {{usuarioActual.nombreCompleto}}</b>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12  ">
+            usuario : <b> {{usuarioActual.Login}}</b>
+        </div>
+    </div>
+    <hr>
+    <div class="row" *ngIf="perfiles.length > 0">
+        <div class="col-sm-12  "><label id="example-radio-group-label">Seleccione el perfil del Usuairo : </label>
+            <mat-radio-group [(ngModel)]="perfilUsuario">
+                <ul>
+                    <li *ngFor="let perfil of perfiles">
+                        <mat-radio-button [value]="perfil.id">
+                            {{perfil.Perf_Nombre}}
+                        </mat-radio-button>
+                    </li>
+                </ul>
+            </mat-radio-group>
+
+
+            <table class='table' *ngIf="perfiles.length <= 0">
+                <tbody>
+                    <tr>
+                        <td>No existen perfil para asignar al usuario</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" *ngIf="perfiles.length > 0">
+        <div class="col-sm-5  ">
+            <button type="button" class="btn btn-primary" (click)='guardarRelacion()'>Guardar</button>
+        </div>
+        <div class="col-sm-5  ">
+            <button type="button" class="btn btn-danger" (click)='cerrarDialog()'>Cancelar</button>
+        </div>
+    </div>
+</div>

@@ -20,7 +20,7 @@ export class establecimientoModel{
     NameBodegaVirtual?:string ;
     estockExistencia?:number ;
     NameBodegaExistencia?:string ;
-    constructor(cargaEsta : Establecimientos){
+    constructor(cargaEsta ?: Establecimientos){
         this.estado = 0;
         this.tipo = 0;
         this.idAuxiliar = 0;

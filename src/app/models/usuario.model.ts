@@ -20,7 +20,7 @@ export class UsuarioModel {
     descripcion?:string;
     perfil?:number;
     libranza?:boolean;
-    constructor( cargaUsuario : Usuarios ){
+    constructor( cargaUsuario ?: Usuarios ){
       if(typeof(cargaUsuario) !== 'undefined'){
         this.ID= cargaUsuario.ID	;
         this.Login= cargaUsuario.Login	;

@@ -1,1 +1,142 @@
-<p>establecimientos works!</p>
+<div class="container-fluid contenedor" style="overflow-y: auto;width: 100%; height: 90%;">
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class="centrado">Creación de Establecimientos</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Nombre</div>
+        <div class="col-sm-3">
+            <input type="text" class="o_input" [(ngModel)]="newEsta.nombre" placeholder="Nombre del Establecimiento...">
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px;">Estado</div>
+        <div class="col-sm-3">
+            <select class="o_input" [(ngModel)]="newEsta.estado">
+                <option value=0>Estado</option>
+                <option value=1>Activo</option>
+                <option value=2>Inactivo</option>
+            </select>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Tipo Esta.</div>
+        <div class="col-sm-3">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <select class="o_input" [(ngModel)]="newEsta.tipo">
+                <option value=0>Tipo Establecimiento</option>
+                <option *ngFor="let item of tiposEsta" [ngValue]="item.id">{{item.nombre}}</option> 
+            </select>
+                <button class="btn btn-success" (click)='mantenerTiposEsta()'>
+                    
+                     
+                    <fa-icon [icon]="faJenkins "></fa-icon>
+   
+                
+                
+                
+                </button>
+            </div>
+        </div>
+        <div class="col-sm-1">Locación Fisica</div>
+        <div class="col-sm-3">
+
+            <select class="o_input" (change)="getLocacionesAlternas(aLocationFisico.id); getLocacionesVirtuales() ; asignarLocation(1, aLocationFisico)" [(ngModel)]="aLocationFisico">
+                <option [ngValue]="objIni">{{objIni.name}}</option>
+                <option *ngFor="let item of locationStore" [ngValue]="item">{{item.name}}</option> 
+            </select>
+
+        </div>
+
+
+
+
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Locacion Stock</div>
+        <div class="col-sm-3">
+            <select class="o_input" (change)="asignarLocation(2, aLocationPOS)" [(ngModel)]="aLocationPOS">
+                <option [ngValue]="objIni">{{objIni.name}}</option>
+                <option *ngFor="let item of locationPOS" [ngValue]="item">{{item.name}}</option> 
+            </select>
+        </div>
+        <div class="col-sm-1">Locacion Virtual</div>
+        <div class="col-sm-3">
+
+            <select class="o_input" (change)="asignarLocation(3, aLocationVirtual)" [(ngModel)]="aLocationVirtual">
+                <option [ngValue]="objIni">{{objIni.name}}</option>
+                <option *ngFor="let item of locationVirtual" [ngValue]="item">{{item.name}}</option> 
+            </select>
+
+        </div>
+
+
+    </div>
+    <br>
+
+    <div class="row">
+
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-4 justify-content-center">
+            <button class="btn btn-outline-primary" role="button" (click)='guardarCaja()'>
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button class="btn btn-outline-danger" role="button" (click)='Cancelar()'>
+                <i class="fas fa-trash"></i>Cancelar
+            </button>
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px;">Descripción</div>
+        <div class="col-sm-3">
+            <textarea [(ngModel)]="newEsta.descripcion" class="o_input" placeholder="Descripcion..."></textarea>
+
+        </div>
+
+
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table" *ngIf="establecimientos.length > 0">
+                <tr>
+
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>estado</th>
+                    <th>Tipo</th>
+                    <th>loc. externa</th>
+                    <th>loc. estock</th>
+                    <th>loc. salida</th>
+                    <th>Fecha estado</th>
+                    <th>Usuario Estado</th>
+                    <th>
+                        opcion
+                    </th>
+                </tr>
+                <tr *ngFor="let establ of establecimientos">
+                    <td>{{establ.nombre}}</td>
+                    <td>{{establ.descripcion }}</td>
+                    <td>{{establ.nombreEstado}}</td>
+                    <td>{{establ.nombreTipo}}</td>
+                    <td>{{establ.nombreAuxiliar}}</td>
+
+                    <td>{{establ.NameBodegaStock}}</td>
+                    <td>{{establ.NameBodegaVirtual}}</td>
+                    <td>{{establ.fecha_creacion | date: 'MMMM d, y, h:mm:ss'}}</td>
+                    <td>{{establ.nombreUsuario}}</td>
+                    <td>
+                        <fa-icon [icon]="faPencilAlt" (click)="setActualizaCaja(establ)"></fa-icon>
+
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>

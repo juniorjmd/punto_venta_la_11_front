@@ -18,7 +18,7 @@ export class ProductoService {
   constructor(private http: HttpClient ,
     private loading : loading ){ 
     console.log('servicios productos inicializado');  
-    const headers = this.requestOptions ;
+    const headers = httpOptions() ; ;
         this.requestOptions = { headers: headers };
 }
 getTiposDeDocumentos(){

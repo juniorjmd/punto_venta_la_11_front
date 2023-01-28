@@ -1,1 +1,123 @@
-<p>contadores works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class="centrado">Matenimientos de Contadores</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Codigo :</div>
+        <div class="col-sm-1">
+            <input type="text" class="o_input" maxlength="4" [(ngModel)]="newContador.codContador" placeholder="Nombre de la caja...">
+        </div>
+        <div class="col-sm-2" style="margin-right: 15px;text-align: end;">Tipo Contador :</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newContador.tipoContador">
+                <option    value ="0" >Seleccione un tipo de contador</option> 
+                <option *ngFor="let item of tipContadores" [value]="item.id" >{{item.nombre}}</option> 
+            </select>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2" style="margin-right: 15px; text-align: end;">Establecimiento :</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newContador.establecimiento">
+                <option value=0>Establecimiento</option>
+                <option *ngFor="let item of esta" [ngValue]="item.id">{{item.nombre}}</option> 
+            </select>
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px; text-align: end;">Desde :</div>
+        <div class="col-sm-1">
+            <input type="number" class="o_input" [(ngModel)]="newContador.desde" placeholder="Valor inicial...">
+
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px; text-align: end;">hasta :</div>
+        <div class="col-sm-1">
+            <input type="number" class="o_input" [(ngModel)]="newContador.hasta" placeholder="valor Final...">
+
+        </div>
+
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2" style="margin-right: 15px; text-align: end;">resolución :</div>
+        <div class="col-sm-2">
+            <input type="number" class="o_input" [(ngModel)]="newContador.resolucion" placeholder="Resolucion de factura">
+
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px; text-align: end;">Fecha inicial :</div>
+        <div class="col-sm-1">
+            <input type="date" class="o_input" [(ngModel)]="newContador.fechaInicioResolucion">
+
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px; text-align: end;">Fecha final :</div>
+        <div class="col-sm-1">
+            <input type="date" class="o_input" [(ngModel)]="newContador.fechaFinResolucion">
+
+        </div>
+
+
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-4 justify-content-center">
+            <button class="btn btn-outline-primary" style="margin-right: 10px;" (click)="guardarContador()" role="button">
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button class="btn btn-outline-danger" role="button" (click)='Cancelar()'>
+                <i class="fas fa-trash"></i>Cancelar
+            </button>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row" style="
+    overflow: auto;
+    height: 220px;">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <table class="table">
+                <tr>
+                    <!--  id, codContador, establecimiento, contador, contador_real_establecimiento, fecha, hora, estado-->
+                    <th>codContador</th>
+                    <th>establecimiento</th>
+
+                    <th>tipo</th>
+                    <th>contador</th>
+                    <th>conteo general</th>
+                    <th>estado</th>
+                    <th>desde</th>
+                    <th>hasta</th>
+                    <th>resolucion</th>
+                    <th>Inicio</th>
+                    <th>Fin</th>
+                    <th>usuario</th>
+                </tr>
+                <tr *ngFor="let Contador of contadores">
+                    <td>{{Contador.codContador}}</td>
+                    <td>{{Contador.nombreEstablecimiento}}</td>
+                    <td>{{Contador.nombreTipo}}</td>
+                    <td>{{Contador.contador }}</td>
+                    <td>{{Contador.contador_real_establecimiento }}</td>
+                    <td>{{Contador.nombre_estado}}</td>
+                    <td>{{Contador.desde}}</td>
+                    <td>{{Contador.hasta}}</td>
+                    <td>{{Contador.resolucion}}</td>
+                    <td>{{Contador.fechaInicioResolucion}}</td>
+                    <td>{{Contador.fechaFinResolucion}}</td>
+                    <td>{{Contador.nombreUsuario}}</td>
+
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>

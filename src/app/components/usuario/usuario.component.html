@@ -1,1 +1,58 @@
-<p>usuario works!</p>
+<div class="container">
+    <br>
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class="centrado">Usuario del sistema</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary" (click)='crearUsuario()'>Nuevo Usuario</button>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table" *ngIf="usuarios.length > 0">
+                <tr>
+
+                    <th>Nombre Completo</th>
+                    <th>Usuario</th>
+                    <th>Correo Electronico</th>
+                    <th>Activo Libranza</th>
+                    <th>Ultimo ingreso</th>
+                    <th>Fecha modificación</th>
+                    <th colspan="2">
+                        opcion
+                    </th>
+                </tr>
+                <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.nombreCompleto}}</td>
+                    <td>{{usuario.Login }}</td>
+                    <td>{{usuario.mail}}</td>
+                    <td>{{usuario.libranza|booleanP}}</td>
+                    <td *ngIf="usuario.ultimo_ingreso != '' && usuario.ultimo_ingreso != '0000-00-00 00:00:00' ">{{usuario.ultimo_ingreso | date: 'MMMM d, y, h:mm:ss'}}</td>
+                    <td *ngIf="usuario.ultimo_ingreso == '' || usuario.ultimo_ingreso == '0000-00-00 00:00:00' ">ingreso no registrado</td>
+
+                    <td *ngIf="usuario.Fecha_Modif != '' && usuario.Fecha_Modif != '0000-00-00 00:00:00' ">{{usuario.Fecha_Modif | date: 'MMMM d, y, h:mm:ss' }}</td>
+                    <td *ngIf="usuario.Fecha_Modif == '' || usuario.Fecha_Modif == '0000-00-00 00:00:00'">Sin registro</td>
+
+                    <td title="editar usuario">
+                        <fa-icon [icon]="faPencilAlt" class="  boton_activo" (click)="setActualizaUsuario(usuario)"></fa-icon>
+                    </td>
+                    <td title="agregar cajas">
+                        <fa-icon [icon]=" faCashRegister " class=" boton_activo" (click)="setAgregarCajas(usuario)"></fa-icon>
+                    </td>
+                    <td title="Asignar Perfil de Usuario">
+                        <fa-icon [icon]="faaddresscard" class="boton_activo" (click)="setAgregarPerfil(usuario)"></fa-icon>
+
+                    </td>
+
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>
