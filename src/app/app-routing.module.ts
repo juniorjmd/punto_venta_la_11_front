@@ -36,10 +36,13 @@ import { CdetalleComponent } from './components/datos-pos/generales/cajas/cdetal
 import { ReportesComponent } from './components/admon/reportes/reportes.component'; 
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CierresComponent } from './components/admon/cierres/cierres.component';
+import { SincOdooComponent } from './components/sinc-odoo/sinc-odoo.component';
 
 const routes: Routes =  
 [
     { path : 'login' , component : LoginComponent}, 
+    
+    { path : 'sincronizar' , component : SincOdooComponent}, 
     { path : 'home' , 
     component : HomeComponent ,
       children : [       

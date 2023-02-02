@@ -12,7 +12,11 @@ import { cajaModel } from '../models/cajas.model';
 export class DocumentoService {
   requestOptions:any
   constructor(private http: HttpClient ,
-    private loading : loading ) { 
+    private loading : loading ,   private _Router : Router){ 
+      let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+      if (!llaveDeRegistro){
+            this._Router.navigate(['login']);
+      }
       console.log('servicio documentos');
       const headers = httpOptions() ; ;
       this.requestOptions = { headers: headers };

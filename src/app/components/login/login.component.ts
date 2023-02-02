@@ -46,6 +46,12 @@ export class LoginComponent implements OnInit
    { next : (data:any)=>{
      this.sucursal = data;
      console.log(this.sucursal);
+
+     let valSincronizar =  parseInt(localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')!) ; 
+      if (!valSincronizar){
+        this._Router.navigate(['sincronizar']);
+      }
+     
           }  ,
     error :  (err:any )=> {console.log(err)
      alert( err.error.error)

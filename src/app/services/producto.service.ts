@@ -14,9 +14,10 @@ import { UsuarioModel } from '../models/usuario.model';
   providedIn: 'root'
 })
 export class ProductoService {
-  requestOptions:any
+  requestOptions:any;
+  loading = new loading() 
   constructor(private http: HttpClient ,
-    private loading : loading ){ 
+    ){ 
     console.log('servicios productos inicializado');  
     const headers = httpOptions() ; ;
         this.requestOptions = { headers: headers };

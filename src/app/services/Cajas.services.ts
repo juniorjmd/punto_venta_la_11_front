@@ -11,6 +11,7 @@ import { Contador } from '../interfaces/contador';
 import { MediosDePagoModel } from '../models/medios-de-pago.model';
 import { DocpagosModel } from '../models/pagos.model';
 import { select } from '../interfaces/generales';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -18,7 +19,17 @@ import { select } from '../interfaces/generales';
 })
 export class cajasServices { 
     requestOptions:any
-       constructor(private http: HttpClient){ 
+       constructor(private http: HttpClient,
+        private _Router : Router){ 
+        let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+        if (!llaveDeRegistro){
+              this._Router.navigate(['login']);
+        }
+
+        let valSincronizar =  parseInt(localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')!) ; 
+      if (!valSincronizar){
+      //  this._Router.navigate(['sincronizar']);
+      }
         console.log('servicios cajas inicializado');  
         const headers = httpOptions() ;
         this.requestOptions = { headers: headers };
@@ -30,8 +41,8 @@ export class cajasServices {
                      "_parametro" : {"idCaja" : caja.id } , 
                      "_valorIngresar" : valorIngresar
                     };
-        console.log('abrirCaja activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post<select>(url.action , datos,this.requestOptions) ;
+        console.log('abrirCaja activo ' ,url.create , datos,this.requestOptions);
+        return this.http.post<select>(url.create , datos,this.requestOptions) ;
     }
 
     
@@ -39,23 +50,23 @@ export class cajasServices {
         let datos = {"action": actions.actionResumenCaja ,
                      "_parametro" : {"idCaja" : caja.id }  
                     };
-        console.log('resumenCaja activo ' ,url.action , datos, this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('resumenCaja activo ' ,url.get , datos, this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     }
     cerrarCaja(caja : cajaModel){
         let datos = {"action": actions.actionCerarCaja ,
                      "_parametro" : {"idCaja" : caja.id } 
                     };
-        console.log('cerrarCaja activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos, this.requestOptions) ;
+        console.log('cerrarCaja activo ' ,url.create , datos,this.requestOptions);
+        return this.http.post(url.create , datos, this.requestOptions) ;
     }
 
     cerrarCajaParcial(caja : cajaModel){
         let datos = {"action": actions.actionCerarCajaParcial ,
                      "_parametro" : {"idCaja" : caja.id } 
                     };
-        console.log('cerrarCaja activo ' ,url.action , datos, this.requestOptions);
-        return this.http.post(url.action , datos, this.requestOptions) ;
+        console.log('cerrarCaja activo ' ,url.create , datos, this.requestOptions);
+        return this.http.post(url.create , datos, this.requestOptions) ;
     }
     
     getTiposDocumentosConContadores(){
@@ -63,8 +74,8 @@ export class cajasServices {
                      "_tabla" : vistas.tipos_documentos_con_cont,
                      "_where" : [{columna : 'estado' , tipocomp : '=' , dato : 1}]
                     };
-        console.log('servicios cajas - getTiposDocumentosConContadores ' ,url.action , datos, this.requestOptions);
-        return this.http.post(url.action , datos, this.requestOptions) ;
+        console.log('servicios cajas - getTiposDocumentosConContadores ' ,url.get , datos, this.requestOptions);
+        return this.http.post(url.get , datos, this.requestOptions) ;
     }
 
     getEstablecimientos(){
@@ -72,103 +83,103 @@ export class cajasServices {
                      "_tabla" : vistas.establecimiento,
                      "_where" : [{columna : 'estado' , tipocomp : '=' , dato : 1}]
                     };
-        console.log('servicios cajas - getEstablecimientos ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getEstablecimientos ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     }
     getAllEstablecimientos(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.establecimiento
                     };
-        console.log('servicios cajas - getAllEstablecimientos ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getAllEstablecimientos ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     }
     
     getAllTiposEstablecimientos(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.tipo_establecimiento 
                     };
-        console.log('servicios cajas - get vw_tipo_establecimiento ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - get vw_tipo_establecimiento ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     }
 
     getLocacionesExternas(){
         let datos = {"action": actions.actionBuscarLocacionesExternas  };
-        console.log('servicios cajas - getLocacionesExternas ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesExternas ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post(url.getOdoo , datos,this.requestOptions) ;
     }
     getLocacionesPrincipales(){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
         "_principal" : true
                     };
-        console.log('servicios cajas - getLocacionesPrincipales ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesPrincipales ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post(url.getOdoo , datos,this.requestOptions) ;
     }
     getLocacionesVirtuales(){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
         "_virtual" : true
                     };
-        console.log('servicios cajas - getLocacionesVirtuales ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesVirtuales ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post(url.getOdoo , datos,this.requestOptions) ;
     }
     getLocacionesFisicas(){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
         "_fisicas" : true
                     };
-        console.log('servicios cajas - getLocacionesFisicas ' ,url.action , datos,this.requestOptions);
-        return this.http.post<select>(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesFisicas ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post<select>(url.getOdoo , datos,this.requestOptions) ;
     }
     getLocacionesExistencias(id:number){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
         "_principal" : false,"_fisicas" : false,"_existencia" : true,
              "_id_principal" : id
              };
-        console.log('servicios cajas - getLocacionesExistencias ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesExistencias ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post(url.getOdoo , datos,this.requestOptions) ;
     }
     getLocacionesSecundarias(id:number){
         let datos = {"action": actions.actionBuscarLocacionesExternas  ,
         "_principal" : false,"_fisicas" : false,
              "_id_principal" : id
              };
-        console.log('servicios cajas - getLocacionesSecundarias ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - getLocacionesSecundarias ' ,url.getOdoo , datos,this.requestOptions);
+        return this.http.post(url.getOdoo , datos,this.requestOptions) ;
     }
     getTiposEstablecimientos(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.tipo_establecimiento,
                      "_where" : [{columna : 'estado' , tipocomp : '=' , dato : 1}]
                     };
-        console.log('servicios cajas - get vw_tipo_establecimiento ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios cajas - get vw_tipo_establecimiento ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     }
     getCajas(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.cajas
                     };
-        console.log('servicios de cajas activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
     getMediosCajaActiva(){
         let datos = {"action": actions.actionSelectPorUsuario ,
                      "_tabla" : vistas.mediosPorCajaActiva,
                      "_columnaUsuario": 'usuarioCaja'
                     };
-        console.log('servicios de cajas activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
     getMedios(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.medios
                     };
-        console.log('servicios de cajas activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
     getContadores(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : vistas.contadores
                     };
-        console.log('servicios de cajas activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
     getCajasUsuario(){
         let datos = {"action": actions.actionSelectPorUsuario ,
@@ -176,17 +187,17 @@ export class cajasServices {
                      "_columnaUsuario": 'idUsuario',
                      "_where" : [{columna : 'estadoEsta' , tipocomp : '=' , dato : 1}]
                     };
-        console.log('servicios de cajas activo ' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
     
     getCajasPorUsuario(usuario:number){
         let datos = {"action": actions.actionSelCajaXuser ,
                      "_usuario" :usuario
                     };
-        console.log('servicios de cajas activo - getCajasPorUsuario' ,'ACTION ' + url.action , 
+        console.log('servicios de cajas activo - getCajasPorUsuario' ,'ACTION ' + url.get , 
         'DATOS '+JSON.stringify( datos),'requestOptions ' +JSON.stringify(this.requestOptions));
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.get , datos,this.requestOptions) ;
     } 
 
     setPagoDocumento(idDocumento:number , pagos:DocpagosModel[] ){
@@ -194,16 +205,16 @@ export class cajasServices {
         "_ordenDocumento" : idDocumento, 
          "_pagos" : pagos
        };
-       console.log('setPagoDocumento',url.action , datos,this.requestOptions)
-        return this.http.post(url.action , datos,this.requestOptions) ;
+       console.log('setPagoDocumento',url.create , datos,this.requestOptions)
+        return this.http.post(url.create , datos,this.requestOptions) ;
     }
     setCajasAUsuarios(idUsuario:number , cajas:number[] ){
         let datos = {"action": actions.actionAsignarCajas ,
         "_idUsuario" : idUsuario, 
          "_cajas" : cajas
        };
-       console.log('setCajasAUsuarios',url.action , datos,this.requestOptions)
-        return this.http.post(url.action , datos,this.requestOptions) ;
+       console.log('setCajasAUsuarios',url.create , datos,this.requestOptions)
+        return this.http.post(url.create , datos,this.requestOptions) ;
     }
     setCaja(caja:cajaModel){
         let datos ;
@@ -243,7 +254,7 @@ export class cajasServices {
         
        console.log(datos);
        
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.create , datos,this.requestOptions) ;
         
 
         
@@ -273,7 +284,7 @@ export class cajasServices {
         
        console.log(JSON.stringify( datos ));
        
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.create , datos,this.requestOptions) ;
         
 
         
@@ -311,7 +322,7 @@ export class cajasServices {
         
        console.log(datos);
        
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.create , datos,this.requestOptions) ;
         
 
         
@@ -355,7 +366,7 @@ export class cajasServices {
         
        console.log(datos);
        
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.create , datos,this.requestOptions) ;
         
 
         
@@ -387,7 +398,7 @@ setMedioDePago(newMedio:MediosDePagoModel){
    };
    console.log(datos);
    
-    return this.http.post(url.action , datos,this.requestOptions) ;
+    return this.http.post(url.create , datos,this.requestOptions) ;
     
 
     

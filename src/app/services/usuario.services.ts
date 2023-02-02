@@ -15,7 +15,11 @@ export class usuarioService {
     requestOptions:any
     loading = new loading();
     constructor(private http: HttpClient ,
-       ){ 
+        private _Router : Router){ 
+            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            if (!llaveDeRegistro){
+                  this._Router.navigate(['login']);
+            }
         console.log('servicios usuarios inicializado');  
         const headers = httpOptions() ; ;
             this.requestOptions = { headers: headers };

@@ -81,6 +81,7 @@ import { DatePipe } from '@angular/common';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CierresComponent } from './components/admon/cierres/cierres.component';
 import { TiposEstableComponent } from './components/datos-pos/generales/establecimientos/tipos-estable/tipos-estable.component';
+import { SincOdooComponent } from './components/sinc-odoo/sinc-odoo.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +137,7 @@ import { TiposEstableComponent } from './components/datos-pos/generales/establec
     dataArrayOdooPipe,
     booleanpPipe,
     TiposEstableComponent,
+    SincOdooComponent,
   ],
   imports: [
     BrowserModule,
