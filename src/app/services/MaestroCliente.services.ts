@@ -10,6 +10,7 @@ import { DepartamentoModel, PaisModel , CiudadModel } from '../models/maestros.m
 import { loading } from 'src/app/models/app.loading'; ;
 import { exit } from 'process';
 import { ClientesOdoo } from '../interfaces/clientes-odoo';
+import { Router } from '@angular/router';
 
 
 @Injectable({
@@ -24,7 +25,11 @@ export class MaestroClienteServices {
 
     requestOptions:any
     constructor(private http: HttpClient ,
-        private loading : loading ){ 
+        private loading : loading ,  private _Router : Router){ 
+            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            if (!llaveDeRegistro){
+                  this._Router.navigate(['login']);
+            }
         console.log('servicios datos iniciales inicializado');  
         
     const headers = httpOptions() ; ;

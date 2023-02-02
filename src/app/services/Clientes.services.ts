@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import * as internal from 'events';
 import { ClientesOdoo } from '../interfaces/clientes-odoo';
 import { actions } from '../models/app.db.actions';
@@ -34,7 +35,11 @@ export class ClientesService {
     }; 
     requestOptions:any;
     constructor(private http: HttpClient ,
-          ){  
+        private _Router : Router){ 
+            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            if (!llaveDeRegistro){
+                  this._Router.navigate(['login']);
+            }
         console.log('servicios datos iniciales inicializado');   
         
         const headers = httpOptions() ; ;

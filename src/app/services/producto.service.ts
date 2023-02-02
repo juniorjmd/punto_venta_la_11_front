@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { loading } from 'src/app/models/app.loading';
 import { DocumentoListado } from '../interfaces/documento.interface';
 import { impuesto, OdooPrd } from '../interfaces/odoo-prd';
@@ -17,7 +18,11 @@ export class ProductoService {
   requestOptions:any;
   loading = new loading() 
   constructor(private http: HttpClient ,
-    ){ 
+    private _Router : Router){ 
+      let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+      if (!llaveDeRegistro){
+            this._Router.navigate(['login']);
+      }
     console.log('servicios productos inicializado');  
     const headers = httpOptions() ; ;
         this.requestOptions = { headers: headers };
