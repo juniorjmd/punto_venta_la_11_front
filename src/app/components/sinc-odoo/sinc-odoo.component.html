@@ -1,1 +1,23 @@
-<p>sinc-odoo works!</p>
+<div class="container">
+    <div class="row justify-content-center" style="  margin-top: 10px; min-height:555px;margin-left: auto;
+margin-right: auto;">
+
+        <div class="col-sm-6">
+            <img src="../../../../../assets/img/odoo/odoo sin fondo 1.png" style="max-height: 500px;" class="figure-img img-fluid rounded" alt="">
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-sm-5" style="background-color: black !important; color:aliceblue ; font-family: 'Courier New', Courier, monospace;   ">
+                <ul>
+                    <li *ngFor="let proceso of procesos">{{proceso.nombre}}
+                        <fa-icon [icon]="facog " *ngIf="!proceso.estado" class="fa-spin"></fa-icon>
+                        <fa-icon [icon]="faWarning " *ngIf="proceso.estado && !proceso.resultado"></fa-icon>
+                        <fa-icon [icon]="faCheck " *ngIf="proceso.estado && proceso.resultado"></fa-icon>
+                        <p style="font-size: 11px;" *ngIf="proceso.detalle != '' ">{{proceso.detalle}}</p>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

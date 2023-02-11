@@ -62,6 +62,9 @@
     'actionInsert' :actionInsert ,
     'actionProcedure' :actionProcedure,
     'actionSelect' :actionSelect ,
+    
+    'actionActualizarBodegasOdoo' :'ACTUALIZAR_EXISTENCIA_POR_BODEGA',
+    'actionActualizarProductosOdoo' :'ACTUALIZAR_LISTADO_DE_PRODUCTOS',
     'actionBuscarPaisesOdoo' : 'BUSCAR_ODOO_PAIS',
     'actionBuscarStatesOdoo' : 'BUSCAR_ODOO_DEP',
     'actionBuscarCiudadOdoo' : 'BUSCAR_ODOO_CIUDAD',
