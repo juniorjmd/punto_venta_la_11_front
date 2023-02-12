@@ -48,15 +48,22 @@ export class SincOdooComponent {
   bodegasNombre:any[] =[]
   contProce:number = 0 ; 
   constructor(private _sincService : SincOdooService,
-    private _loginService: LoginService,
+    
     private _Router : Router) {
    
 
       this.generarActualizacion();
     } 
     async finalizarProcesos(){
+
+      const retornoEsta = await this._sincService.finalizarActulizacion();
+      console.log(retornoEsta);
       this.procesos[0].estado = true;
       this.procesos[0].resultado = true;
+      if (retornoEsta.error !== 'ok') {this.procesosFinal.resultado = false;
+        this.procesos[0].resultado = false;
+      }else{   
+         localStorage.setItem('E9PZJrrrRy5UVx7oqf+s9E0buds=',retornoEsta.llave)}
       this.procesos.push(this.procesosFinal)
       console.log(this.procesos);
     }
@@ -78,7 +85,10 @@ export class SincOdooComponent {
     await this.actulizarMarcas();
     console.log('fin actualizacion');
       await this.finalizarProcesos();
-
+      if(this.procesos[0].resultado){
+        this._Router.navigate(['login']);
+        
+      }
     } catch (error:any) {
          
       this.procesos[0].detalle = error;
@@ -164,7 +174,7 @@ async actulizarMarcas(){
      detalle: "",
      resultado: false
    }; 
-   const retornoSuc   = await this._sincService.actualizarTaxes()
+   const retornoSuc   = await this._sincService.actualizarMarcas()
    if( retornoSuc.error === 'ok'){
      this.terminoBien = true;
      this.procesos[this.contProce].detalle = "Total Datos actualizados ==> " + retornoSuc.numdata;

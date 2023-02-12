@@ -17,8 +17,10 @@ export class DatosInicialesService {
         this.requestOptions = { headers: headers };
   }
 
-  getDatosIniSucursal(){
-      let datos = {"action": actions.datosInicialesSucursal};
+  getDatosIniSucursal( key_actualizacion: any){
+      let datos = {"action": actions.datosInicialesSucursal ,
+        "_key_actualizacion" : key_actualizacion
+    };
       console.log('servicios datos iniciales inicializado ' ,url.datosIniciales , datos, url.httpOptionsSinAutorizacion);
       return this.http.post(url.datosIniciales , datos, url.httpOptionsSinAutorizacion) ;
     

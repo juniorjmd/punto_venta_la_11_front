@@ -68,6 +68,7 @@
     'actionActualizarCategoriasOdoo' :'ACTUALIZAR_LISTADO_DE_CATEGORIAS',
     'actionActualizarTaxesOdoo' :'ACTUALIZAR_LISTADO_DE_TAXES',
     'actionActualizarMarcasOdoo' :'ACTUALIZAR_LISTADO_DE_MARCAS',
+    'actionFinalizarActualizacion' :'FINALIZAR_ACTUALIZACION_ODOO',
     'actionBuscarPaisesOdoo' : 'BUSCAR_ODOO_PAIS',
     'actionBuscarStatesOdoo' : 'BUSCAR_ODOO_DEP',
     'actionBuscarCiudadOdoo' : 'BUSCAR_ODOO_CIUDAD',

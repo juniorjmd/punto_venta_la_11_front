@@ -32,6 +32,7 @@ export class LoginComponent implements OnInit
    mail: ''
  }
  sucursal:vwsucursal[]=[]; 
+ valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
  constructor(private _datosInicialesService : DatosInicialesService,
    private _loginService: LoginService,
    private _Router : Router) {
@@ -39,19 +40,17 @@ export class LoginComponent implements OnInit
 
     
      localStorage.clear();
+     if (!this.valSincronizar){
+      this._Router.navigate(['sincronizar']);
+     }else{localStorage.setItem('E9PZJrrrRy5UVx7oqf+s9E0buds=',this.valSincronizar)}
 
 
-
-   this._datosInicialesService.getDatosIniSucursal().subscribe(
-   { next : (data:any)=>{
-     this.sucursal = data;
-     console.log(this.sucursal);
-
-     let valSincronizar =  parseInt(localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')!) ; 
-      if (!valSincronizar){
-        this._Router.navigate(['sincronizar']);
-      }
+   this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
+   { next : (data:any)=>{  this.sucursal = data.sucursal; 
      
+    if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
+      this._Router.navigate(['sincronizar']);
+     }
           }  ,
     error :  (err:any )=> {console.log(err)
      alert( err.error.error)

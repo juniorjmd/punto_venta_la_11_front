@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { vwsucursal } from 'src/app/models/app.db.interfaces';
 import { DatosInicialesService } from 'src/app/services/datos-iniciales.service';
 
@@ -10,14 +11,25 @@ import { DatosInicialesService } from 'src/app/services/datos-iniciales.service'
 export class NavbarComponent {
   llaveIncio:string;
   sucursal : vwsucursal[] = [];
-  constructor( private _datosInicialesService: DatosInicialesService) { 
+  
+  valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
+
+  constructor( private _datosInicialesService: DatosInicialesService
+    ,   private _Router : Router) { 
     this.llaveIncio = ''; 
    
+    if (!this.valSincronizar){
+      this._Router.navigate(['sincronizar']);
+     }
     
-    
-  this._datosInicialesService.getDatosIniSucursal().subscribe(
+  this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
     { next : (data:any)=>{
-      this.sucursal = data; 
+      this.sucursal = data.sucursal; 
+      console.log(data);
+      
+      if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
+        this._Router.navigate(['sincronizar']);
+       }
            }  ,
      error :  (err:any )=> {console.log(err)
       alert( err.error.error)
