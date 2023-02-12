@@ -65,6 +65,8 @@
     
     'actionActualizarBodegasOdoo' :'ACTUALIZAR_EXISTENCIA_POR_BODEGA',
     'actionActualizarProductosOdoo' :'ACTUALIZAR_LISTADO_DE_PRODUCTOS',
+    'actionActualizarCategoriasOdoo' :'ACTUALIZAR_LISTADO_DE_CATEGORIAS',
+    'actionActualizarTaxesOdoo' :'ACTUALIZAR_LISTADO_DE_TAXES',
     'actionBuscarPaisesOdoo' : 'BUSCAR_ODOO_PAIS',
     'actionBuscarStatesOdoo' : 'BUSCAR_ODOO_DEP',
     'actionBuscarCiudadOdoo' : 'BUSCAR_ODOO_CIUDAD',

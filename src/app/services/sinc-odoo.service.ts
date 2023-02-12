@@ -21,7 +21,20 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
-   
+
+  actualizarTaxes(): Promise<select|any>{
+    let datos = {"action": actions.actionActualizarTaxesOdoo };
+    console.log('servicios actualizar categorias ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
+
+  actualizarCategorias(): Promise<select|any>{
+    let datos = {"action": actions.actionActualizarCategoriasOdoo };
+    console.log('servicios actualizar categorias ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
   actualizarExistencias(idBodega:number): Promise<select|any>{
     let datos = {"action": actions.actionActualizarBodegasOdoo , "id_bodega_stock_asignada" : idBodega};
     console.log('servicios actualizar existencias ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
