@@ -28,6 +28,12 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
+  actualizarMarcas(): Promise<select|any>{
+    let datos = {"action": actions.actionActualizarMarcasOdoo };
+    console.log('servicios actualizar categorias ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
 
   actualizarCategorias(): Promise<select|any>{
     let datos = {"action": actions.actionActualizarCategoriasOdoo };

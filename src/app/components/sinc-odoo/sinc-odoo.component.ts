@@ -75,6 +75,7 @@ export class SincOdooComponent {
     await this.actulizarProductos();
     await this.actulizarCategorias();
     await this.actulizarTaxes();
+    await this.actulizarMarcas();
     console.log('fin actualizacion');
       await this.finalizarProcesos();
 
@@ -152,6 +153,37 @@ async actulizarCategorias(){
   }
 }
 
+async actulizarMarcas(){
+ 
+  try {
+   this.contProce++;
+    
+   this.procesos[this.contProce] = {
+     nombre:  'Actulizando listado de Taxes desde Odoo' ,
+     estado: false,
+     detalle: "",
+     resultado: false
+   }; 
+   const retornoSuc   = await this._sincService.actualizarTaxes()
+   if( retornoSuc.error === 'ok'){
+     this.terminoBien = true;
+     this.procesos[this.contProce].detalle = "Total Datos actualizados ==> " + retornoSuc.numdata;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = true;
+   }else{
+     this.terminoBien = false;
+     this.procesos[this.contProce].detalle = "error ==> " + retornoSuc.error;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = false;
+   }
+  } catch (error:any) {
+   console.log(error);
+       this.terminoBien = false;
+       this.procesos[this.contProce].detalle = "error ==> " + error.error.error;
+       this.procesos[this.contProce].estado = true;
+       this.procesos[this.contProce].resultado = false;
+  }
+}
 
 async actulizarTaxes(){
  
