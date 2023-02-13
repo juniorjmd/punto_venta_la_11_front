@@ -1,9 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { select } from 'src/app/interfaces/generales.interface';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; 
+import { select } from 'src/app/interfaces/generales';
 import { errorOdoo, OdooPrd } from 'src/app/interfaces/odoo-prd';
 import { loading } from 'src/app/models/app.loading';
 import { ProductoService } from 'src/app/services/producto.service';
+import Swal from 'sweetalert2';
 
   
 @Component({
@@ -13,7 +14,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 })
 export class BuscarProductosAuxComponent implements OnInit {
   parceros : OdooPrd[] = [];
-  prdBusqueda :OdooPrd   ;
+  prdBusqueda !:OdooPrd   ;
   codPrd:string ;  
   show = false ;
   cantidadPrd:number ;  
@@ -32,20 +33,20 @@ export class BuscarProductosAuxComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  addCnt(cnt){
+  addCnt(cnt:number){
     this.cantidadPrd += cnt ;
-    if (this.prdBusqueda.cantidad < this.cantidadPrd){
-       this.cantidadPrd =  this.prdBusqueda.cantidad ;
+    if (this.prdBusqueda.cantidad! < this.cantidadPrd){
+       this.cantidadPrd =  this.prdBusqueda.cantidad! ;
     }
   }
 
-  enviarCnt( cnt ){
+  enviarCnt( cnt:number ){
     this.cantidadPrd  += cnt ;
-    if ( this.cantidadPrd > 0 && this.prdBusqueda.cantidad >= this.cantidadPrd){  
+    if ( this.cantidadPrd > 0 && this.prdBusqueda.cantidad! >= this.cantidadPrd){  
             this.prdBusqueda.cantidadVendida = this.cantidadPrd;
             this.loading.show() 
             this.prdService.guardarPrdCompra(this.prdBusqueda ).subscribe(
-              (respuesta:select)=>{
+              {next:(respuesta:any|select)=>{
                 if (respuesta.error !== 'ok'){
                     Swal.fire(  'ERROR',respuesta.error, 'error') ;
                     console.log(JSON.stringify(respuesta));
@@ -54,14 +55,14 @@ export class BuscarProductosAuxComponent implements OnInit {
                   else{ this.dialogo.close(true); }
                   this.loading.hide() 
 
-                },
+                },error:
                 (error:errorOdoo) =>{
                   console.log(JSON.stringify( error) );
                   
                   alert(error.error.error +"\n" + error.error.msg); 
                   this.dialogo.close(false); 
                   this.loading.hide() 
-                }) 
+                }}) 
        
         
     }
@@ -70,17 +71,17 @@ export class BuscarProductosAuxComponent implements OnInit {
    
    buscarProducto(){
     this.loading.show() 
-    this.prdService.getProductosCodBarrasVCnt(this.codPrd ).subscribe(
-      (respuesta:select)=>{
+    this.prdService.getProductosCodBarrasVCnt(this.codPrd ).subscribe( 
+      {next:(respuesta:any|select)=>{
         if (respuesta.error === 'ok'){
            if (respuesta.numdata > 0 ){
            this.prdBusqueda =  respuesta.data[0] ; 
-    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos.datos[0].amount /100))).toFixed(2) ) ;
+    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos!.datos[0].amount /100))).toFixed(2) ) ;
     this.prdBusqueda.valor_del_iva = parseFloat( (this.prdBusqueda.lst_price  - this.prdBusqueda.precio_sin_iva ).toFixed(2) );
     if(!Number.isInteger(this.prdBusqueda.descuento)){
       this.prdBusqueda.descuento = 0;
     }
-           if(this.prdBusqueda.cantidad > 10 ){
+           if(this.prdBusqueda.cantidad! > 10 ){
             this.disabled = [false ,false ,false ,false ,false ,false ,false ,false ,false ,false ];
            }else{
              switch (this.prdBusqueda.cantidad ){
@@ -135,12 +136,12 @@ export class BuscarProductosAuxComponent implements OnInit {
          console.log('getProductosCodBarrasVCnt',JSON.stringify(respuesta));
          this.loading.hide();
         
-         },
+         },error:
          error => {this.loading.hide();
            Swal.fire(
           'ERROR',error.error.error,
           'error');
-         } 
+         } }
     );
    }
 }

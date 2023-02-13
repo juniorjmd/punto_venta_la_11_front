@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit, NgModule } from '@angular/core'; 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { cajaModel } from 'src/app/models/cajas.model';
-import { loading } from 'src/app/models/app.loading';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { loading } from 'src/app/models/app.loading'; 
 import { cajasServices } from 'src/app/services/Cajas.services';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-definir-base-caja',
@@ -12,7 +12,7 @@ import { cajasServices } from 'src/app/services/Cajas.services';
 })
 export class DefinirBaseCajaComponent implements OnInit {
  caja:cajaModel ;
- valorIngresar:number;
+ valorIngresar!:number;
   constructor( private cajaService : cajasServices,
     public dialogo: MatDialogRef<DefinirBaseCajaComponent>,
     @Inject(MAT_DIALOG_DATA) public cajaImport:cajaModel,
@@ -33,7 +33,7 @@ export class DefinirBaseCajaComponent implements OnInit {
     }else{
       this.loading.show() 
       this.cajaService.abrirCaja(this.caja, this.valorIngresar).subscribe(
-        (respuesta:any)=>{
+      {next:  (respuesta:any)=>{
           console.log(respuesta)
          
         if (respuesta.error === 'ok'){
@@ -44,12 +44,12 @@ export class DefinirBaseCajaComponent implements OnInit {
         }
         this.loading.hide();
        
-        },
+        },error:
         error => {this.loading.hide();
           Swal.fire(
           'ERROR',error.error.error,
           'error');
-        }
+        }}
         );
     }
     

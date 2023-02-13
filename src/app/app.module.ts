@@ -10,8 +10,6 @@ import { InicioComponent } from './components/inicio/inicio.component';
 import { AbrirCajaComponent } from './components/pos/abrir-caja/abrir-caja.component';
 import { VentasComponent } from './components/pos/ventas/ventas.component';
 import { CerrarCajaComponent } from './components/pos/cerrar-caja/cerrar-caja.component';
-import { DevolucionesComponent } from './components/pos/devoluciones/devoluciones.component';
-import { EnviosComponent } from './components/pos/envios/envios.component';
 import { ClientesComponent } from './components/clientes/clientes.component';
 import { ClienteInicioComponent } from './components/clientes/cliente-inicio/cliente-inicio.component';
 import { ClienteNuevoComponent } from './components/clientes/cliente-nuevo/cliente-nuevo.component';
@@ -90,6 +88,9 @@ import { MostrarProductoComponent } from './components/pos/mostrar-producto/most
 import { MoverDocumentosComponent } from './components/pos/mover-documentos/mover-documentos.component';
 import { PagosVentaComponent } from './components/pos/pagos-venta/pagos-venta.component';
 import { ResumenCajaComponent } from './components/pos/resumen-caja/resumen-caja.component';
+import { FndClienteComponent } from './components/clientes/fnd-cliente/fnd-cliente.component';
+import { DevolucionesComponent } from './components/pos/devoluciones/devoluciones.component';
+import { EnviosComponent } from './components/pos/envios/envios.component';
 
 @NgModule({
   declarations: [
@@ -139,7 +140,7 @@ import { ResumenCajaComponent } from './components/pos/resumen-caja/resumen-caja
     UsuarioComponent,
     LoadingComponent,
     MenucardsComponent,
-    
+    FndClienteComponent,
     DineroPipe,
     ImgB64Pipe,
     dataArrayOdooPipe,

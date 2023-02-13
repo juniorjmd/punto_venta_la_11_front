@@ -1,0 +1,197 @@
+<div class="row" *ngIf="busqueda ">
+    <div class="col-sm-5 ">
+        <div class="form-group ">
+            <select class=" o_input_req " [(ngModel)]="NwCliente.l10n_latam_identification_type_id" [compareWith]="compararTipoId" placeholder=" "> 
+            <option  *ngFor='let tipid of tipo_identificacion' [ngValue]="tipid">{{tipid[1]}}</option>
+        </select>
+        </div>
+    </div>
+    <div class="col-sm-7 ">
+        <div class="form-group ">
+            <label for=" "></label>
+            <input type="text " (keyup.enter)='buscarCliente()' placeholder="identificacion " [(ngModel)]="NwCliente.vat " class=" o_input_req " name=" " id=" " aria-describedby="helpId ">
+
+        </div>
+    </div>
+
+</div>
+
+<div *ngIf="!busqueda">
+    <hr>
+    <div class="row ">
+        <div class="col-sm-6 ">
+            <div class="form-group ">
+                <label for=" "></label>
+                <input type="text " placeholder="Nombre " [(ngModel)]="NwCliente.name " class=" o_input_req " name=" " id=" " aria-describedby="helpId ">
+
+            </div>
+        </div>
+        <div class="col-sm-6 ">
+            <div _ngcontent-wwk-c163="" role="group" aria-label="Basic example" class="btn-group">
+                <button _ngcontent-wwk-c163="" *ngIf="crear" type="button" (click)="crearCliente()" title="Guardar En Odoo" class="btn btn-success">
+                    <i _ngcontent-wwk-c163="" class="fas fa-check-double"></i></button>
+
+                <button _ngcontent-wwk-c163="" *ngIf="!crear" type="button" (click)="actualizarCliente()" title="Actualizar En Odoo" class="btn btn-warning">
+                             <i  _ngcontent-wwk-c163=""  class="fas fa-edit"></i>
+                        </button>
+                <button _ngcontent-wwk-c163="" type="button" (click)="pasarClienteAcontrolYasignarDocumento()" title="Agregar al Documento" class="btn btn-primary">
+                        <i _ngcontent-wwk-c163="" class="fas fa-plus"></i>&nbsp;<i _ngcontent-wwk-c163="" class="fas fa-file-alt"></i></button> </div>
+        </div>
+
+    </div>
+    <div class="row ">
+        <div class="col-sm-4 ">
+            <div class="form-group " placeholder="Compañía ">
+                <select class=" o_input " [(ngModel)]="NwCliente.parent_id " placeholder=" ">
+                <option  class="noMostrar " [ngValue]= 'false'>Compañia - ninguna</option>
+             <!--   <option  *ngFor='let compania of companias' value="compania ">{{compania.label}}</option>-->
+            </select>
+            </div>
+        </div>
+        <!---identificacion -->
+
+        <div class="col-sm-3 ">
+            <div class="form-group ">
+                <select class=" o_input_req " [(ngModel)]="NwCliente.l10n_latam_identification_type_id " placeholder=" "> 
+            <option  *ngFor='let tipid of tipo_identificacion' [ngValue]="tipid">{{tipid[1]}}</option>
+        </select>
+            </div>
+        </div>
+
+        <div class="col-sm-3 ">
+            <div class="form-group " placeholder="Compañía ">
+                <input type="text " placeholder="Identificacion " [(ngModel)]="NwCliente.vat " class=" o_input_req " name=" " id=" " aria-describedby="helpId ">
+
+            </div>
+        </div>
+        <!---identificacion -->
+
+
+    </div>
+
+    <div class="row ">
+        <div class="col-sm-5 ">
+            <div class="row ">
+                <div class="col-sm-4 ">Tipo de direccion</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <select class=" o_input " [(ngModel)]="NwCliente.type " (change)="muestraCliente() " placeholder=" "> 
+                        <option  *ngFor='let tipdireccion of tipo_direccion' [value]="tipdireccion.dato " >{{tipdireccion.label}}</option>
+                    </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Direccion</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <input type="text " [(ngModel)]="NwCliente.street " class="o_input " placeholder="Calle... ">
+                    </div>
+                    <div class="form-group ">
+                        <input type="text " [(ngModel)]="NwCliente.street2 " class="o_input " placeholder="Calle 2... ">
+                    </div>
+
+                    <div class="form-group ">
+                        <div class="row ">
+
+
+                            <select class=" o_input col-sm-5 " [(ngModel)]="indexPais" style="margin-left: 10px; " (change)="getDepartamento() ">
+                            <option   class="noMostrar "   [ngValue]=-1>País</option>
+                            <option  *ngFor='let Pais of paises;let i = index' [ngValue]="i" >{{Pais[1]}}</option>
+                        </select>
+
+                            <select class=" o_input col-sm-6 " style="margin-left: 10px; " placeholder=" " [(ngModel)]="indexDepa" (change)="getCiudad() ">
+                            <option [ngValue]="-1 " class="noMostrar "  >Departamento</option>
+                            <option  *ngFor='let Provincia of Provincias ; let i =  index'  [ngValue]="i">{{Provincia[1]}}</option>
+                        </select>
+
+                        </div>
+                    </div>
+                    <div class="form-group ">
+                        <div class="row ">
+                            <select class=" o_input col-sm-6 " [(ngModel)]="indexCity" style="margin-left: 10px; " (change)="asignarCiudad()">
+                            <option [ngValue]=-1 class="noMostrar "   >Ciudad</option>
+                            <option  *ngFor='let Ciudad of Ciudades; let i = index' [ngValue]= i >{{Ciudad[1]}}</option>
+                        </select>
+
+                            <input type="text " style="margin-left: 10px; " [(ngModel)]="cityN.cod_dane " class="o_input col-sm-3 " placeholder="C.P. ">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1 "></div>
+        <!--campos del cliente segunda columna debajo de nombre-->
+        <div class="col-sm-5 ">
+            <div class="row ">
+                <div class="col-sm-4 ">Puesto de trabajo</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <input type="text " class="o_input " [(ngModel)]='NwCliente.function' placeholder="por ejemplo : Director de Ventas ">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Teléfono</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <input type="text " [(ngModel)]='NwCliente.phone' class="o_input ">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Celular</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <div class="form-group ">
+                            <input [(ngModel)]='NwCliente.mobile' type="text " class="o_input ">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Correo Electronico</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <input type="text " [(ngModel)]='NwCliente.email' class="o_input ">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Enlace a Página Web</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <input type="text " class="o_input ">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Titulo</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <select class=" o_input " placeholder=" "> 
+                    <option  *ngFor='let titulo of titulos' value="titulo.dato ">{{titulo.label}}</option>
+                </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-sm-4 ">Categorías</div>
+                <div class="col-sm-8 ">
+                    <div class="form-group ">
+                        <select class=" o_input " placeholder=" ">  
+                   <option  *ngFor='let categoria of categorias' value="categoria.dato ">{{categoria.label}}</option>
+               </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="row row-cols-3 ">
+        <div class="col-sm-12 ">
+
+        </div>
+    </div>
+</div>

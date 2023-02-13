@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { loading } from 'src/app/models/app.loading';
-import { select } from 'src/app/interfaces/generales.interface';
+import { loading } from 'src/app/models/app.loading'; 
 import { DocumentosModel } from 'src/app/models/documento.model';
 import { DocumentoService } from 'src/app/services/documento.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,8 +16,9 @@ import { PagosVentaComponent } from '../pagos-venta/pagos-venta.component';
 import { printer, url } from 'src/app/models/app.db.url';
 import { ConectorPlugin } from 'src/app/models/app.printer.con';
 import { BuscarProdDirectoComponent } from '../buscar-prod-directo/buscar-prod-directo.component';
-import { FndClienteComponent } from '../../cliente/fnd-cliente/fnd-cliente.component';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import Swal from 'sweetalert2';
+import { select } from 'src/app/interfaces/generales';
+import { FndClienteComponent } from '../../clientes/fnd-cliente/fnd-cliente.component';
 
 
 @Component({
@@ -28,17 +28,17 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 })
 export class VentasComponent implements AfterViewInit  {
   pagos:pagosModel[] =[]  ;
-  indexEfectivo:number;
-  focus:boolean;
+  indexEfectivo!:number;
+  focus!:boolean;
   MedioP:MediosDePago[]=[];
   buscarClose : boolean = true;
-  codigoProducto:string;
+  codigoProducto!:string;
   vueltas:boolean = false;
   documentos : DocumentosModel[] = [];
   documentoActivo : DocumentosModel = new DocumentosModel();
   documentoRetorno : DocumentosModel = new DocumentosModel();
   documentoSeleccionadoActivo : DocumentosModel = new DocumentosModel(); 
-  @ViewChild('codProd') codProdlement: ElementRef;
+  @ViewChild('codProd') codProdlement!: ElementRef;
   constructor( public loading : loading,private serviceCaja : cajasServices ,
     private newAbrirDialog : MatDialog,
     private documentoService : DocumentoService,
@@ -64,9 +64,9 @@ export class VentasComponent implements AfterViewInit  {
         if (response.confirmado){
          
           console.log('dato retornado busqueda directa',response.datoDevolucion);
-          this.codigoProducto = response.datoDevolucion.id.toString();
+          this.codigoProducto = response.datoDevolucion!.id.toString();
             this.buscarClose = false ;
-            this.newAbrirDialog.open(BuscarProductosComponent ,{data: response.datoDevolucion.id.toString() })
+            this.newAbrirDialog.open(BuscarProductosComponent ,{data: response.datoDevolucion!.id.toString() })
             .afterClosed()
             .subscribe((confirmado: Boolean)=>{ 
               this.crearDocumento();
@@ -95,7 +95,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
     this.documentoRetorno = this.documentoActivo
    let nombreImpresora = printer.namePrinterGenerico;
    if (!nombreImpresora) return console.log("Selecciona una impresora");
-   let conector = new ConectorPlugin(null);
+   let conector = new ConectorPlugin('');
    conector.cortar();
    conector.establecerTamanioFuente(1, 1);
    conector.establecerEnfatizado(0);
@@ -111,7 +111,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
    conector.texto("--------------------------------\n"); 
    conector.texto("Factura "+this.documentoRetorno.idDocumentoFinal + "\n");
    conector.texto("--------------------------------\n");
-   this.documentoRetorno.listado.forEach((lista:DocumentoListado)=>{
+   this.documentoRetorno.listado!.forEach((lista:DocumentoListado)=>{
     conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda);
     conector.texto(lista.nombreProducto + "\n");
     conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionDerecha);    
@@ -135,7 +135,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
    conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro);
    conector.texto("Medios de Pago\n");
 
-   this.documentoRetorno.pagos.forEach((pagos:DocpagosModel)=>{
+   this.documentoRetorno.pagos!.forEach((pagos:DocpagosModel)=>{
     conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionIzquierda);
     conector.texto("      "+pagos.nombreMedio + "\n");
     conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionDerecha);
@@ -152,7 +152,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
    conector.establecerJustificacion(ConectorPlugin.Constantes.AlineacionCentro);
    conector.texto("***Gracias por su compra***\n");
    
-   conector.feed(4)
+   conector.feed('4')
 
    conector.abrirCajon() // Abrir cajón de dinero. Opcional
    conector.cortar()
@@ -166,12 +166,11 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   getMediosP(){ 
   this.loading.show()
   this.serviceCaja.getMediosCajaActiva()
-     .subscribe(
-      (datos:select)=>{
+     .subscribe({next: (datos:any|select)=>{
          console.log(datos);
          
     if (datos.numdata > 0 ){ 
-      datos.data.forEach((dato:MediosDePago , index )=>{
+      datos.data.forEach((dato:MediosDePago , index:number )=>{
         this.MedioP[index] =   dato ;
         this.pagos[index] = new pagosModel();
         this.pagos[index].idMedioDePago = dato.id;
@@ -188,11 +187,11 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
     console.log('medios de pago' , this.MedioP );
         this.loading.hide()
       } ,
-      error => {this.loading.hide();
+      error:error => {this.loading.hide();
         Swal.fire(
           'ERROR',error.error.error,
           'error');
-      }
+      }}
       );
   }
   generarEnvio(){ 
@@ -217,7 +216,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   generarDomicilio(){
     this.loading.show() 
   this.documentoService.generarDomicilioDocumento(this.documentoActivo.orden).subscribe(
-    (respuesta:select)=>{
+     (respuesta:any|select)=>{
       let cont = 0;
        console.log('crearDocumento',respuesta);  
        if (respuesta.error === 'ok'){
@@ -271,7 +270,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
     console.log(linea)
     this.loading.show() 
     this.productoService.devolverPrdCompra(linea).subscribe(
-      (respuesta:select)=>{
+       (respuesta:any|select)=>{
         
         console.log(JSON.stringify(respuesta));
         if (respuesta.error !== 'ok'){
@@ -291,7 +290,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
 
   }
   irbuscarProducto( ){
-   let activeTextarea = document.activeElement.tagName; 
+   let activeTextarea = document.activeElement!.tagName; 
    console.log(activeTextarea)
    if(activeTextarea.toUpperCase().indexOf('SELECT') < 0)
     this.codProdlement.nativeElement.focus();
@@ -314,16 +313,16 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
 
      
     if (typeof(this.documentoActivo.pagos) === 'undefined' || this.documentoActivo.pagos.length === 0)
-      {this.documentoActivo.pagos[0] = new DocpagosModel();
-        this.documentoActivo.pagos[0].idDocumento =  this.documentoActivo.orden;
+      {this.documentoActivo.pagos![0] = new DocpagosModel();
+        this.documentoActivo.pagos![0].idDocumento =  this.documentoActivo.orden;
         try {
-          this.documentoActivo.pagos[0].idMedioDePago =  this.pagos[ this.indexEfectivo].idMedioDePago;
-        this.documentoActivo.pagos[0].referencia =  'Efectivo';
-        this.documentoActivo.pagos[0].valorPagado =  this.pagos[ this.indexEfectivo].valorPagado;
+          this.documentoActivo.pagos![0].idMedioDePago =  this.pagos[ this.indexEfectivo].idMedioDePago;
+        this.documentoActivo.pagos![0].referencia =  'Efectivo';
+        this.documentoActivo.pagos![0].valorPagado =  this.pagos[ this.indexEfectivo].valorPagado;
         } catch (error) {
-          this.documentoActivo.pagos[0].idMedioDePago =  1;
-        this.documentoActivo.pagos[0].referencia =  'Efectivo';
-        this.documentoActivo.pagos[0].valorPagado =  this.documentoActivo.valorTotal;
+          this.documentoActivo.pagos![0].idMedioDePago =  1;
+        this.documentoActivo.pagos![0].referencia =  'Efectivo';
+        this.documentoActivo.pagos![0].valorPagado =  this.documentoActivo.valorTotal;
         }
         
         
@@ -331,7 +330,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
         console.log( this.documentoActivo.pagos);
       }
       //return;
-      if (this.documentoActivo.listado.length === 0){
+      if (this.documentoActivo.listado!.length === 0){
       alert('Debe ingresar los productos a facturar') ; 
       return;
     }
@@ -343,7 +342,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
 
   this.loading.show() 
   this.documentoService.cerrarDocumento(this.documentoActivo.orden).subscribe(
-    (respuesta:select)=>{
+     (respuesta:any|select)=>{
       let cont = 0;
        console.log('cerrarDocumento',respuesta); 
        if (respuesta.error === 'ok'){
@@ -363,7 +362,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   crearDocumento(){
     this.loading.show() 
   this.documentoService.crearDocumento().subscribe(
-    (respuesta:select)=>{
+     (respuesta:any|select)=>{
       let cont = 0;
        console.log('crearDocumento',respuesta); 
        if (respuesta.error === 'ok'){
@@ -380,7 +379,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   cambiarDocumentoActivo(){
     this.loading.show() 
   this.documentoService.cambiarDocumento(this.documentoActivo.orden).subscribe(
-    (respuesta:select)=>{
+     (respuesta:any|select)=>{
       let cont = 0;
        console.log('cambiarDocumento',respuesta);  
        if (respuesta.error !== 'ok'){  
@@ -406,7 +405,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   cancelarDocumento(){
     this.loading.show() 
   this.documentoService.cancelarDocumento(this.documentoActivo.orden).subscribe(
-    (respuesta:select)=>{
+     (respuesta:any|select)=>{
       let cont = 0;
        console.log('crearDocumento',respuesta);  
        if (respuesta.error === 'ok'){
@@ -426,13 +425,13 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   this.vueltas =true;
   this.pagos = [];
   this.documentoService.getDocumentosUsuarioCaja().subscribe(
-    (datos:select)=>{
+    {next: (datos:any|select)=>{
       let cont = 0;
        console.log('getDocumentos',datos); 
        this.documentos = [];
        let documentoSeleccionado:DocumentosModel;
   if (datos.numdata > 0 ){ 
-    datos.data.forEach((dato:any , index  )=>{ 
+    datos.data.forEach((dato:any , index:number  )=>{ 
      // this.documentos = 
      this.documentos.push(dato.objeto);
      if(index === 0)  documentoSeleccionado = dato.objeto;
@@ -442,9 +441,9 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
      
      console.log(dato);
     })
-    this.documentoActivo = documentoSeleccionado;
-    if (this.documentoActivo.pagos.length > 0 ){
-      this.pagos = this.documentoActivo.pagos;
+    this.documentoActivo = documentoSeleccionado!;
+    if (this.documentoActivo.pagos!.length > 0 ){
+      this.pagos = this.documentoActivo.pagos!;
       console.log('pagos factura',this.pagos)
     }else{
       try {
@@ -461,10 +460,10 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
  }
  
  this.vueltas =false;
-} ,
+} , error:
 (error: any) =>{
   alert(JSON.stringify(error));
 
-});
+}});
 }
 }
