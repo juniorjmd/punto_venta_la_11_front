@@ -1,0 +1,8 @@
+<div class="container-fluid">
+    <ul class="list-group">
+        <li *ngFor="let caja of cajasActivas; let i=index" class="list-group-item">
+            {{caja.nombreEstablecimiento}} -- {{caja.nombre}} -- {{caja.nombreUsuarioEstadoCaja}}
+            <button type="button" (click)='asignarACaja(caja)' class="btn btn-primary">Asignar</button>
+        </li>
+    </ul>
+</div>

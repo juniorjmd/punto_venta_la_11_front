@@ -1,0 +1,13 @@
+.container-fluid {
+    background-color: aliceblue !important;
+    height: auto !important;
+    min-height: 565px !important;
+    border: transparent !important;
+    width: 100% !important;
+    background-image: url(../../../assets/img/home-menu-bg-overlay.svg)!important;
+    background-size: cover;
+}
+
+.container-fluid div {
+    background-color: transparent !important;
+}

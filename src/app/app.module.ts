@@ -7,7 +7,6 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { MiUsuarioComponent } from './components/mi-usuario/mi-usuario.component';
 import { InicioComponent } from './components/inicio/inicio.component';
-import { PosComponent } from './components/pos/pos.component';
 import { AbrirCajaComponent } from './components/pos/abrir-caja/abrir-caja.component';
 import { VentasComponent } from './components/pos/ventas/ventas.component';
 import { CerrarCajaComponent } from './components/pos/cerrar-caja/cerrar-caja.component';
@@ -82,6 +81,15 @@ import { UsuarioComponent } from './components/usuario/usuario.component';
 import { CierresComponent } from './components/admon/cierres/cierres.component';
 import { TiposEstableComponent } from './components/datos-pos/generales/establecimientos/tipos-estable/tipos-estable.component';
 import { SincOdooComponent } from './components/sinc-odoo/sinc-odoo.component';
+import { PosComponent } from './components/pos/pos.component';
+import { BuscarProdDirectoComponent } from './components/pos/buscar-prod-directo/buscar-prod-directo.component';
+import { BuscarProductosAuxComponent } from './components/pos/buscar-productos-aux/buscar-productos-aux.component';
+import { BuscarProductosComponent } from './components/pos/buscar-productos/buscar-productos.component';
+import { DefinirBaseCajaComponent } from './components/pos/definir-base-caja/definir-base-caja.component';
+import { MostrarProductoComponent } from './components/pos/mostrar-producto/mostrar-producto.component';
+import { MoverDocumentosComponent } from './components/pos/mover-documentos/mover-documentos.component';
+import { PagosVentaComponent } from './components/pos/pagos-venta/pagos-venta.component';
+import { ResumenCajaComponent } from './components/pos/resumen-caja/resumen-caja.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +146,15 @@ import { SincOdooComponent } from './components/sinc-odoo/sinc-odoo.component';
     booleanpPipe,
     TiposEstableComponent,
     SincOdooComponent,
+
+    BuscarProdDirectoComponent,
+    BuscarProductosComponent,
+    BuscarProductosAuxComponent,
+    DefinirBaseCajaComponent,
+    MostrarProductoComponent,
+    MoverDocumentosComponent,
+    PagosVentaComponent,
+    ResumenCajaComponent,
   ],
   imports: [
     BrowserModule,

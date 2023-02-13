@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <h3 *ngIf="!show">Buscando Productos</h3>
+    <div *ngIf="!show" class="row">
+        <div class="col-sm-12">
+            <p class="card-text">
+                parametro de Busqueda <b> {{codPrd}}</b>
+                <i ngclass="fas fa-sync-alt fa-spin" [ngClass]="{'fas': true, 'fa-sync-alt': true, 'fa-spin': show===false}"></i></p>
+        </div>
+    </div>
+
+
+
+    <div class="row" *ngIf="show">
+        <div class="col-sm-5">
+            <div class="card mb-3" style="max-width: 500px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img style="max-width: 100px;" [src]="prdBusqueda.image_128 | ImgB64" alt="{{prdBusqueda.display_name}}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text">{{ prdBusqueda.display_name }}</p>
+                            <p class="card-text"><b>precio: </b><small class="text-muted">{{ prdBusqueda.lst_price }}</small>
+                                <br><b>precio base : </b><small class="text-muted">{{ prdBusqueda.precio_sin_iva }}</small><br>
+                                <b>valor IVA : </b><small class="text-muted">{{ prdBusqueda.valor_del_iva }}</small>
+                                <br><b>Descuento: </b><small class="text-muted">{{ prdBusqueda.descuento }}</small>
+
+
+                                <br><b>IVA: </b><small class="text-muted">{{ prdBusqueda.impuestos.datos[0].amount }} %</small>
+                                <br><b>existencia: </b><small class="text-muted">{{ prdBusqueda.cantidad }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-5">
+            <table>
+                <tr>
+                    <td colspan="3"> <input type="number" readonly [ngModel]="cantidadPrd" class="o_input form-control "></td>
+                </tr>
+                <tr>
+                    <td><button [disabled]="disabled[0]" style="width: 100%;" (click)="enviarCnt(1)" class="btn btn-primary btn-sm">1</button></td>
+                    <td><button [disabled]="disabled[1]" style="width: 100%;" (click)="enviarCnt(2)" class="btn btn-primary btn-sm">2</button></td>
+                    <td><button [disabled]="disabled[2]" style="width: 100%;" (click)="enviarCnt(3)" class="btn btn-primary btn-sm">3</button></td>
+                </tr>
+                <tr>
+                    <td><button [disabled]="disabled[3]" style="width: 100%;" (click)="enviarCnt(4)" class="btn btn-primary btn-sm">4</button></td>
+                    <td><button [disabled]="disabled[4]" style="width: 100%;" (click)="enviarCnt(5)" class="btn btn-primary btn-sm">5</button></td>
+                    <td><button [disabled]="disabled[5]" style="width: 100%;" (click)="enviarCnt(6)" class="btn btn-primary btn-sm">6</button></td>
+                </tr>
+                <tr>
+                    <td><button [disabled]="disabled[6]" style="width: 100%;" (click)="enviarCnt(7)" class="btn btn-primary btn-sm">7</button></td>
+                    <td><button [disabled]="disabled[7]" style="width: 100%;" (click)="enviarCnt(8)" class="btn btn-primary btn-sm">8</button></td>
+                    <td><button [disabled]="disabled[8]" style="width: 100%;" (click)="enviarCnt(9)" class="btn btn-primary btn-sm">9</button></td>
+                </tr>
+                <tr>
+                    <td><button style="width: 100%;" (click)="cantidadPrd = 0" class="btn btn-primary btn-sm">clr</button></td>
+                    <td colspan="2"><button [disabled]="disabled[9]" style="width: 100%;" (click)="addCnt(10)" class="btn btn-primary btn-sm">+10</button></td>
+                </tr>
+                <tr>
+                    <td colspan="3"><button [disabled]="disabled[9]" style="width: 100%;" (click)="enviarCnt(0)" class="btn btn-success btn-sm">Enter</button></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+
+
+    <hr *ngIf="show_reemplazo">
+    <h3 *ngIf="show_reemplazo">Productos Reemplazo</h3>
+    <div *ngIf="show_reemplazo" class="row">
+        <div *ngFor="let parcero  of parceros" class="col-sm-3">
+            <div class="card mb-3" style="max-width: 540px;" (click)="codPrd = parcero.id ; buscarProducto() ">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img style="max-height: 50px;" [src]="parcero.image_128 | ImgB64" alt="{{parcero.display_name}}">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <p class="card-text">{{ parcero.display_name }}</p>
+                            <p class="card-text"><b>precio: </b><small class="text-muted">{{ parcero.lst_price }}</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

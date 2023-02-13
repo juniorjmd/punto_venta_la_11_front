@@ -42,7 +42,7 @@ getCategorias(){
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
 /*buscar producto por codigo de barra validando la existencia */
-getProductosCodBarrasVCnt(codPrd:OdooPrd){
+getProductosCodBarrasVCnt(codPrd:string){
   let datos = {"action": actions.buscarProducto ,
       "_limit" : 1 , "_codBarra" : true , "_data" : codPrd ,  "_validar_existencia" : true ,
         "_sin_parceros" : true

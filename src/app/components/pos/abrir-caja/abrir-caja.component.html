@@ -1,1 +1,74 @@
-<p>abrir-caja works!</p>
+<DIv>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1 class="centrado">Cajas Disponible</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 "></div>
+        <div class="col-sm-8 ">
+
+            <table class="table">
+                <thead *ngIf="!cajaAbiertaFlag" class="thead-inverse">
+                    <tr>
+                        <th>caja</th>
+                        <th>Descripcion</th>
+                        <th>opcion</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="!cajaAbiertaFlag">
+                    <tr *ngFor="let caja of cajas">
+                        <td scope="row">{{caja.nombre}}</td>
+                        <td>{{caja.descripcion}}</td>
+
+                        <td *ngIf="caja.nombreEstado === 'Cerrada'"><i class="fas fa-cash-register fa-2x boton_activo" (click)="asignarCaja(cajaAbierta)" title="Abrir caja"></i></td>
+                        <td *ngIf="caja.nombreEstado !== 'Cerrada'">
+                            <span class="fa-stack  " title="Abrir caja">
+                                <i class="fas fa-cash-register fa-stack-1x  "  ></i>
+                                <i class="fa fa-ban fa-stack-2x text-info"></i></span>
+
+                        </td>
+                        <td *ngIf="caja.nombreEstado !== 'Cerrada'"><i class="fas fa-vote-yea fa-2x boton_activo" (click)="continuar_caja_suspendida(caja)" title="Establecer caja"></i></td>
+                        <td *ngIf="caja.nombreEstado === 'Cerrada'">
+                            <span class="fa-stack  " title="Establecer caja">
+                            <i class="fas fa-vote-yea fa-stack-1x  "  ></i>
+                            <i class="fa fa-ban fa-stack-2x text-info"></i></span></td>
+
+
+                        <td *ngIf="caja.nombreEstado === 'Pausa'"><i class="fab fa-expeditedssl fa-2x boton_activo" (click)="cerrar(caja)" title="Cerrar caja"></i></td>
+                        <td *ngIf="caja.nombreEstado !== 'Pausa'">
+
+                            <span class="fa-stack  " title="Cerrar caja">
+                            <i class="fab fa-expeditedssl fa-stack-1x  "></i>
+                            <i class="fa fa-ban fa-stack-2x text-info"></i></span></td>
+                    </tr>
+
+                </tbody>
+
+
+
+                <thead *ngIf="cajaAbiertaFlag" class="thead-inverse">
+                    <tr>
+                        <th>caja</th>
+                        <th>Descripcion</th>
+                        <th>Fecha de Apertura</th>
+                        <th colspan="3">opcion</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="cajaAbiertaFlag">
+                    <tr>
+                        <td scope="row">{{cajaAbierta.nombre}}</td>
+                        <td>{{cajaAbierta.descripcion}}</td>
+                        <td>{{cajaAbierta.fechaEstadoCaja}}</td>
+                        <td><i class="fas fa-cash-register fa-2x boton_activo" (click)="continuar()" title="Abrir caja"></i></td>
+                        <td><i class="fas fa-running fa-2x boton_activo" (click)="cerrar_parcial(cajaAbierta)" title="liberar caja"></i></td>
+                        <td><i class="fab fa-expeditedssl fa-2x boton_activo" (click)="cerrar(cajaAbierta)" title="Cerrar caja"></i></td>
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</DIv>

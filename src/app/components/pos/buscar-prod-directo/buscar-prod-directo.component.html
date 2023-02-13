@@ -1,0 +1,61 @@
+<div class="container" style="overflow-y:auto;">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="row">
+                <div class="col-sm-10"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h4>Categorias</h4>
+                    <span class="badge badge-success" (click)="buscarPorCategoria(categoria)" style="margin-left:5px; cursor: pointer;" *ngFor="let categoria of categorias">{{categoria.label}} </span>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-sm-12">
+                        <h4>Marcas</h4>
+                        <input type="text" [(ngModel)]='textFindMarcas' (keyup.enter)="getMarcasPorFiltro()" />
+                    </div>
+                    <div class="col-sm-12" style="max-height: 100px;
+                    overflow-y: auto;">
+                        <span class="badge  badge-pill  badge-primary" (click)="buscarPorMarca(marca)" style="margin-left:5px; cursor: pointer;" *ngFor="let marca of marcas">{{marca.label}} </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-12" style="
+        overflow: auto;
+        height: 500px;">
+            <table class="table" st>
+                <tr>
+                    <td colspan="7">
+                        <input type="text" [(ngModel)]='textFindProductos' (keyup.enter)="getProductosPorFiltro()" />
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>codigo</th>
+                    <th>codigoBarra</th>
+                    <th>nombre</th>
+                    <th>categoria</th>
+                    <th>marca</th>
+
+                    <th>precio</th>
+                    <th>------</th>
+                </tr>
+                <tr *ngFor="let prd of listPrdBusqueda">
+                    <td>{{prd.id}}</td>
+                    <td>{{prd.barcode}}</td>
+                    <td>{{prd.display_name}}</td>
+                    <td>{{prd.categ_id[1]}}</td>
+                    <td>{{prd.x_studio_marca[1]}}</td>
+                    <td>{{prd.lst_price}}</td>
+                    <td><button (click)="enviarProducto(prd)">  <i class="fas fa-mouse-pointer"></i>
+                    </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

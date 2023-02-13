@@ -1,1 +1,151 @@
-<p>ventas works!</p>
+<div class="container-fluid" (click)='irbuscarProducto()' (keyup)='irbuscarProducto()'>
+    <div class="row">
+        <div class="col-sm-12">
+            <h3 class="centrado">Punto De Venta {{documentoActivo.nombreEsta}}
+                <h4 class="centrado subtitulosEspeciales"> {{documentoActivo.nombreCaja}}</h4>
+            </h3>
+
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-sm-12">
+            <table class="table">
+                <tr>
+                    <td>Cliente</td>
+                    <td style="width: 260px;">Vendedor</td>
+                    <td> documentos</td>
+                    <td colspan="2"> Cod producto</td>
+                </tr>
+                <tr>
+                    <td>{{documentoActivo.clienteNombre}}</td>
+                    <td>{{documentoActivo.vendedorNombre}}</td>
+                    <td>
+
+
+
+
+                        <div class="input-group mb-3">
+
+                            <select class=" o_input form-control" (blur)='irbuscarProductoObl()' (change)='cambiarDocumentoActivo() ;irbuscarProductoObl()' [(ngModel)]="documentoActivo">
+                                <option *ngFor='let doc of documentos' [ngValue]="doc">{{doc.orden.toString().padStart(10,'0000000000')}}</option>
+                            </select>
+                            <div class="input-group-append">
+                                <button type="button" (click)='getDocumentos()' class="btn btn-primary">
+                                    <i ngclass="fas fa-sync-alt fa-spin"
+                                    
+                                    [ngClass]="{'fas': true, 'fa-sync-alt': true, 'fa-spin': vueltas===true}"
+                                    ></i>
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input class=" o_input form-control" (keyup.enter)='buscarProducto()' #codProd type="text" [(ngModel)]="codigoProducto" />
+                    </td>
+                    <td style="cursor:pointer" (click)='buscarProducto()'> <i class="fas fa-search"></i></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-7" style="min-height: 285px;  overflow:auto;">
+
+            <table class="table table-striped ">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th>&nbsp;</th>
+                        <th>Descripcion</th>
+                        <th>Cant</th>
+                        <th>Precio</th>
+                        <th>Descuento</th>
+                        <th>IVA</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of documentoActivo.listado">
+                        <td><i *ngIf="item.estado_linea_venta == 'A' " class="far fa-times-circle" style="cursor:pointer" (click)="eliminarLinea(item)"></i></td>
+                        <td>{{item.nombreProducto}}</td>
+                        <td>{{item.cantidadVendida}}</td>
+                        <td>{{item.presioSinIVa}}</td>
+                        <td>{{item.descuento}}</td>
+                        <td>{{item.IVA}}</td>
+                        <td>{{item.valorTotal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-5">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" class="btn btn-success" title="Facturar" (click)='asignarPagosAVenta()'><i class="fas fa-check-double"></i></button>
+                <button type="button" class="btn btn-primary" title="Crear Documento" (click)='crearDocumento()'><i class="fas fa-plus"></i>&nbsp;<i class="fas fa-file-alt"></i> </button>
+                <button type="button" class="btn btn-info" title="Añadir cliente al  Documento" (click)='buscarCliente()'><i class="fas fa-user"></i>&nbsp;<i class="fas fa-file-alt"></i> </button>
+                <button type="button" class="btn btn-danger" title="Eliminar Documento" (click)='cancelarDocumento()'><i class="fas fa-trash"></i> &nbsp;<i class="fas fa-file-alt"></i> </button>
+                <button type="button" class="btn btn-warning" title="Busqueda Producto" (click)='busquedaAuxiliarProducto()'><i class="fas fa-search"></i> &nbsp;<i class="fas fa-file-alt"></i> </button>
+
+
+
+                <button type="button" class="btn btn-success" style="background-color: #67b4e0;" title="plan separe"> 
+                        <i class="far fa-hand-point-up"></i> &nbsp; <i class="fab fa-shopify"></i>
+                        
+                        </button>
+
+
+                <button type="button" title="Mover Documento a otra caja" (click)='moverDocumentoCaja()' class="btn btn-danger" style="background-color: #4d4444; 
+                border-color: #4d4444;">
+                <i class="fas fa-exchange-alt"></i>&nbsp; <i class="fas fa-cash-register revers"></i>
+            </button>
+            </div>
+            <div class="btn-group" role="group" style="margin-top: 5px;" aria-label="Basic example">
+
+                <button type="button" class="btn " (click)="generarEnvio()" style="background-color: rgb(41, 39, 39);" title="Guardar como Envio"> 
+                    <img src="assets/img/img_menu_interno/deliveri_truck.png" style="width:100%;height:30px "/></button>
+
+                <button type="button" class="btn btn-success" title="Libranza"><i class="far fa-hand-point-up"></i> Libranza</button>
+            </div>
+            <table class="table">
+                <tr>
+                    <td colspan="2">
+                        <h3 style="color: coral;">Medios de Pago</h3>
+                    </td>
+                </tr>
+                <tr *ngFor="let medio of pagos ; let i = index">
+                    <td><b>{{medio.nombre}}</b></td>
+                    <td *ngIf="medio.nombre === 'Efectivo' "><input class="o_input form-control" readonly type="number" [(ngModel)]='pagos[i].valorPagado'></td>
+                    <td *ngIf="medio.nombre !== 'Efectivo'"><input class="o_input form-control" type="number" [(ngModel)]='pagos[i].valorPagado'></td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>subTotal</th>
+                        <th>Descuento</th>
+                        <th>Iva</th>
+                        <th>Otros impuestos</th>
+                        <th>Total</th>
+                        <th>Ajuste</th>
+                        <th>TotalFactura</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>{{documentoActivo.valorParcial}}</td>
+                        <td>{{documentoActivo.descuento}}</td>
+                        <td>{{documentoActivo.valorIVA}}</td>
+                        <td>0</td>
+                        <td>{{documentoActivo.valorTotal}}</td>
+                        <td>{{documentoActivo.ajusteAlpeso}}</td>
+                        <td>{{documentoActivo.totalFactura}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

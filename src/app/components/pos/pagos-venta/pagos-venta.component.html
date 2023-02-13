@@ -1,0 +1,53 @@
+<div class="container-fluit">
+    <div *ngIf="listo">
+        <table class="table" style="min-width: 350px;">
+            <tr>
+                <th>Medio de Pago</th>
+                <th>Cantidad</th>
+            </tr>
+            <tr *ngFor="let pago  of pagos ; let i = index ">
+                <td>{{pago.nombreMedio}}</td>
+                <td *ngIf="i===indexEfectivo">
+                    <input type="number" readonly [(ngModel)]="pagos[i].valorPagado">
+                    <br>
+                    <table>
+                        <tr>
+                            <td><span style="font-size: x-small;"><b>Recibido</b></span> </td>
+                            <td><span style="font-size: x-small;"><b>Vueltos</b></span></td>
+                        </tr>
+                        <tr>
+                            <td><input type="number" (keyup.enter)='setVueltos(i)' (blur)="setVueltos(i)" [(ngModel)]="pagos[i].valorRecibido"></td>
+                            <td><input *ngIf="i===indexEfectivo" type="number" readonly [(ngModel)]="pagos[i].vueltos"></td>
+                        </tr>
+                    </table>
+
+
+                </td>
+                <td *ngIf="i!==indexEfectivo">
+
+                    <input (change)="cambioDeValor(i)" type="number" [(ngModel)]="pagos[i].valorPagado">
+
+                    <table>
+                        <tr>
+                            <td><span style="font-size: x-small;"><b>Referencia de pago =>  </b></span> <input type="text" [(ngModel)]="pagos[i].referencia"></td>
+                        </tr>
+                    </table>
+                </td>
+
+
+
+
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <hr>
+                    <button class="btn btn-success" (click)="finalizarOk()">Cerrar Factura</button>
+                    <button class="btn btn-warning" style="margin-left: 5%;" (click)="cancelar()">Continuar Facturando</button>
+                    <hr>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div *ngIf="!listo"><i class="fas fa-spinner fa-pulse"></i>
+    </div>
+</div>
