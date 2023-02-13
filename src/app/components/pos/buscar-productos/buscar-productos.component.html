@@ -26,7 +26,7 @@
                                 <br><b>Descuento: </b><small class="text-muted">{{ prdBusqueda.descuento }}</small>
 
 
-                                <br><b>IVA: </b><small class="text-muted">{{ prdBusqueda.impuestos.datos[0].amount }} %</small>
+                                <br><b>IVA: </b><small class="text-muted">{{ prdBusqueda.impuestos!.datos[0].amount }} %</small>
                                 <br><b>existencia: </b><small class="text-muted">{{ prdBusqueda.cantidad }}</small></p>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
     <h3 *ngIf="show_reemplazo">Productos Reemplazo</h3>
     <div *ngIf="show_reemplazo" class="row">
         <div *ngFor="let parcero  of parceros" class="col-sm-3">
-            <div class="card mb-3" style="max-width: 540px;" (click)="codPrd = parcero.id ; buscarProducto() ">
+            <div class="card mb-3" style="max-width: 540px;" (click)="codPrd = parcero.id.toString() ; buscarProducto() ">
                 <div class="row g-0">
                     <div class="col-md-2">
                         <img style="max-height: 50px;" [src]="parcero.image_128 | ImgB64" alt="{{parcero.display_name}}">

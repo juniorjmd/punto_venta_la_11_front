@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Domicilios } from 'src/app/interfaces/domicilios';
 import { DomiciliosService } from 'src/app/services/domicilios.service';
 import { loading } from 'src/app/models/app.loading'; 
 import { MatDialog } from '@angular/material/dialog';
@@ -144,6 +143,8 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
        console.log("Error. La respuesta es: " + respuestaAlImprimir);
    }
   } 
+  MostrarDetalle(obj:DocumentosModel){}
+
   getDomicilios(){
      
     this.loading.show();

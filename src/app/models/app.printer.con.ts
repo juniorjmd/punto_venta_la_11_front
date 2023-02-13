@@ -56,7 +56,7 @@ export const ConectorPlugin = (() => {
         ruta:string;
         operaciones:any[];
         constructor( ruta:string ) {
-            if (!ruta || ruta.trim() = '') ruta = ConectorPlugin.URL_PLUGIN_POR_DEFECTO;
+            if (!ruta || ruta.trim() == '') ruta = ConectorPlugin.URL_PLUGIN_POR_DEFECTO;
             this.ruta = ruta;
             this.operaciones = [];
             return this;

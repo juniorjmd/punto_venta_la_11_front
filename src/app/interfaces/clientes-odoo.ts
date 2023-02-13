@@ -17,9 +17,9 @@ export interface ClientesOdoo {
     "city":  boolean|string|number,
     "street2": boolean|string,
     //-----------------------------
-    "state_id": any[]|boolean|string| number| answDfltOdoo,
+    "state_id": any[] ,
     "zip": boolean|string,
-    "country_id": any[]|boolean|string| number| answDfltOdoo   ,
+    "country_id": any[] ,
     "function": boolean|string,
     "category_id": boolean|string,
     "title": boolean|string,
