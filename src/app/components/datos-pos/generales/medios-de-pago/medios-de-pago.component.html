@@ -1,1 +1,96 @@
-<p>medios-de-pago works!</p>
+<div class="container-fluid contenedor" style="width: 100%; height: 90%;">
+    <div class="row">
+        <div class="col-sm-12  ">
+
+            <h2 class="centrado">Creación de Medios De Pago</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-1">Nombre</div>
+        <div class="col-sm-2">
+            <input type="text" class="o_input" [(ngModel)]="newMedioP.nombre" placeholder="Nombre del medio...">
+        </div>
+        <div class="col-sm-1" style="margin-right: 15px;">Estado</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newMedioP.estado">
+                <option value=0>Estado</option>
+                <option value=1>Activo</option>
+                <option value=2>Inactivo</option>
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-2">Cuenta Contable</div>
+        <div class="col-sm-2">
+            <input type="number" class="o_input" [(ngModel)]="newMedioP.cuentaContable" placeholder="Nombre de la caja...">
+        </div>
+
+        <div class="col-sm-1" style="margin-right: 15px;">Establecimiento</div>
+        <div class="col-sm-2">
+            <select class=" o_input " [(ngModel)]="newMedioP.establecimiento">
+                <option value=0>Establecimiento</option>
+                <option *ngFor="let item of esta" [ngValue]="item.id">{{item.nombre}}</option> 
+            </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-1">Descripción</div>
+        <div class="col-sm-2">
+            <textarea [(ngModel)]="newMedioP.descripcion" class="o_input" placeholder="Descripcion...">
+
+            </textarea>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="col-sm-4 justify-content-center">
+            <button class="btn btn-outline-primary" role="button" (click)='guardarMedio()'>
+                <i class="fas fa-save"></i> Guardar
+            </button>
+            <button class="btn btn-outline-danger" role="button" (click)='Cancelar()'>
+                <i class="fas fa-trash"></i>Cancelar
+            </button>
+        </div>
+    </div>
+    <hr>
+    <br>
+    <div class="row">
+        <div class="col-sm-12  ">
+            <table class="table" *ngIf="MedioP.length > 0">
+                <tr>
+
+                    <th>nombre</th>
+                    <th>descripcion</th>
+                    <th>Cuenta</th>
+                    <th>estado </th>
+                    <th>Establecimiento</th>
+                    <th>
+                        opcion
+                    </th>
+                </tr>
+                <tr *ngFor="let caja of MedioP">
+                    <td>{{caja.nombre}}</td>
+                    <td>{{caja.descripcion }}</td>
+                    <td>{{caja.cuentaContable}}</td>
+                    <td>{{caja.nombreEstado}}</td>
+                    <td>{{caja.nombreEsta}}</td>
+                    <td *ngIf="caja.nombre !== 'Efectivo'">
+                        <fa-icon [icon]="faPencilAlt " class="fas fa-pencil-alt boton_activo" (click)="setActualizaCaja(caja)"></fa-icon>
+                    </td>
+                    <td *ngIf="caja.nombre === 'Efectivo'">
+                        <span class="fa-stack fa-1x"> 
+                            <fa-icon [icon]="faBan "   style="color:Tomato" title=""></fa-icon> 
+                                             </span>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+    </div>
+</div>

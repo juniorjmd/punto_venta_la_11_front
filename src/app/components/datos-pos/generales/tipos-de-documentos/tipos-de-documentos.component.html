@@ -1,1 +1,35 @@
-<p>tipos-de-documentos works!</p>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 ">
+            <h2 class="centrado">Tipos del Documento</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 ">
+            <h3 class="centrado">
+                <p>Listado de los diferentes tipos o estados por los que puede pasar un documento</p>
+            </h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 "></div>
+        <div class="col-sm-8 ">
+            <table class="table centrado">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let tipos of tiposDeDocumento">
+                        <td scope="row">{{tipos.id}}</td>
+                        <td>{{tipos.nombre}}</td>
+                        <td>{{tipos.nombre_estado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

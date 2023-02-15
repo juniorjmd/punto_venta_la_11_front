@@ -1,1 +1,171 @@
-<p>cliente-detalle works!</p>
+<div class="row ">
+
+    <div class="col-sm-8"></div>
+</div>
+<div class="row ">
+
+    <div class="col-sm-8">
+        <div class="form-group">
+            <label for=""></label>
+            <input type="text" placeholder="Nombre" class=" o_input_req" name="" id="" aria-describedby="helpId">
+
+        </div>
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="form-group" placeholder="Compañía">
+            <select class=" o_input" placeholder="">
+                <option disabled class="noMostrar" selected>Compañia</option>
+                <option  *ngFor='let compania of companias' value="compania.dato">{{compania.label}}</option>
+            </select>
+        </div>
+    </div>
+
+    <!---identificacion -->
+
+    <div class="col-sm-1">
+        <div class="form-group" placeholder="Compañía">
+            <select class=" o_input_req" placeholder="">
+            <option disabled class="noMostrar" selected>Tipo ID</option>
+            <option  *ngFor='let tipid of tipo_identificacion' value="tipid.dato">{{tipid.label}}</option>
+        </select>
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="form-group" placeholder="Compañía">
+            <input type="text" placeholder="Identificacion" class=" o_input_req" name="" id="" aria-describedby="helpId">
+
+        </div>
+    </div>
+    <!---identificacion -->
+</div>
+
+<div class="row">
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-4">Tipo de direccion</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <select class=" o_input" placeholder="">
+                        <option   selected value=""> </option>
+                        <option  *ngFor='let tipdireccion of tipo_direccion' value="tipdireccion.dato">{{tipdireccion.label}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Direccion</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="o_input" placeholder="Calle...">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="o_input" placeholder="Calle 2...">
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <input type="text" class="o_input col-sm-3" placeholder="Ciudad">
+                        <select class=" o_input col-sm-5" style="margin-left: 10px;" placeholder="">
+                            <option disabled class="noMostrar" selected>Provincia</option>
+                            <option  *ngFor='let Provincia of Provincias' value="Provincia.dato">{{Provincia.label}}</option>
+                        </select>
+
+                        <input type="text" style="margin-left: 10px;" class="o_input col-sm-3" placeholder="C.P.">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">NIF</div>
+
+            <div class="col-sm-8">
+                <div class="form-group"><input type="text" class="o_input" placeholder="Por ejemplo, ESA00000000"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Direccion de Recibo</div>
+
+            <div class="col-sm-8">
+                <div class="form-group"><input type="text" class="o_input"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <!--campos del cliente segunda columna debajo de nombre-->
+    <div class="col-sm-5">
+        <div class="row">
+            <div class="col-sm-4">Puesto de trabajo</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="o_input" placeholder="por ejemplo : Director de Ventas">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Teléfono</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="o_input">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Celular</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <div class="form-group">
+                        <input type="text" class="o_input">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Correo Electronico</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="o_input">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Enlace a Página Web</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <input type="text" class="o_input">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Titulo</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <select class=" o_input" placeholder="">
+                    <option   selected value=""> </option>
+                    <option  *ngFor='let titulo of titulos' value="titulo.dato">{{titulo.label}}</option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4">Categorías</div>
+            <div class="col-sm-8">
+                <div class="form-group">
+                    <select class=" o_input" placeholder="">
+                   <option   selected value=""> </option>
+                   <option  *ngFor='let categoria of categorias' value="categoria.dato">{{categoria.label}}</option>
+               </select>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="row row-cols-3">
+    <div class="col-sm-12">
+
+    </div>
+</div>

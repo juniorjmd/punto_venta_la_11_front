@@ -1,1 +1,29 @@
-<p>cliente-inicio works!</p>
+<div style="overflow-y: auto;width: 100%; height: 90%;">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nombre </th>
+                <th scope="col">identificación</th>
+                <th scope="col">Teléfono</th>
+                <th scope="col">Correo Electrónico</th>
+                <th scope="col">Ciudad</th>
+                <th scope="col">País</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let cliente of clientes">
+
+                <input type="hidden" value="cliente.id" #idCliente>
+
+
+                <td>{{cliente.display_name.trim()}}</td>
+                <td>{{cliente.vat}}</td>
+                <td>{{cliente.mobile}}</td>
+                <td>{{cliente.email }}</td>
+                <td>{{cliente.city }}</td>
+                <td>{{cliente.country_id | dataArrayOdoo}}</td>
+            </tr>
+
+        </tbody>
+    </table>
+</div>

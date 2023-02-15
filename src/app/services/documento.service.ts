@@ -11,9 +11,10 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class DocumentoService {
-  requestOptions:any
+  requestOptions:any;
+  loading = new loading(); 
   constructor(private http: HttpClient ,
-    private loading : loading ,   private _Router : Router){ 
+      private _Router : Router){ 
       let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
       if (!llaveDeRegistro){
             this._Router.navigate(['login']);

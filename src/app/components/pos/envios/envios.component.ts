@@ -144,7 +144,10 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
        console.log("Error. La respuesta es: " + respuestaAlImprimir);
    }
   } 
-  MostrarDetalle(obj:DocumentosModel){}
+  MostrarDetalle(obj:DocumentosModel){
+    console.log(obj);
+    
+  }
 
   getDomicilios(){
      
