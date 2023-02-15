@@ -1,0 +1,22 @@
+<form #f="ngForm" (ngSubmit)="ingresarPais(f)">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Pais</h4>
+        <button type="button" class="close" aria-label="Close" id='cerrarCrearPais' (click)="cerrarDialogo();limpiarForm()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body row">
+        <div class="col-md-6">
+            <label for="inputEmail4" class="form-label">codigo</label>
+            <input type="hidden" [(ngModel)]="pais.id" id='idPais' name="id" class="form-control">
+            <input type="text" [(ngModel)]="pais.cod_pais" id="codPais" name="cod_pais" class="form-control">
+        </div>
+        <div class="col-md-6">
+            <label for="inputPassword4" class="form-label">Nombre</label>
+            <input type="text" [(ngModel)]="pais.nombre" id="nombrePais" name="nombre" class="form-control">
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" id='btnActionModal'>Guardar</button>
+    </div>
+</form>

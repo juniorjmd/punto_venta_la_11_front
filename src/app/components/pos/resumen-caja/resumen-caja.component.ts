@@ -16,8 +16,7 @@ export class ResumenCajaComponent implements OnInit {
   cajaResumen:cajasResumenModel;
    constructor( private cajaService : cajasServices,
      public dialogo: MatDialogRef<ResumenCajaComponent>,
-     @Inject(MAT_DIALOG_DATA) public cajaResumenImport:cajasResumenModel,
-     public loading : loading) { 
+     @Inject(MAT_DIALOG_DATA) public cajaResumenImport:cajasResumenModel, ) { 
        this.cajaResumen  = this.cajaResumenImport;
        this.caja = new cajaModel(this.cajaResumen.caja)
      }

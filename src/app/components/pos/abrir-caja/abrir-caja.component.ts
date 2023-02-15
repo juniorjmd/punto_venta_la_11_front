@@ -11,6 +11,7 @@ import { ResumenCajaComponent } from '../resumen-caja/resumen-caja.component';
 import { cajasResumenModel } from 'src/app/models/cajasResumen.model';
 import Swal from 'sweetalert2';
 import { select } from 'src/app/interfaces/generales';
+import { faVoteYea, faBan, faCashRegister, faRunning, faLock } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-abrir-caja',
   templateUrl: './abrir-caja.component.html',
@@ -19,10 +20,20 @@ import { select } from 'src/app/interfaces/generales';
 export class AbrirCajaComponent implements OnInit {
   cajas : cajaModel[]=[];
   cajaAbierta!: cajaModel;
-  cajaAbiertaFlag:boolean = false;
+  cajaAbiertaFlag:boolean = false;loading = new loading();
+
+
+    
+  faVoteYea=   faVoteYea;
+  faBan=   faBan;
+  faExpeditedssl=   faLock;
+  faCashRegister=   faCashRegister;
+  faRunning =   faRunning ;
+
+
+
   constructor(private serviceCaja : cajasServices ,    
-    private _Router : Router,
-    private loading : loading, private cajaService : cajasServices,
+    private _Router : Router, private cajaService : cajasServices,
     private newAbrirCajaDialog : MatDialog) { 
       this.getCajas()
     }

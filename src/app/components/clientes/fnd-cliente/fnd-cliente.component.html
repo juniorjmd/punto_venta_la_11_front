@@ -28,14 +28,19 @@
         </div>
         <div class="col-sm-6 ">
             <div _ngcontent-wwk-c163="" role="group" aria-label="Basic example" class="btn-group">
-                <button _ngcontent-wwk-c163="" *ngIf="crear" type="button" (click)="crearCliente()" title="Guardar En Odoo" class="btn btn-success">
-                    <i _ngcontent-wwk-c163="" class="fas fa-check-double"></i></button>
+                <button _ngcontentwwkc163="" *ngIf="crear" type="button" (click)="crearCliente()" title="Guardar En Odoo" class="btn btnsuccess"> 
+                
+            <fa-icon [icon]="facheckdouble " title=""></fa-icon>
+                </button>
 
-                <button _ngcontent-wwk-c163="" *ngIf="!crear" type="button" (click)="actualizarCliente()" title="Actualizar En Odoo" class="btn btn-warning">
-                             <i  _ngcontent-wwk-c163=""  class="fas fa-edit"></i>
+                <button _ngcontentwwkc163="" *ngIf="!crear" type="button" (click)="actualizarCliente()" title="Actualizar En Odoo" class="btn btnwarning"> 
+                             <fa-icon [icon]="faedit " title=""></fa-icon>
                         </button>
-                <button _ngcontent-wwk-c163="" type="button" (click)="pasarClienteAcontrolYasignarDocumento()" title="Agregar al Documento" class="btn btn-primary">
-                        <i _ngcontent-wwk-c163="" class="fas fa-plus"></i>&nbsp;<i _ngcontent-wwk-c163="" class="fas fa-file-alt"></i></button> </div>
+                <button _ngcontentwwkc163="" type="button" (click)="pasarClienteAcontrolYasignarDocumento()" title="Agregar al Documento" class="btn btnprimary"> 
+                        <fa-icon [icon]="faplus " title=""></fa-icon> 
+                        <fa-icon [icon]="fafilealt " title=""></fa-icon>
+                    
+                    </button> </div>
         </div>
 
     </div>

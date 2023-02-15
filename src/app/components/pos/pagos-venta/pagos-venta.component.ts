@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { select } from 'src/app/interfaces/generales.interface';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { select } from 'src/app/interfaces/generales';
 import { MediosDePago } from 'src/app/interfaces/medios-de-pago.interface';
 import { loading } from 'src/app/models/app.loading';
 import { cajaModel } from 'src/app/models/cajas.model';
@@ -8,6 +9,7 @@ import { DocumentosModel } from 'src/app/models/documento.model';
 import { DocpagosModel, pagosModel } from 'src/app/models/pagos.model';
 import { cajasServices } from 'src/app/services/Cajas.services';
 import { DocumentoService } from 'src/app/services/documento.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pagos-venta',
@@ -15,12 +17,13 @@ import { DocumentoService } from 'src/app/services/documento.service';
   styleUrls: ['./pagos-venta.component.css']
 })
 export class PagosVentaComponent implements OnInit {
+  faspinner = faSpinner ;
+  
   pagos:DocpagosModel[] = [];
   indexEfectivo:number = 0;
   MedioP:MediosDePago[]= [];
-  listo:boolean = false;
-  constructor(
-    public loading : loading,private serviceCaja : cajasServices ,
+  listo:boolean = false;loading = new loading();
+  constructor( private serviceCaja : cajasServices ,
     public dialogo: MatDialogRef<PagosVentaComponent>,
     @Inject(MAT_DIALOG_DATA) public Documento:DocumentosModel
 
@@ -31,19 +34,17 @@ export class PagosVentaComponent implements OnInit {
   finalizarOk(){
     //documentos_pagos
     this.serviceCaja.setPagoDocumento(this.Documento.orden ,this.pagos )
-     .subscribe(
-      (datos:select)=>{
-         console.log(datos); 
+     .subscribe( {next:
+      (datos:any|select)=>{
     console.log('pagos realizados' , this.pagos ); 
         this.loading.hide()
         this.listo = true;
         this.dialogo.close(true);
-      } ,
-      error => {this.loading.hide();
+      } , error:( error ) => {this.loading.hide();
         Swal.fire(
           'ERROR',error.error.error,
           'error');
-      }
+      }}
       );
   }
   cancelar(){
@@ -56,7 +57,7 @@ export class PagosVentaComponent implements OnInit {
       this.pagos[index].valorPagado = 0;
     }
     this.pagos[this.indexEfectivo].valorPagado = this.Documento.totalFactura;
-    this.pagos.forEach((dato:DocpagosModel , index )=>{
+    this.pagos.forEach((dato:DocpagosModel , index:number )=>{
       if (index !== this.indexEfectivo)
       this.pagos[this.indexEfectivo].valorPagado -= dato.valorPagado;
     })
@@ -80,12 +81,9 @@ getMediosP(){
   this.listo = false;
   this.loading.show()
   this.serviceCaja.getMediosCajaActiva()
-     .subscribe(
-      (datos:select)=>{
-         console.log(datos);
-         
+  .subscribe({next: (datos:any|select)=>{
     if (datos.numdata > 0 ){ 
-      datos.data.forEach((dato:MediosDePago , index )=>{
+      datos.data.forEach((dato:MediosDePago , index:number )=>{
         this.pagos[index] = new DocpagosModel();
         this.pagos[index].idMedioDePago = dato.id;
         this.pagos[index].nombreMedio =dato.nombre;
@@ -93,28 +91,25 @@ getMediosP(){
         this.pagos[index].vueltos = 0; 
         this.pagos[index].valorTotalAPagar = 0; 
         if (dato.nombre === 'Efectivo')
-       { this.indexEfectivo = index;
-          this.pagos[index].valorPagado = this.Documento.totalFactura;
-          this.pagos[index].valorRecibido = this.pagos[index].valorPagado;
-          this.pagos[index].vueltos = 0; 
-       
-        }
+         { this.indexEfectivo = index;
+            this.pagos[index].valorPagado = this.Documento.totalFactura;
+            this.pagos[index].valorRecibido = this.pagos[index].valorPagado;
+            this.pagos[index].vueltos = 0; 
+          }
         else
-        {this.pagos[index].valorPagado = 0;}
-      }) 
-     // console.log(this.MedioP);
+          {this.pagos[index].valorPagado = 0;}}) 
     }else{
       this.MedioP = [];
     } 
     console.log('pagos realizados' , this.pagos ); 
         this.loading.hide()
         this.listo = true;
-      } ,
+      } ,error:
       error => {this.loading.hide();
         Swal.fire(
           'ERROR',error.error.error,
           'error');
-      }
+      }}
       );
   }
 }

@@ -2,8 +2,8 @@
 export class pagosModel{
    idMedioDePago!: number; 
    valorPagado!: number; 
-
-    } 
+   nombre?: string; 
+} 
     export class DocpagosModel{
     id ?:number ; 
     idDocumento!: number; 

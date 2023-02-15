@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { faUsersCog, faUserCircle, faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 import { vwsucursal } from 'src/app/models/app.db.interfaces';
 import { DatosInicialesService } from 'src/app/services/datos-iniciales.service';
 
@@ -11,7 +12,9 @@ import { DatosInicialesService } from 'src/app/services/datos-iniciales.service'
 export class NavbarComponent {
   llaveIncio:string;
   sucursal : vwsucursal[] = [];
-  
+  fauserscog = faUsersCog
+fausercircle = faUserCircle
+fadooropen = faDoorOpen
   valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
 
   constructor( private _datosInicialesService: DatosInicialesService

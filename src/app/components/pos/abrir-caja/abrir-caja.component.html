@@ -21,26 +21,34 @@
                         <td scope="row">{{caja.nombre}}</td>
                         <td>{{caja.descripcion}}</td>
 
-                        <td *ngIf="caja.nombreEstado === 'Cerrada'"><i class="fas fa-cash-register fa-2x boton_activo" (click)="asignarCaja(cajaAbierta)" title="Abrir caja"></i></td>
+                        <td *ngIf="caja.nombreEstado === 'Cerrada'">
+                            <fa-icon [icon]="faCashRegister" class="fa-cash-register fa-2x boton_activo" (click)="asignarCaja(cajaAbierta)" title="Abrir caja">
+                            </fa-icon>
+                        </td>
                         <td *ngIf="caja.nombreEstado !== 'Cerrada'">
                             <span class="fa-stack  " title="Abrir caja">
-                                <i class="fas fa-cash-register fa-stack-1x  "  ></i>
-                                <i class="fa fa-ban fa-stack-2x text-info"></i></span>
+                                <fa-icon [icon]="faCashRegister " ></fa-icon>
+                                <fa-icon [icon]="faBan "></fa-icon></span>
 
                         </td>
-                        <td *ngIf="caja.nombreEstado !== 'Cerrada'"><i class="fas fa-vote-yea fa-2x boton_activo" (click)="continuar_caja_suspendida(caja)" title="Establecer caja"></i></td>
+                        <td *ngIf="caja.nombreEstado !== 'Cerrada'">
+                            <fa-icon [icon]="faVoteYea" class=" boton_activo" (click)="continuar_caja_suspendida(caja)" title="Establecer caja">
+                            </fa-icon>
+                        </td>
                         <td *ngIf="caja.nombreEstado === 'Cerrada'">
                             <span class="fa-stack  " title="Establecer caja">
-                            <i class="fas fa-vote-yea fa-stack-1x  "  ></i>
-                            <i class="fa fa-ban fa-stack-2x text-info"></i></span></td>
+                            <fa-icon [icon]="faVoteYea " ></fa-icon>
+                            <fa-icon [icon]="faBan"></fa-icon></span></td>
 
 
-                        <td *ngIf="caja.nombreEstado === 'Pausa'"><i class="fab fa-expeditedssl fa-2x boton_activo" (click)="cerrar(caja)" title="Cerrar caja"></i></td>
+                        <td *ngIf="caja.nombreEstado === 'Pausa'">
+                            <fa-icon [icon]=" faExpeditedssl" class="boton_activo" (click)="cerrar(caja)" title="Cerrar caja"></fa-icon>
+                        </td>
                         <td *ngIf="caja.nombreEstado !== 'Pausa'">
 
                             <span class="fa-stack  " title="Cerrar caja">
-                            <i class="fab fa-expeditedssl fa-stack-1x  "></i>
-                            <i class="fa fa-ban fa-stack-2x text-info"></i></span></td>
+                            <fa-icon [icon]="faExpeditedssl "></fa-icon>
+                            <fa-icon [icon]="faBan "></fa-icon></span></td>
                     </tr>
 
                 </tbody>
@@ -60,9 +68,17 @@
                         <td scope="row">{{cajaAbierta.nombre}}</td>
                         <td>{{cajaAbierta.descripcion}}</td>
                         <td>{{cajaAbierta.fechaEstadoCaja}}</td>
-                        <td><i class="fas fa-cash-register fa-2x boton_activo" (click)="continuar()" title="Abrir caja"></i></td>
-                        <td><i class="fas fa-running fa-2x boton_activo" (click)="cerrar_parcial(cajaAbierta)" title="liberar caja"></i></td>
-                        <td><i class="fab fa-expeditedssl fa-2x boton_activo" (click)="cerrar(cajaAbierta)" title="Cerrar caja"></i></td>
+                        <td>
+                            <fa-icon [icon]="faCashRegister" class="boton_activo" (click)="continuar()" title="Abrir caja">
+                            </fa-icon>
+                        </td>
+                        <td>
+                            <fa-icon [icon]="faRunning" class="boton_activo" (click)="cerrar_parcial(cajaAbierta)" title="liberar caja">
+                            </fa-icon>
+                        </td>
+                        <td>
+                            <fa-icon [icon]="faExpeditedssl" class="boton_activo" (click)="cerrar(cajaAbierta)" title="Cerrar caja"></fa-icon>
+                        </td>
                     </tr>
 
 

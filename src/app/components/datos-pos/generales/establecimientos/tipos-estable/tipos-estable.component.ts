@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { select } from 'src/app/interfaces/generales';
 import { loading } from 'src/app/models/app.loading';
 import { TiposEstablecimientosModel } from 'src/app/models/tipos-establecimientos.model';
@@ -12,6 +12,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./tipos-estable.component.css']
 })
 export class TiposEstableComponent {
+  fatrash = faTrash
+  fasave = faSave
   loading = new loading();
   faPencilAlt = faPencilAlt;
   tiposEsta: TiposEstablecimientosModel[] = [];

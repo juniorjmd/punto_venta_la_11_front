@@ -1,1 +1,35 @@
-<p>paises works!</p>
+<div class="row" *ngIf="0 >= numpaises   " style="margin-top: 20px;">
+    <div class="col-sm-12">
+        <div class="alert alert-primary" role="alert">
+            No se han generado <strong>paises</strong> en la base de datos.
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<button (click)="editarPais( changePais.id , changePais.cod_pais , changePais.nombre)" style="margin-top: 10px;" class="btn btn-primary">Nuevo País</button>
+<table class="table table-striped" style="margin-top: 10px;" *ngIf=" numpaises > 0 ">
+    <thead>
+        <tr>
+            <th scope="col">Codigo </th>
+            <th scope="col">país</th>
+            <th scope="col" colspan="2">Opciones </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let pais of paises">
+
+            <td>{{pais.cod_pais}}</td>
+            <td>{{pais.nombre}}</td>
+            <td style="cursor: pointer;" (click)="editarPais(pais.id , pais.cod_pais , pais.nombre)">
+                <fa-icon [icon]="faEdit">
+                </fa-icon>
+            </td>
+            <td style="cursor: pointer;" (click)="borrarPais(pais)">
+                <fa-icon [icon]="faTrash">
+                </fa-icon>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

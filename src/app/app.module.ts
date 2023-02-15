@@ -90,7 +90,13 @@ import { PagosVentaComponent } from './components/pos/pagos-venta/pagos-venta.co
 import { ResumenCajaComponent } from './components/pos/resumen-caja/resumen-caja.component';
 import { FndClienteComponent } from './components/clientes/fnd-cliente/fnd-cliente.component';
 import { DevolucionesComponent } from './components/pos/devoluciones/devoluciones.component';
-import { EnviosComponent } from './components/pos/envios/envios.component';
+import { EnviosComponent } from './components/pos/envios/envios.component'; 
+import { DialogoConfirmacionComponent } from './components/layout/dialogo-confirmacion/dialogo-confirmacion.component';
+
+import { NciudadComponent } from './components/maestros/new/nciudad/nciudad.component';
+import { NpaisComponent } from './components/maestros/new/npais/npais.component';
+import { NdepartamentoComponent } from './components/maestros/new/ndepartamento/ndepartamento.component';
+import { NavbarUbicacionComponent } from './components/maestros/navbar-ubicacion/navbar-ubicacion.component';
 
 @NgModule({
   declarations: [
@@ -147,7 +153,7 @@ import { EnviosComponent } from './components/pos/envios/envios.component';
     booleanpPipe,
     TiposEstableComponent,
     SincOdooComponent,
-
+    DialogoConfirmacionComponent,
     BuscarProdDirectoComponent,
     BuscarProductosComponent,
     BuscarProductosAuxComponent,
@@ -155,12 +161,13 @@ import { EnviosComponent } from './components/pos/envios/envios.component';
     MostrarProductoComponent,
     MoverDocumentosComponent,
     PagosVentaComponent,
-    ResumenCajaComponent,
+    ResumenCajaComponent,  
+    NciudadComponent, NpaisComponent, NdepartamentoComponent, NavbarUbicacionComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule, 
-    FormsModule, 
+    FormsModule,  
     HttpClientModule,
     MatDialogModule,
     MatCheckboxModule,

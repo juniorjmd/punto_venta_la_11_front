@@ -17,13 +17,10 @@ export class BuscarProductosAuxComponent implements OnInit {
   prdBusqueda !:OdooPrd   ;
   codPrd:string ;  
   show = false ;
-  cantidadPrd:number ;  
+  cantidadPrd:number ;  loading = new loading();
   disabled:boolean[]
   constructor(   private prdService : ProductoService, 
-    public dialogo: MatDialogRef<BuscarProductosAuxComponent>,
-  //  @Inject(MAT_DIALOG_DATA) public codPrdInser:string,
-      
-    public loading : loading) { 
+    public dialogo: MatDialogRef<BuscarProductosAuxComponent>) { 
       this.cantidadPrd = 0 ;
      // this.codPrd =  codPrdInser ;
      this.codPrd = '';

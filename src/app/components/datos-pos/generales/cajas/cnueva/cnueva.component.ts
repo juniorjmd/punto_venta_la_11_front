@@ -7,7 +7,7 @@ import { caja } from 'src/app/interfaces/caja.interface';
 import { select } from 'src/app/interfaces/generales';
 import { Establecimientos } from 'src/app/interfaces/establecimientos.interface';
 import { LoadingComponent } from 'src/app/components/layout/loading/loading.component';
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faSave, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,8 +16,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cnueva.component.css']
 })
 export class CnuevaComponent{
-
-  
+  fatrash = faTrash;
+  fasave = faSave;
   cajas :cajaModel[]  = []; 
   newCaja : cajaModel = new cajaModel(undefined);
   esta : establecimientoModel[] = [];

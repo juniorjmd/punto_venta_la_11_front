@@ -7,6 +7,7 @@ import { OdooPrd, responsePrd } from 'src/app/interfaces/odoo-prd';
 import { MatDialogRef } from '@angular/material/dialog';
 import { select } from 'src/app/interfaces/generales';
 import Swal from 'sweetalert2';
+import { faMousePointer } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-buscar-prod-directo',
   templateUrl: './buscar-prod-directo.component.html',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class BuscarProdDirectoComponent  {
   show = false ;
+  faMousePointer = faMousePointer;
   textFindMarcas:string = '';
   textFindProductos:string = '';
   parceros : OdooPrd[] = [];
@@ -27,8 +29,8 @@ export class BuscarProdDirectoComponent  {
   //--------------------
   marcas:dfltAnswOdoo2[] = [];
   marcasAux:dfltAnswOdoo2[] = [];
-  categorias:dfltAnswOdoo2[] = [];
-  constructor(public loading : loading ,public dialogo: MatDialogRef<BuscarProdDirectoComponent>
+  categorias:dfltAnswOdoo2[] = [];loading = new loading();
+  constructor( public dialogo: MatDialogRef<BuscarProdDirectoComponent>
     , private prdService : ProductoService,
     private MaestroClienteServices :MaestroClienteServices) {
     this.buscarProductos();

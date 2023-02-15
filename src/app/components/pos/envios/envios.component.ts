@@ -12,6 +12,7 @@ import { DomiciliosModel } from 'src/app/models/domicilios/domicilios.model';
 import { PagosVentaComponent } from '../pagos-venta/pagos-venta.component';
 import { select } from 'src/app/interfaces/generales';
 import Swal from 'sweetalert2';
+import { faHandHoldingUsd, faEye } from '@fortawesome/free-solid-svg-icons';
 @Component({
   selector: 'app-envios',
   templateUrl: './envios.component.html',
@@ -20,10 +21,10 @@ import Swal from 'sweetalert2';
 export class EnviosComponent implements OnInit {
   listadoDePedidos:DomiciliosModel[] = [];  
   documentoRetorno : DocumentosModel = new DocumentosModel();
-
-
-  constructor(private serviceDomicilio : DomiciliosService , 
-              private loading : loading ,
+  loading = new loading();
+  faHandHoldingUsd = faHandHoldingUsd;
+  faEye = faEye;
+  constructor(private serviceDomicilio : DomiciliosService ,  
               private documentoService :DocumentoService,
               private newAbrirDialog : MatDialog ) { 
 

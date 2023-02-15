@@ -1,0 +1,59 @@
+<form #f="ngForm" (ngSubmit)="ingresar(f)">
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Nuevo Departamento</h4>
+        <button type="button" class="close" aria-label="Close" id='cerrarCreardepartamento' (click)="cerrarDialogo();limpiarForm()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+
+    <div class="modal-body " *ngIf="0 >= numpaises  ">
+        <div class="row">
+            <div class="col-md-12" style="align-items: center;">
+
+                <fa-icon [icon]="faSpinner ">
+                </fa-icon>
+            </div>
+        </div>
+    </div>
+    <div class="modal-body " *ngIf=" numpaises > 0  ">
+
+        <div class="row">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Pais</label>
+                <select [(ngModel)]="cityN.cod_pais" (change)="getDepartamentosPorPais(cityN.cod_pais)" id="codPais" name="codPais" class="form-control">
+                    <option   [ngValue]="0" disabled selected>Seleccione un paìs</option>
+                    <option *ngFor="let c of paises" [ngValue]="c.id">{{c.nombre}}</option>
+                  </select>
+            </div>
+
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Departamento</label>
+                <select required [(ngModel)]="cityN.cod_departamento" id="codDepartamento" name="codDepartamento" class="form-control">
+                    <option   [ngValue]="0"   >Seleccione un departamento</option>
+                    <option *ngFor="let c of dep" [ngValue]="c.id" >{{c.nombre}}</option>
+                  </select>
+            </div>
+
+
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">codigo</label>
+                <input type="hidden" [(ngModel)]="cityN.id" id='idCiudad' name="id" class="form-control">
+                <input type="number" required [(ngModel)]="cityN.cod_ciudad" id="codCiudad" name="codCiudad" class="form-control">
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Nombre</label>
+                <input type="text" required [(ngModel)]="cityN.nombre" id="nombreCiudad" name="nombreCiudad" class="form-control">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" id='btnActionModal'>Guardar</button>
+    </div>
+</form>

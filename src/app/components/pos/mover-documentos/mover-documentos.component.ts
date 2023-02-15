@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { select } from 'src/app/interfaces/generales.interface';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; 
+import { select } from 'src/app/interfaces/generales';
 import { loading } from 'src/app/models/app.loading';
 import { cajaModel } from 'src/app/models/cajas.model';
 import { DocumentosModel } from 'src/app/models/documento.model';
@@ -12,8 +12,8 @@ import { DocumentoService } from 'src/app/services/documento.service';
   styleUrls: ['./mover-documentos.component.css']
 })
 export class MoverDocumentosComponent implements OnInit {
- cajasActivas: cajaModel[] = [];
-  constructor(public loading : loading,
+ cajasActivas: cajaModel[] = [];loading = new loading();
+  constructor( 
     private documentoService : DocumentoService ,
      public dialogo: MatDialogRef<MoverDocumentosComponent>,
     @Inject(MAT_DIALOG_DATA) public Documento:DocumentosModel) { this.getCajasActivasEstablecimiento()}
@@ -25,7 +25,7 @@ export class MoverDocumentosComponent implements OnInit {
     caja.documentoActivoCaja = this.Documento.orden
     this.loading.show();
   this.documentoService.cambiarDocumentoDeCaja(caja).subscribe(
-    (datos:select)=>{ 
+    (datos:any|select)=>{ 
        console.log('asignarACaja',datos);  
        this.loading.hide();
        this.dialogo.close(true);
@@ -35,7 +35,7 @@ export class MoverDocumentosComponent implements OnInit {
   getCajasActivasEstablecimiento(){
     this.documentoService.getCajasActivas(this.Documento.establecimiento).
     subscribe(
-      (datos:select)=>{
+      (datos:any|select)=>{
         let cont = 0;
          console.log('getCajasActivas',datos); 
          this.cajasActivas = []; 

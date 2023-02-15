@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { vwsucursal } from 'src/app/models/app.db.interfaces';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { DatosInicialesService } from 'src/app/services/datos-iniciales.service';
@@ -13,6 +14,8 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class LoginComponent implements OnInit
 {
+  faUser = faUser ;
+faEnvelope = faEnvelope ;
  usuario:UsuarioModel = {
    ID: 0,
    Login: '',

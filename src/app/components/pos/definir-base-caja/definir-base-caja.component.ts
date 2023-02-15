@@ -12,12 +12,10 @@ import Swal from 'sweetalert2';
 })
 export class DefinirBaseCajaComponent implements OnInit {
  caja:cajaModel ;
- valorIngresar!:number;
+ valorIngresar!:number;loading = new loading();
   constructor( private cajaService : cajasServices,
     public dialogo: MatDialogRef<DefinirBaseCajaComponent>,
-    @Inject(MAT_DIALOG_DATA) public cajaImport:cajaModel,
-    
-    public loading : loading) { 
+    @Inject(MAT_DIALOG_DATA) public cajaImport:cajaModel, ) { 
       this.caja = this.cajaImport;
     }
 

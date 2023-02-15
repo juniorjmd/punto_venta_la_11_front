@@ -19,12 +19,12 @@
         <form (ngSubmit)="login(f)" #f="ngForm">
             <div class="agile-field-txt">
                 <label>
-                <i class="fa fa-user" aria-hidden="true"></i> Username </label>
+                <fa-icon [icon]="faUser" ></fa-icon>Username </label>
                 <input type="text" id="identificacion" [(ngModel)]="usuario.Login" value='ADMIN' name="name" placeholder="Enter your name " required>
             </div>
             <div class="agile-field-txt">
                 <label>
-                <i class="fa fa-envelope" aria-hidden="true"></i> password </label>
+                <fa-icon [icon]="faEnvelope" ></fa-icon>password </label>
                 <input type="password" name="password" [(ngModel)]="usuario.pass" value='123456' placeholder="Enter your password " #password required id="password">
                 <div class="agile_label">
                     <input id="check3" name="check3" type="checkbox" value="show password" (click)="myFunction(password)">
@@ -32,7 +32,6 @@
                 </div>
             </div>
             <!-- script for show password -->
-
             <!-- //script ends here -->
             <div class="w3ls-bot">
 

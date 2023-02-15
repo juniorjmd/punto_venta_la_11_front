@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { faTrash, faSave } from '@fortawesome/free-solid-svg-icons';
 import { loading } from 'src/app/models/app.loading';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { usuarioService } from 'src/app/services/usuario.services';
@@ -13,6 +14,8 @@ import Swal from 'sweetalert2';
 export class UsuarioEditarComponent {
   newUsuario: UsuarioModel ;
   
+  fatrash = faTrash
+  fasave = faSave
   loading = new loading();
   constructor(
     public dialogo: MatDialogRef<UsuarioEditarComponent>,

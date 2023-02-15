@@ -9,6 +9,7 @@ import { DocumentosModel } from 'src/app/models/documento.model';
 import {ClientesService} from 'src/app/services/Clientes.services'
 import { select } from 'src/app/interfaces/generales';
 import Swal from 'sweetalert2';
+import { faCheckDouble, faEdit, faPlus, faFileAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-fnd-cliente',
@@ -33,7 +34,15 @@ export class FndClienteComponent implements OnInit {
   cityN:CiudadModel = new CiudadModel();
   busqueda:boolean = true;
   crear:boolean = true ; 
-  constructor( public loading : loading, private MaestroClienteServices :MaestroClienteServices ,
+  loading = new loading();
+
+
+
+  facheckdouble = faCheckDouble ; 
+  faedit= faEdit ; 
+  faplus= faPlus ; 
+  fafilealt= faFileAlt ; 
+  constructor(   private MaestroClienteServices :MaestroClienteServices ,
     public dialogo: MatDialogRef<BuscarProductosComponent>,
     @Inject(MAT_DIALOG_DATA) public documentoActivo:DocumentosModel ,
     private clientesService:ClientesService       

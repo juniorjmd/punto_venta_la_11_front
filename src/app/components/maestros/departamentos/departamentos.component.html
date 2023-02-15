@@ -1,1 +1,38 @@
-<p>departamentos works!</p>
+<div class="row" *ngIf="0 >= numdepartamentos   " style="margin-top: 20px;">
+    <div class="col-sm-12">
+        <div class="alert alert-primary" role="alert">
+            No se han generado <strong>departamentos</strong> en la base de datos.
+        </div>
+    </div>
+</div>
+<button (click)="editarDepartamento( departamentoChange)" style="margin-top: 10px;" class="btn btn-primary">Nuevo Departamento</button>
+<table class="table table-striped" *ngIf=" numdepartamentos > 0 ">
+    <thead>
+        <tr>
+            <th scope="col">Codigo </th>
+            <th scope="col">Departamento</th>
+            <th scope="col">Cod pais</th>
+            <th scope="col">País</th>
+            <th scope="col" colspan="2">Opciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let departamento of departamentos">
+            <td>{{departamento.cod_departamento}}</td>
+            <td>{{departamento.nombre}}</td>
+            <td>{{departamento.cod_pais}}</td>
+            <td>{{departamento.nombre_pais}}</td>
+
+            <td style="cursor: pointer;" (click)="editarDepartamento(departamento)">
+                <fa-icon [icon]="faEdit">
+                </fa-icon>
+            </td>
+            <td style="cursor: pointer;" (click)="borrar(departamento)">
+                <fa-icon [icon]="faTrash">
+                </fa-icon>
+            </td>
+
+        </tr>
+    </tbody>
+</table>

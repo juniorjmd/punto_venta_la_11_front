@@ -1,1 +1,34 @@
-<p>clientes works!</p>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: transparent !important;">
+        <a class="navbar-brand" [routerLink]="['/home/inicio']">
+            <fa-icon [icon]="fafolderminus " title="menú inicial"></fa-icon>
+        </a>
+        <a class="navbar-brand" [routerLink]="['listado']">
+            <fa-icon [icon]="fahouseuser " title="listado Cliente"></fa-icon>
+        </a>
+        <a class="navbar-brand" [routerLink]="['maestros']">
+            <fa-icon [icon]="facogs " title="maestros Clientes"></fa-icon>
+        </a>
+
+        <a class=" btn btn-outline-primary my-2 my-sm-0" [routerLink]="['nuevo']">Nuevo<span class="sr-only">(current)</span></a>
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="row">
+            <div class="col-sm-2"></div>
+
+            <div class="col-sm-8"> </div>
+        </div>
+        <input class="o_input mr-sm-2" style='width:50%' type="text" #buscarCliente (keyup.enter)="buscaCliente($event,buscarCliente.value)" placeholder="Buscar Clientes" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="button" (click)="buscaCliente($event,buscarCliente.value)">Buscar</button>
+
+
+
+
+    </nav>
+    <router-outlet></router-outlet>
+</div>

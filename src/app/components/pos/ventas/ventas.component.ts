@@ -3,7 +3,7 @@ import { loading } from 'src/app/models/app.loading';
 import { DocumentosModel } from 'src/app/models/documento.model';
 import { DocumentoService } from 'src/app/services/documento.service';
 import { MatDialog } from '@angular/material/dialog';
-import { OdooPrd, responsePrd } from 'src/app/interfaces/odoo-prd';
+import {  responsePrd } from 'src/app/interfaces/odoo-prd';
 import { MoverDocumentosComponent } from '../mover-documentos/mover-documentos.component';
 import { BuscarProductosComponent } from '../buscar-productos/buscar-productos.component';
 import { DocumentoListado } from 'src/app/interfaces/documento.interface';
@@ -19,6 +19,7 @@ import { BuscarProdDirectoComponent } from '../buscar-prod-directo/buscar-prod-d
 import Swal from 'sweetalert2';
 import { select } from 'src/app/interfaces/generales';
 import { FndClienteComponent } from '../../clientes/fnd-cliente/fnd-cliente.component';
+import { faCashRegister, faCheckDouble, faExchangeAlt, faFileAlt, faHandPointUp, faPlus, faSave, faSearch, faShoppingBag, faSyncAlt, faTimesCircle, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -27,6 +28,19 @@ import { FndClienteComponent } from '../../clientes/fnd-cliente/fnd-cliente.comp
   styleUrls: ['./ventas.component.css']
 })
 export class VentasComponent implements AfterViewInit  {
+  faTimesCircle = faTimesCircle;
+  faFileAlt = faFileAlt;
+  faSave = faSave; 
+  faSyncAlt  = faSyncAlt;
+faSearch = faSearch;
+faHandPointUp = faHandPointUp;
+faShopify = faShoppingBag;
+faExchangeAlt = faExchangeAlt;
+faCashRegister = faCashRegister;
+faCheckDouble = faCheckDouble ;
+faPlus = faPlus ;
+faUser = faUser ;
+faTrash = faTrash;
   pagos:pagosModel[] =[]  ;
   indexEfectivo!:number;
   focus!:boolean;
@@ -38,8 +52,8 @@ export class VentasComponent implements AfterViewInit  {
   documentoActivo : DocumentosModel = new DocumentosModel();
   documentoRetorno : DocumentosModel = new DocumentosModel();
   documentoSeleccionadoActivo : DocumentosModel = new DocumentosModel(); 
-  @ViewChild('codProd') codProdlement!: ElementRef;
-  constructor( public loading : loading,private serviceCaja : cajasServices ,
+  @ViewChild('codProd') codProdlement!: ElementRef;loading = new loading();
+  constructor( private serviceCaja : cajasServices ,
     private newAbrirDialog : MatDialog,
     private documentoService : DocumentoService,
     private productoService : ProductoService,

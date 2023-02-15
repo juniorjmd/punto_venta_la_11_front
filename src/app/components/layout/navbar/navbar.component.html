@@ -32,12 +32,12 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-users-cog "></i> Misceláneo
+                        <fa-icon [icon]="fauserscog "></fa-icon> Misceláneo
                     </a>
                     <ul class="dropdown-menu">
                         <li>
                             <a class="dropdown-item" [routerLink]="['miUsuario']">
-                                <i class="fa fa-user-circle"></i> Mi Usuario</a>
+                                <fa-icon [icon]="fausercircle">></fa-icon>Mi Usuario</a>
                         </li>
 
                         <li>
@@ -45,7 +45,7 @@
                         </li>
                         <li>
                             <a class="dropdown-item" [routerLink]="['/']">
-                                <i class="fas fa-door-open"></i> Log out
+                                <fa-icon [icon]="fadooropen">></fa-icon>Log out
                             </a>
                         </li>
                     </ul>

@@ -19,13 +19,11 @@ export class BuscarProductosComponent implements OnInit {
   show = false ;
   show_reemplazo = false;
   cantidadPrd:number ;  
-  disabled:boolean[]
+  disabled:boolean[];loading = new loading();
   constructor(   private prdService : ProductoService,
     
     public dialogo: MatDialogRef<BuscarProductosComponent>,
-    @Inject(MAT_DIALOG_DATA) public codPrdInser:string,
-      
-    public loading : loading) { 
+    @Inject(MAT_DIALOG_DATA) public codPrdInser:string ) { 
       this.cantidadPrd = 0 ;
       this.codPrd =  codPrdInser ;
       this.buscarProducto();

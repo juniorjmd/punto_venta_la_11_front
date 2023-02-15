@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { faPencilAlt, faStore, faStoreAltSlash } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faSave, faStore, faStoreAltSlash, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Establecimientos } from 'src/app/interfaces/establecimientos.interface';
 import { select } from 'src/app/interfaces/generales';
 import { TiposEstablecimientos } from 'src/app/interfaces/tipos-establecimientos';
@@ -18,6 +18,8 @@ import { TiposEstableComponent } from './tipos-estable/tipos-estable.component';
   styleUrls: ['./establecimientos.component.css']
 })
 export class EstablecimientosComponent  { 
+  fatrash = faTrash
+  fasave = faSave
   objIni:LocationOdoo = {id:0, name : 'Sin Asignar'} ; 
   establecimientos :establecimientoModel[]  = [];
   tiposEsta: TiposEstablecimientosModel[] = [];
