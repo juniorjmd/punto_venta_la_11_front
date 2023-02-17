@@ -6,6 +6,7 @@ import { vwsucursal } from 'src/app/models/app.db.interfaces';
 import { UsuarioModel } from 'src/app/models/usuario.model';
 import { DatosInicialesService } from 'src/app/services/datos-iniciales.service';
 import { LoginService } from 'src/app/services/login.service';
+import { SincOdooService } from '../../services/sinc-odoo.service';
 
 @Component({
   selector: 'app-login',
@@ -37,35 +38,62 @@ faEnvelope = faEnvelope ;
  sucursal:vwsucursal[]=[]; 
  valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
  constructor(private _datosInicialesService : DatosInicialesService,
-   private _loginService: LoginService,
+   private _loginService: LoginService,private _sincService :SincOdooService,
    private _Router : Router) {
 
 
     
      localStorage.clear();
-     if (!this.valSincronizar){
-      this._Router.navigate(['sincronizar']);
-     }else{localStorage.setItem('E9PZJrrrRy5UVx7oqf+s9E0buds=',this.valSincronizar)}
+this.inicioLogin();
 
 
-   this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
-   { next : (data:any)=>{  this.sucursal = data.sucursal; 
-     
-    if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
-      this._Router.navigate(['sincronizar']);
+  }
+  
+  async inicioLogin(){
+    await this.validaGenearActualizacion();
+
+
+
+    this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
+      { next : (data:any)=>{  this.sucursal = data.sucursal; 
+       console.log(data);
+       
+        
+       if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
+         this._Router.navigate(['sincronizar']);
+        }
+             }  ,
+       error :  (err:any )=> {console.log(err)
+        alert( err.error.error)
+      }
      }
-          }  ,
-    error :  (err:any )=> {console.log(err)
-     alert( err.error.error)
+        );  
+   
+   
+  }
+
+  async validaGenearActualizacion(){
+    try { 
+      const retornoEsta   = await this._sincService.validaGenearActualizacion()
+         console.log(retornoEsta); 
+   
+     if (retornoEsta.error == 'ok'){ 
+      if(retornoEsta.numdata > 0 ){
+        localStorage.setItem('E9PZJrrrRy5UVx7oqf+s9E0buds=',retornoEsta.data[0].llave);
+        this.valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
+      }else{
+          this._Router.navigate(['sincronizar']);
+        }
+  
+   }else{
+    alert(retornoEsta.error);
+    
    }
+    } catch (error:any) {
+      console.log(error); 
+    }
+    
   }
-     );  
-
-
-
-
-  }
-
  ngOnInit(): void { 
  this.usuario =  new UsuarioModel(this.usuario);
  this.usuario.Login = 'ADMIN';

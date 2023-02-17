@@ -19,8 +19,7 @@ export class SincOdooComponent {
   faellipsis = faEllipsis
   facog = faCog
   faWarning =faWarning;
-  faCheck= faCheck;
-  
+  faCheck= faCheck; 
   terminoBien = true ; 
   procesosInicio:ProcesoSinc= {
     nombre: 'Actualizando Existencias Desde Odoo',
@@ -55,40 +54,79 @@ export class SincOdooComponent {
       this.generarActualizacion();
     } 
     async finalizarProcesos(){
-
+      if(this.terminoBien){
       const retornoEsta = await this._sincService.finalizarActulizacion();
       console.log(retornoEsta);
       this.procesos[0].estado = true;
       this.procesos[0].resultado = true;
       if (retornoEsta.error !== 'ok') {this.procesosFinal.resultado = false;
         this.procesos[0].resultado = false;
+        this.terminoBien= false;
       }else{   
          localStorage.setItem('E9PZJrrrRy5UVx7oqf+s9E0buds=',retornoEsta.llave)}
       this.procesos.push(this.procesosFinal)
       console.log(this.procesos);
     }
+  else{this.procesosFinal.resultado = false;
+    this.procesos[0].resultado = false;}
+  }
   
+  async validaGenearActualizacion(){
+    try { 
+      
+      this.procesos[this.contProce] = this.procesosInicio;
+      const retornoEsta   = await this._sincService.setearBanderaActualizacion()
+         console.log(retornoEsta); 
+   
+     if (retornoEsta.error == 'ok'){ 
+      console.log( 'codEstado', retornoEsta.datos[0].codEstado )
+      if( retornoEsta.datos[0].codEstado == 1 ){ 
+         this.terminoBien= false;   
+        this.contProce++
+        this.procesos[this.contProce] = {
+          nombre: 'Actualmente se encuentra Activo un proceso de actualizacion ',
+          estado: true,
+          detalle: 'por favor espere un momento',
+          resultado: false
+        }; 
+            setTimeout(()=>{
+             this.retornoLogin()
+          }, 15000);
+        }
+  
+   }else{
+    alert(retornoEsta.error);
+    
+   }
+    } catch (error:any) {
+      console.log(error); 
+    }
+    
+  }
+  retornoLogin(){
+    this._Router.navigate(['login']);
+  }
     async  generarActualizacion(){
     try {
       this.procesos[this.contProce] =  this.procesosInicio ;
-      await this.obtenerSucursales();
-
+      await this.validaGenearActualizacion(); 
+      if(this.terminoBien) await this.obtenerSucursales();
+      if(this.terminoBien){
       for( let i = 0 ; i< this.sucursal.length ; i++){
-        await this.obtenerEstablecimientos(this.sucursal[i]);
+        if(this.terminoBien)  await this.obtenerEstablecimientos(this.sucursal[i]);
         console.log('termino traer establecimientos', this.establecimientos);
-      }
+      }}
       console.log('termino paso el for') 
-    await this.generarActualizacionBodegas(); 
-    await this.actulizarProductos();
-    await this.actulizarCategorias();
-    await this.actulizarTaxes();
-    await this.actulizarMarcas();
+   if(this.terminoBien) await this.generarActualizacionBodegas(); 
+   if(this.terminoBien)  await this.actulizarProductos();
+   if(this.terminoBien)  await this.actulizarCategorias();
+   if(this.terminoBien)  await this.actulizarTaxes();
+   if(this.terminoBien)  await this.actulizarMarcas();
     console.log('fin actualizacion');
-      await this.finalizarProcesos();
+      await this.finalizarProcesos(); 
       if(this.procesos[0].resultado){
         this._Router.navigate(['login']);
-        
-      }
+      } 
     } catch (error:any) {
          
       this.procesos[0].detalle = error;
@@ -226,6 +264,7 @@ async actulizarTaxes(){
        this.procesos[this.contProce].resultado = false;
   }
 }
+
 
 async obtenerSucursales(){
   try {

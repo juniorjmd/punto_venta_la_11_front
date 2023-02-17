@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select } from '../interfaces/generales';
 import { actions } from '../models/app.db.actions';
+import { PROCEDURE } from '../models/app.db.tables';
 import { httpOptions, url } from '../models/app.db.url';
 
 @Injectable({
@@ -52,6 +53,30 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
+
+  validaGenearActualizacion(): Promise<select|any>{
+    let datos = {"action": actions.actionSelect , "_tabla" : 'vw_sync_historico'  ,
+    "_where" :  [{columna : 'estado' , tipocomp : '=' , dato : 'activa' }]};
+    console.log('servicios datos validaGenearActualizacion ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  }  
+  
+  setearBanderaActualizacion(): Promise<select|any>{
+
+    let arraydatos =  {   
+      "_COD_FLAG" : 'FLAG_INICIO_ACTUALIZACION' 
+  }
+    let datos = {"action": actions.actionProcedure ,
+    "_procedure" : PROCEDURE.setearBanderas,
+    "_arraydatos" : arraydatos
+   };
+
+    console.log('servicios datos validaGenearActualizacion ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  }  
+
 getSucursales(): Promise<select|any>{
   let datos = {"action": actions.actionSelect , "_tabla" : 'vw_sucursales' };
   console.log('servicios datos get sucursales ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);

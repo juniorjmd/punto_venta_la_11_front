@@ -173,15 +173,49 @@ export class AbrirCajaComponent implements OnInit {
         }}
         );
   }
-  asignarCaja(caja : cajaModel){
+
+
+ async asignarCaja(caja : cajaModel){
     /*["/home", "pos"]*/ 
-      this.newAbrirCajaDialog.open(DefinirBaseCajaComponent,{data:caja})
-      .afterClosed()
-      .subscribe((confirmado: Boolean)=>{
-        if (confirmado){ 
-          this._Router.navigate(["/home","pos","ventas"]);
+    console.log('caja enviada',caja);
+
+    const valCaja =await this.cajaService.getCaja ( caja.id);
+
+    //await this.validarCajaDisponible(caja.id)
+    valCaja.subscribe(
+      {next:  (respuesta:any)=>{
+          console.log('respuesta validacion',respuesta)
+         
+        if (respuesta.error === 'ok'){  
+          if (respuesta.data[0].estadoCaja.toString() === '2'){  
+
+         this.newAbrirCajaDialog.open(DefinirBaseCajaComponent,{data:caja})
+         .afterClosed()
+         .subscribe((confirmado: Boolean)=>{
+           if (confirmado){ 
+             this._Router.navigate(["/home","pos","ventas"]);
+         }
+         })
+        }else{ Swal.fire(  'ERROR','la caja no se encuentra disponible', 'error') ;
+        this.getCajas();
       }
-      })
+
+        }else{
+          Swal.fire(  'ERROR',respuesta.error, 'error') ;
+        }
+        this.loading.hide();
+       
+        },error:
+        error => {this.loading.hide();
+          Swal.fire(
+          'ERROR',error.error.error,
+          'error');
+        }}
+        );
+console.log('validarCajaDisponible',valCaja);
+
+
+     
   }
   continuar(){
     this._Router.navigate(["/home","pos","ventas"]);

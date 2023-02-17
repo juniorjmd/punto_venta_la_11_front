@@ -17,6 +17,8 @@ export class DefinirBaseCajaComponent implements OnInit {
     public dialogo: MatDialogRef<DefinirBaseCajaComponent>,
     @Inject(MAT_DIALOG_DATA) public cajaImport:cajaModel, ) { 
       this.caja = this.cajaImport;
+      console.log('caja a establecer',this.caja);
+      
     }
 
   ngOnInit(): void {

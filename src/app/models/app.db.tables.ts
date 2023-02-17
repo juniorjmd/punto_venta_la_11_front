@@ -17,6 +17,7 @@
  }
 
  export const PROCEDURE = { 
-    insertaContador : 'sp_inserta_nuevo_contador'
+    insertaContador : 'sp_inserta_nuevo_contador',
+    setearBanderas : 'sp_SET_BANDERA'
 
 }

@@ -159,6 +159,14 @@ export class cajasServices {
         console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
         return this.http.post(url.get , datos,this.requestOptions) ;
     } 
+    getCaja(cajaId : number){
+        let datos = {"action": actions.actionSelect ,
+                     "_tabla" : vistas.cajas,
+                     "_where" : [{columna : 'id' , tipocomp : '=' , dato : cajaId}]
+                    };
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
+    } 
     getMediosCajaActiva(){
         let datos = {"action": actions.actionSelectPorUsuario ,
                      "_tabla" : vistas.mediosPorCajaActiva,
@@ -358,6 +366,7 @@ export class cajasServices {
             "tipo" : newEsta.tipo,
             "estado" : newEsta.estado ,
             "usuario_creacion" : 'USUARIO_LOGUEADO' }
+            
             datos = {"action": actions.actionInsert ,
             "_tabla" : TABLA.establecimiento,
             "_arraydatos" : arraydatos

@@ -22,7 +22,7 @@
                         <td>{{caja.descripcion}}</td>
 
                         <td *ngIf="caja.nombreEstado === 'Cerrada'">
-                            <fa-icon [icon]="faCashRegister" class="fa-cash-register fa-2x boton_activo" (click)="asignarCaja(cajaAbierta)" title="Abrir caja">
+                            <fa-icon [icon]="faCashRegister" class="fa-cash-register fa-2x boton_activo" (click)="asignarCaja(caja)" title="Abrir caja">
                             </fa-icon>
                         </td>
                         <td *ngIf="caja.nombreEstado !== 'Cerrada'">
@@ -32,7 +32,7 @@
 
                         </td>
                         <td *ngIf="caja.nombreEstado !== 'Cerrada'">
-                            <fa-icon [icon]="faVoteYea" class=" boton_activo" (click)="continuar_caja_suspendida(caja)" title="Establecer caja">
+                            <fa-icon [icon]="faVoteYea" class=" fa-2x boton_activo" (click)="continuar_caja_suspendida(caja)" title="Establecer caja">
                             </fa-icon>
                         </td>
                         <td *ngIf="caja.nombreEstado === 'Cerrada'">
@@ -42,7 +42,7 @@
 
 
                         <td *ngIf="caja.nombreEstado === 'Pausa'">
-                            <fa-icon [icon]=" faExpeditedssl" class="boton_activo" (click)="cerrar(caja)" title="Cerrar caja"></fa-icon>
+                            <fa-icon [icon]=" faExpeditedssl" class="fa-2x boton_activo" (click)="cerrar(caja)" title="Cerrar caja"></fa-icon>
                         </td>
                         <td *ngIf="caja.nombreEstado !== 'Pausa'">
 

@@ -22,7 +22,7 @@ fadooropen = faDoorOpen
     this.llaveIncio = ''; 
    
     if (!this.valSincronizar){
-      this._Router.navigate(['sincronizar']);
+      this._Router.navigate(['login']);
      }
     
   this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
@@ -31,7 +31,7 @@ fadooropen = faDoorOpen
       console.log(data);
       
       if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
-        this._Router.navigate(['sincronizar']);
+        this._Router.navigate(['login']);
        }
            }  ,
      error :  (err:any )=> {console.log(err)
