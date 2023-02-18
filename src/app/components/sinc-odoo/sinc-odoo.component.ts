@@ -122,6 +122,8 @@ export class SincOdooComponent {
    if(this.terminoBien)  await this.actulizarCategorias();
    if(this.terminoBien)  await this.actulizarTaxes();
    if(this.terminoBien)  await this.actulizarMarcas();
+   if(this.terminoBien)  await this.actulizarClientes();
+   if(this.terminoBien)  await this.actulizarTipIdClientes();
     console.log('fin actualizacion');
       await this.finalizarProcesos(); 
       if(this.procesos[0].resultado){
@@ -232,7 +234,69 @@ async actulizarMarcas(){
        this.procesos[this.contProce].resultado = false;
   }
 }
+async actulizarClientes(){
+ 
+  try {
+   this.contProce++;
+    
+   this.procesos[this.contProce] = {
+     nombre:  'Actulizando listado de Personas desde Odoo' ,
+     estado: false,
+     detalle: "",
+     resultado: false
+   }; 
+   const retornoSuc   = await this._sincService.actualizarClientes()
+   if( retornoSuc.error === 'ok'){
+     this.terminoBien = true;
+     this.procesos[this.contProce].detalle = "Total Datos actualizados ==> " + retornoSuc.numdata;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = true;
+   }else{
+     this.terminoBien = false;
+     this.procesos[this.contProce].detalle = "error ==> " + retornoSuc.error;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = false;
+   }
+  } catch (error:any) {
+   console.log(error);
+       this.terminoBien = false;
+       this.procesos[this.contProce].detalle = "error ==> " + error.error.error;
+       this.procesos[this.contProce].estado = true;
+       this.procesos[this.contProce].resultado = false;
+  }
+}
 
+async actulizarTipIdClientes(){
+ 
+  try {
+   this.contProce++;
+    
+   this.procesos[this.contProce] = {
+     nombre:  'Actulizando listado de tipo de identificacion Personas desde Odoo' ,
+     estado: false,
+     detalle: "",
+     resultado: false
+   }; 
+   const retornoSuc   = await this._sincService.actulizarTipIdClientes()
+   if( retornoSuc.error === 'ok'){
+     this.terminoBien = true;
+     this.procesos[this.contProce].detalle = "Total Datos actualizados ==> " + retornoSuc.numdata;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = true;
+   }else{
+     this.terminoBien = false;
+     this.procesos[this.contProce].detalle = "error ==> " + retornoSuc.error;
+     this.procesos[this.contProce].estado = true;
+     this.procesos[this.contProce].resultado = false;
+   }
+  } catch (error:any) {
+   console.log(error);
+       this.terminoBien = false;
+       this.procesos[this.contProce].detalle = "error ==> " + error.error.error;
+       this.procesos[this.contProce].estado = true;
+       this.procesos[this.contProce].resultado = false;
+  }
+}
 async actulizarTaxes(){
  
   try {

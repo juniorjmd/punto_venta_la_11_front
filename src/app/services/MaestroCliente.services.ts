@@ -227,7 +227,8 @@ export class MaestroClienteServices {
     }
 
      setTiposDocumentos(){
-        let datos = {"action": actions.actionTipDoc  };
+        let datos = {"action": actions.actionSelect   ,
+        "_tabla" : TABLA.tipoDeIdentificacion  };
       console.log('servicios maestro Cliente - setTiposDocumentos ' ,url.action , datos,this.requestOptions);
        return this.http.post(url.action , datos,this.requestOptions) ;
     }
@@ -238,12 +239,29 @@ export class MaestroClienteServices {
     }
     
     setCategorias(){
-        let datos = {"action": actions.actionCategoriasOdoo  };
+        let datos = {"action": actions.actionSelect , "_tabla" : TABLA.categorias  };
       console.log('servicios maestro Cliente - actionCategoriasOdoo  ' ,url.action , datos,this.requestOptions);
        return this.http.post(url.action , datos,this.requestOptions) ;
     }
     setCategoriasPrd(){
         let datos = {"action": actions.actionCategoriasPrdOdoo  };
+      console.log('servicios maestro Cliente - actionCategoriasOdoo  ' ,url.action , datos,this.requestOptions);
+       return this.http.post(url.action , datos,this.requestOptions) ;
+    }  
+    getCategoriasPrd(){
+        let datos = {"action": actions.actionSelect , "_tabla" : TABLA.categorias };
+      console.log('servicios maestro Cliente - actionCategoriasOdoo  ' ,url.action , datos,this.requestOptions);
+       return this.http.post(url.action , datos,this.requestOptions) ;
+    }
+    getCategoriasPrdAux(){
+        let datos = {"action": actions.actionSelect , "_tabla" : vistas.auxCategoriasPrd };
+      console.log('servicios maestro Cliente - actionCategoriasOdoo  ' ,url.action , datos,this.requestOptions);
+       return this.http.post(url.action , datos,this.requestOptions) ;
+    }
+
+
+    getMarcasPrdAux(){
+        let datos = {"action": actions.actionSelect , "_tabla" : vistas.auxEstudioMarca };
       console.log('servicios maestro Cliente - actionCategoriasOdoo  ' ,url.action , datos,this.requestOptions);
        return this.http.post(url.action , datos,this.requestOptions) ;
     }

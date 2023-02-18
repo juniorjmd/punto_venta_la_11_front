@@ -1,4 +1,6 @@
-<div class="row" *ngIf="busqueda ">
+<br>
+<div class="row" style="width: 500px;" *ngIf="busqueda ">
+
     <div class="col-sm-5 ">
         <div class="form-group ">
             <select class=" o_input_req " [(ngModel)]="NwCliente.l10n_latam_identification_type_id" [compareWith]="compararTipoId" placeholder=" "> 
@@ -8,14 +10,13 @@
     </div>
     <div class="col-sm-7 ">
         <div class="form-group ">
-            <label for=" "></label>
             <input type="text " (keyup.enter)='buscarCliente()' placeholder="identificacion " [(ngModel)]="NwCliente.vat " class=" o_input_req " name=" " id=" " aria-describedby="helpId ">
 
         </div>
     </div>
 
 </div>
-
+<br>
 <div *ngIf="!busqueda">
     <hr>
     <div class="row ">

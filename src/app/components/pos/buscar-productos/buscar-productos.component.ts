@@ -4,8 +4,10 @@ import { select } from 'src/app/interfaces/generales';
 import { errorOdoo, OdooPrd } from 'src/app/interfaces/odoo-prd';
 
 import { loading } from 'src/app/models/app.loading';
+import { DocumentosModel } from 'src/app/models/documento.model';
 import { ProductoService } from 'src/app/services/producto.service';
 import Swal from 'sweetalert2';
+import { Documento } from '../../../interfaces/documento.interface';
 
 @Component({
   selector: 'app-buscar-productos',
@@ -18,14 +20,19 @@ export class BuscarProductosComponent implements OnInit {
   codPrd:string ;  
   show = false ;
   show_reemplazo = false;
+  DocumentoActivo:DocumentosModel;
   cantidadPrd:number ;  
   disabled:boolean[];loading = new loading();
   constructor(   private prdService : ProductoService,
     
     public dialogo: MatDialogRef<BuscarProductosComponent>,
-    @Inject(MAT_DIALOG_DATA) public codPrdInser:string ) { 
+    @Inject(MAT_DIALOG_DATA) public codPrdInser:{codigo:string , doc:DocumentosModel} ) { 
+      console.clear()
       this.cantidadPrd = 0 ;
-      this.codPrd =  codPrdInser ;
+      this.codPrd =  codPrdInser.codigo ;
+      this.DocumentoActivo =  codPrdInser.doc ;
+      console.log('busquedaprd - documento',codPrdInser);
+      
       this.buscarProducto();
       this.disabled = [true,true,true,true,true,true,true,true,true,true];
     }
@@ -45,7 +52,7 @@ export class BuscarProductosComponent implements OnInit {
     if ( this.cantidadPrd > 0 && this.prdBusqueda.cantidad! >= this.cantidadPrd){  
             this.prdBusqueda.cantidadVendida = this.cantidadPrd;
             this.loading.show() 
-            this.prdService.guardarPrdCompra(this.prdBusqueda ).subscribe(
+            this.prdService.guardarPrdCompra(this.prdBusqueda ).subscribe({ next:
               (respuesta:any|select)=>{
                 if (respuesta.error !== 'ok'){
                     Swal.fire(  'ERROR',respuesta.error, 'error') ;
@@ -56,14 +63,14 @@ export class BuscarProductosComponent implements OnInit {
                     console.log('productoVendido',JSON.stringify(respuesta));}
                   this.loading.hide() 
 
-                },
+                },error : 
                 (error:errorOdoo) =>{
                   console.log(JSON.stringify( error) );
                   
                   alert(error.error.error +"\n" + error.error.msg); 
                   this.dialogo.close(false); 
                   this.loading.hide() 
-                }) 
+                } } ) 
        
         
     }
@@ -71,17 +78,35 @@ export class BuscarProductosComponent implements OnInit {
 
    
    buscarProducto(){
+    console.clear()
     this.loading.show() 
-    this.prdService.getProductosCodBarrasVCnt(this.codPrd ).subscribe(
+    this.prdService.getProductosCodBarrasVCnt(this.codPrd  ).subscribe(
       {next :  (respuesta:any|select)=>{
         if (respuesta.error === 'ok'){
-           if (respuesta.numdata > 0 ){
+           if (respuesta.numdata > 0 ){ 
+console.log('getProductosCodBarrasVCnt',respuesta.data[0]);
            this.prdBusqueda =  respuesta.data[0] ; 
-    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos!.datos[0].amount /100))).toFixed(2) ) ;
+            if(typeof(this.prdBusqueda.impuestos) === 'string')
+            this.prdBusqueda.impuestos =JSON.parse(this.prdBusqueda.impuestos );
+         // debugger
+    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos![0].amount /100))).toFixed(2) ) ;
     this.prdBusqueda.valor_del_iva = parseFloat( (this.prdBusqueda.lst_price  - this.prdBusqueda.precio_sin_iva ).toFixed(2) );
     if(!Number.isInteger(this.prdBusqueda.descuento)){
       this.prdBusqueda.descuento = 0;
     }
+    this.prdBusqueda.cantidad= 0;
+
+    respuesta.data.forEach((element:any) => {
+     if( element.bodega == this.DocumentoActivo.idStockOdooPOS ){
+      this.prdBusqueda.cantidad= element.cantidad_real;
+      this.prdBusqueda.codigoExistencia= element.idExistencia;
+     }
+    });
+
+    
+
+
+
            if(this.prdBusqueda.cantidad! >= 10 ){
             this.disabled = [false ,false ,false ,false ,false ,false ,false ,false ,false ,false ];
            }else{

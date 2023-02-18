@@ -2,6 +2,9 @@
  
 
  export const TABLA = {
+   products : 'prd_productos',
+   documentos_clientes : 'documentos_clientes',
+   tipoDeIdentificacion : 'documentos_clientes_tipos',
     SUCURSAL : DATOS_SUCURSAL ,
     ciudades : "ciudades" ,
     departamento: "departamento" ,
@@ -12,7 +15,9 @@
     establecimiento:"establecimiento",
     medios:"documentos_medios_de_pago",
     tipoEstablecimiento:"tipo_establecimiento",
-    contador:"contadores"
+    contador:"contadores",
+    categorias : 'prd_categorias'
+
 
  }
 

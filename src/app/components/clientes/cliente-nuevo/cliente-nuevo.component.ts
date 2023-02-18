@@ -75,7 +75,7 @@ export class ClienteNuevoComponent{
     this.loading.hide() 
 this.gettipoDocuOdoo(); 
 this.getEmpresas();
-this.getCategorias();
+//this.getCategorias();
 
   //  this.tipo_identificacion =   this._MaestroClienteServices.getMaestroClientes('tipo_identificacion');
     console.log('tipo_direccion',this.tipo_direccion);

@@ -7,7 +7,10 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h4>Categorias</h4>
-                    <span class="badge badge-success" (click)="buscarPorCategoria(categoria)" style="margin-left:5px; cursor: pointer;" *ngFor="let categoria of categorias">{{categoria.label}} </span>
+                    <span class="badge bg-secondary" (click)="buscarPorCategoria(cat)" style="margin-left:5px; cursor: pointer;" *ngFor="let cat of categorias">
+                        
+                        
+                        {{cat.label}} </span>
                 </div>
                 <div class="col-sm-6">
                     <div class="col-sm-12">
@@ -16,7 +19,7 @@
                     </div>
                     <div class="col-sm-12" style="max-height: 100px;
                     overflow-y: auto;">
-                        <span class="badge  badge-pill  badge-primary" (click)="buscarPorMarca(marca)" style="margin-left:5px; cursor: pointer;" *ngFor="let marca of marcas">{{marca.label}} </span>
+                        <span class="badge bg-secondary" (click)="buscarPorMarca(marca)" style="margin-left:5px; cursor: pointer;" *ngFor="let marca of marcas">{{marca.label}} </span>
                     </div>
                 </div>
             </div>
@@ -24,8 +27,8 @@
     </div>
     <hr>
     <div class="row">
-        <div class="col-sm-12" style="overflow-y: auto;width: 100%; height: 90%;">
-            <table class="table" st>
+        <div class="col-sm-12" style="overflow-y: auto;width: 100%; height: 500px;">
+            <table class="table">
                 <tr>
                     <td colspan="7">
                         <input type="text" [(ngModel)]='textFindProductos' (keyup.enter)="getProductosPorFiltro()" />
@@ -40,19 +43,15 @@
                     <th>marca</th>
 
                     <th>precio</th>
-                    <th>------</th>
                 </tr>
-                <tr *ngFor="let prd of listPrdBusqueda">
+                <tr class="listadoSeleccion" *ngFor="let prd of listPrdBusqueda" (click)="enviarProducto(prd)">
                     <td>{{prd.id}}</td>
                     <td>{{prd.barcode}}</td>
                     <td>{{prd.display_name}}</td>
                     <td>{{prd.categ_id![1]}}</td>
                     <td>{{prd.x_studio_marca![1]}}</td>
                     <td>{{prd.lst_price}}</td>
-                    <td><button (click)="enviarProducto(prd)"> 
-                         <fa-icon [icon]="faMousePointer"></fa-icon>
-                    </button>
-                    </td>
+
                 </tr>
             </table>
         </div>

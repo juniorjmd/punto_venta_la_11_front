@@ -35,6 +35,18 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
+  actualizarClientes(): Promise<select|any>{
+    let datos = {"action": actions.actionActualizarMarcasOdoo };
+    console.log('servicios actualizarMarcas ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
+  actulizarTipIdClientes(): Promise<select|any>{
+    let datos = {"action": actions.actionActualizarMarcasOdoo };
+    console.log('servicios actualizarMarcas ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
   finalizarActulizacion(): Promise<select|any>{
     let datos = {"action": actions.actionFinalizarActualizacion };
     console.log('servicios finalizarActulizacion ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);

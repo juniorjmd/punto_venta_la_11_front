@@ -1,4 +1,6 @@
  export const vistas = {
+  prd_product_con_existencia : 'vw_productos_con_existencia',
+   aux_prd_product: 'vw_aux_prd_product',
   cajas : "vw_cajas" ,
   medios : "vw_medios" ,
   tiposDeDocumentos:'vw_tipos_de_documentos',
@@ -16,6 +18,8 @@
     documento: 'vw_obj_documentos',
     contadores:'vw_contadores',
     tipos_documentos_con_cont: 'vw_t_documentos_con_cont',
-    domicilios:'vw_documentos_domicilio'
+    domicilios:'vw_documentos_domicilio',
+    auxCategoriasPrd:'vw_aux_prd_categorias',
+   auxEstudioMarca : 'vw_prd_studio_marca_aux'
  }
 

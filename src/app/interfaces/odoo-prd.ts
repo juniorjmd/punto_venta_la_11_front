@@ -20,9 +20,10 @@ export interface OdooPrd {
     "categ_id" ?:string[],
     "x_studio_marca" ?:string[]
     "cantidad" ?: number
-    "impuestos"?: impuesto 
+    "impuestos"?: impuesto[];
     "cantidadVendida"?: number 
     "descuento" ?: number 
+    "codigoExistencia" ?: number 
 }
 
 export interface errorOdoo{
@@ -32,6 +33,7 @@ export interface errorOdoo{
     "loc_virt" ?: any[]
 
 }
+/*
 export interface impuesto{
     "cnt": number,
     "datos": [
@@ -42,7 +44,17 @@ export interface impuesto{
             "amount_type": string
         }
     ]
-}
+}*/
+
+export interface impuesto  
+        {
+            "id": number,
+            "name": string,
+            "amount": number,
+            "amount_type": string
+        }
+     
+ 
 
 
 export interface responsePrd{

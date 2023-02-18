@@ -1,0 +1,7 @@
+.listadoSeleccion {
+    cursor: pointer !important;
+}
+
+.listadoSeleccion:hover {
+    background-color: cornflowerblue !important;
+}

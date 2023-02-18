@@ -7,6 +7,7 @@ import { actions } from '../models/app.db.actions';
 import { httpOptions, url } from '../models/app.db.url';
 import { vistas } from '../models/app.db.view';
 import { DocumentosModel } from '../models/documento.model';
+import { TABLA } from '../models/app.db.tables';
 
 @Injectable({
     providedIn: 'root'
@@ -112,7 +113,7 @@ export class ClientesService {
           "_agregar_a_documento" : true,
           "_documento_orden" : documento.orden 
        }
-        console.log('setClienteOdoo  ' ,JSON.stringify(cliente),url.action , datos,this.requestOptions);
+        console.log('setClienteOdoo  ' ,JSON.stringify(cliente),url.createOdoo , datos,this.requestOptions);
         return this.http.post(url.action , datos,this.requestOptions) ;
     }
     updateClienteOdoo( cliente:ClientesOdoo   ){
@@ -124,13 +125,21 @@ export class ClientesService {
         return this.http.post(url.action , datos,this.requestOptions) ;
     }
     getClienteOdooPorCedula( cliente:ClientesOdoo ){
-
+/*
         let datos = {"action": actions.actionSelectClienteOdoo ,
         "_tipo_busqueda" : "id" ,
         "_tipo_identificacion" : cliente.l10n_latam_identification_type_id[0] ,
         "_dato" : cliente.vat ,
         "_limit":1
        }
+*/
+       let datos = {"action": actions.actionSelect ,
+       "_tabla" : TABLA.documentos_clientes,
+       "_where" : [{columna : 'l10n_latam_identification_type_id' , tipocomp : '=' , dato : cliente.l10n_latam_identification_type_id[0]},
+       {columna : 'vat' , tipocomp : '=' , dato : cliente.vat}]
+      };
+
+
         console.log('actionSelectClienteOdoo  ' ,JSON.stringify(cliente),url.action , datos,this.requestOptions);
         return this.http.post(url.action , datos,this.requestOptions) ;
     }

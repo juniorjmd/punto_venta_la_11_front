@@ -42,6 +42,7 @@ getCategorias(){
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
 /*buscar producto por codigo de barra validando la existencia */
+/*
 getProductosCodBarrasVCnt(codPrd:string){
   let datos = {"action": actions.buscarProducto ,
       "_limit" : 1 , "_codBarra" : true , "_data" : codPrd ,  "_validar_existencia" : true ,
@@ -51,56 +52,59 @@ getProductosCodBarrasVCnt(codPrd:string){
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
  
-
-getProductosPorCategoria(codCategoria:number){
-  let datos = {"action": actions.buscarProducto ,
-      "_limit" : 100 , "_categoria" : true , "_data" : codCategoria ,  "_validar_existencia" : false 
+*/
+getProductosCodBarrasVCnt(codPrd:string  ){
+  let datos = {"action": actions.actionSelect ,
+      "_limit" : 100 ,  
+      "_tabla" : vistas.prd_product_con_existencia,
+      "_where" : [{columna : 'barcode' , tipocomp : '=' , dato : codPrd} ]
               };
   console.log('servicios getProductosPorCategoria' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
 
 
-getProductosGeneral(limit:number){
-  let datos;
-  if( limit > 0 ){
-      datos   = {"action": actions.buscarProducto ,
-  "_limit" : limit ,   "_validar_existencia" : false 
-          };}else{
-      datos = {"action": actions.buscarProducto ,  "_validar_existencia" : false 
+getProductosPorCategoria(codCategoria:number){
+  let datos = {"action": actions.actionSelect ,
+      "_limit" : 100 ,  
+      "_tabla" : vistas.aux_prd_product,
+      "_where" : [{columna : 'categ_id' , tipocomp : '=' , dato : codCategoria} ]
               };
-  }
-  
-  console.log('servicios getProductosPorMarca' ,url.action , datos,this.requestOptions);
+  console.log('servicios getProductosPorCategoria' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
+ 
+getProductosGeneral(limit:number){
+  let  datos   = {"action": actions.actionSelect ,
+  "_limit" : limit ,   "_tabla" : vistas.aux_prd_product     };
+  
+  console.log('servicios getProductosGeneral' ,url.action , datos,this.requestOptions);
+  return this.http.post(url.action , datos,this.requestOptions) ;
+} 
+
+
 getProductosPorMarca(codMarca:number){
-  let datos = {"action": actions.buscarProducto ,
-      "_limit" : 100 , "_marca" : true , "_data" : codMarca ,  "_validar_existencia" : false 
-              };
+  let datos = {"action": actions.actionSelect ,
+      "_limit" : 100 ,  
+      "_tabla" : vistas.aux_prd_product,
+      "_where" : [{columna : 'x_studio_marca' , tipocomp : '=' , dato : codMarca} ]};
   console.log('servicios getProductosPorMarca' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
 
 
 getProductosPorNombre(limit:number , texto:string){
-  let datos ;
-  if( limit > 0 ){ 
-    datos = {"action": actions.buscarProducto ,
-      "_limit" : limit , "_descripcion" : true , "_data" : texto ,  "_validar_existencia" : false 
-              }; }
-              else{
-                  datos = {"action": actions.buscarProducto ,
-      "_descripcion" : true , "_data" : texto ,  "_validar_existencia" : false 
-              };  
-              }
+  let datos = {"action": actions.actionSelect ,
+  "_limit" : limit ,  
+  "_tabla" : vistas.aux_prd_product,
+  "_where" : [{columna : 'display_name' , tipocomp : 'like' , dato : texto} ]};
   console.log('servicios getProductosPorMarca' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 } 
 //actionStockMoveDevolucion
 
 guardarPrdCompra(producto : OdooPrd){
-let impuestos:number = (producto.impuestos)? producto.impuestos.datos[0].amount:0                                                          ;
+let impuestos:number = (producto.impuestos)? producto.impuestos[0].amount:0                                                          ;
 
   let datos = {"action": actions.actionStockMove , 
   "_precio_brt_prd" : producto.lst_price    , 
@@ -109,7 +113,8 @@ let impuestos:number = (producto.impuestos)? producto.impuestos.datos[0].amount:
    "_precio_iva_prd" : producto.valor_del_iva  , 
    "_cantidad" : producto.cantidadVendida ,
    "_descuento" : producto.descuento ,
-    "_cod_prd" :   producto.id 
+    "_cod_prd" :   producto.id ,
+    "_id_bodega" : producto.codigoExistencia
 };
   console.log('servicios getProductosCodBarrasVCnt' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;

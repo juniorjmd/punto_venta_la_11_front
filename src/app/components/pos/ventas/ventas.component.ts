@@ -80,10 +80,12 @@ faTrash = faTrash;
           console.log('dato retornado busqueda directa',response.datoDevolucion);
           this.codigoProducto = response.datoDevolucion!.id.toString();
             this.buscarClose = false ;
-            this.newAbrirDialog.open(BuscarProductosComponent ,{data: response.datoDevolucion!.id.toString() })
+            this.newAbrirDialog.open(BuscarProductosComponent ,{data:            
+              {codigo:response.datoDevolucion!.barcode.toString()  , doc:  this.documentoActivo}
+            })
             .afterClosed()
             .subscribe((confirmado: Boolean)=>{ 
-              this.crearDocumento();
+             // this.crearDocumento();
               this.codigoProducto = ''; 
               this.buscarClose = true;
             })  
@@ -260,7 +262,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
     console.log('buscarProducto',this.codigoProducto)
     if (this.codigoProducto.trim() !== '' &&  this.buscarClose){
       this.buscarClose = false ;
-      this.newAbrirDialog.open(BuscarProductosComponent ,{data:this.codigoProducto })
+      this.newAbrirDialog.open(BuscarProductosComponent ,{data:{codigo:this.codigoProducto , doc:  this.documentoActivo} })
       .afterClosed()
       .subscribe((confirmado: Boolean)=>{
         this.getDocumentos();

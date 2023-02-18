@@ -73,7 +73,7 @@ export class BuscarProductosAuxComponent implements OnInit {
         if (respuesta.error === 'ok'){
            if (respuesta.numdata > 0 ){
            this.prdBusqueda =  respuesta.data[0] ; 
-    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos!.datos[0].amount /100))).toFixed(2) ) ;
+    this.prdBusqueda.precio_sin_iva =   parseFloat( (this.prdBusqueda.lst_price / (1 + ( this.prdBusqueda.impuestos![0].amount /100))).toFixed(2) ) ;
     this.prdBusqueda.valor_del_iva = parseFloat( (this.prdBusqueda.lst_price  - this.prdBusqueda.precio_sin_iva ).toFixed(2) );
     if(!Number.isInteger(this.prdBusqueda.descuento)){
       this.prdBusqueda.descuento = 0;

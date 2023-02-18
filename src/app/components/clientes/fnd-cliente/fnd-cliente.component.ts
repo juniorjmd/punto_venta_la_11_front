@@ -56,6 +56,7 @@ export class FndClienteComponent implements OnInit {
   buscarCliente(){
     this.loading.show() 
     //this.documentoActivo.orden;
+    
   this.clientesService.getClienteOdooPorCedula(this.NwCliente).subscribe(
      (respuesta:any|select)=>{
       let cont = 0;
@@ -146,8 +147,9 @@ pasarClienteAcontrolYasignarDocumento(){
   if(this.NwCliente.street2 == ''){this.NwCliente.street2 = false;}
   if(this.NwCliente.category_id == ''){this.NwCliente.category_id = false;}
   if(this.NwCliente.title == ''){this.NwCliente.title = false;}
-  this.loading.show() 
-  //this.documentoActivo.orden;
+  this.loading.show();
+   console.log(this.NwCliente);
+  
 this.clientesService.pasarClienteOdooACntYasignarDoc(this.NwCliente , this.documentoActivo ).subscribe(
    (respuesta:any|select)=>{
     let cont = 0;
@@ -164,7 +166,7 @@ this.clientesService.pasarClienteOdooACntYasignarDoc(this.NwCliente , this.docum
           this.dialogo.close(true);
         break;
         case 'ok_no_existe_en_odoo' :
-          alert('El cliente de estar creado primeramente en odoo!!');
+          alert('El cliente debe estar creado en odoo!!');
         break;
         default :
            Swal.fire(  'ERROR',respuesta.error, 'error') ;
@@ -251,11 +253,11 @@ this.NwCliente.l10n_latam_identification_type_id = this.tipo_identificacionA ;
     this.companias =  [];
     this.Provincias =  this.MaestroClienteServices.getMaestroClientes('provincias');
     this.titulos =  this.MaestroClienteServices.getMaestroClientes('titulos');
-    this.categorias =  this.MaestroClienteServices.getMaestroClientes('categorias'); 
+    //this.categorias =  this.MaestroClienteServices.getMaestroClientes('categorias'); 
     this.loading.hide() 
 this.gettipoDocuOdoo(); 
 this.getEmpresas();
-this.getCategorias();
+//this.getCategorias();
 
   //  this.tipo_identificacion =   this.MaestroClienteServices.getMaestroClientes('tipo_identificacion');
     console.log('tipo_direccion',this.tipo_direccion);

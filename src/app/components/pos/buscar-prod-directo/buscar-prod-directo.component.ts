@@ -29,7 +29,8 @@ export class BuscarProdDirectoComponent  {
   //--------------------
   marcas:dfltAnswOdoo2[] = [];
   marcasAux:dfltAnswOdoo2[] = [];
-  categorias:dfltAnswOdoo2[] = [];loading = new loading();
+  categorias:dfltAnswOdoo2[] = [];
+  loading = new loading();
   constructor( public dialogo: MatDialogRef<BuscarProdDirectoComponent>
     , private prdService : ProductoService,
     private MaestroClienteServices :MaestroClienteServices) {
@@ -67,7 +68,7 @@ export class BuscarProdDirectoComponent  {
     console.log('busqueda productos inicial' ); 
      this.loading.show() 
      this.listPrdBusqueda = [];
-     this.prdService.getProductosGeneral(30).subscribe(
+     this.prdService.getProductosGeneral(15).subscribe(
       {next:(respuesta:any|select)=>{
          if (respuesta.error === 'ok'){
             if (respuesta.numdata > 0 ){
@@ -99,7 +100,7 @@ export class BuscarProdDirectoComponent  {
              if (respuesta.numdata > 0 ){
 
               respuesta.data.forEach((value:any,index:number) => {
-                 value.precio_sin_iva =   parseFloat( (value.lst_price / (1 + ( value.impuestos.datos[0].amount /100))).toFixed(2) ) ;
+                 value.precio_sin_iva =   parseFloat( (value.lst_price / (1 + ( value.impuestos[0].amount /100))).toFixed(2) ) ;
                  value.valor_del_iva = parseFloat( (value.lst_price  - value.precio_sin_iva ).toFixed(2) );
                 if(!Number.isInteger(value.descuento)){
                   value.descuento = 0;
@@ -140,7 +141,7 @@ export class BuscarProdDirectoComponent  {
              if (respuesta.numdata > 0 ){
 
               respuesta.data.forEach((value:any,index:number) => {
-                 value.precio_sin_iva =   parseFloat( (value.lst_price / (1 + ( value.impuestos.datos[0].amount /100))).toFixed(2) ) ;
+                 value.precio_sin_iva =   parseFloat( (value.lst_price / (1 + ( value.impuestos[0].amount /100))).toFixed(2) ) ;
                  value.valor_del_iva = parseFloat( (value.lst_price  - value.precio_sin_iva ).toFixed(2) );
                 if(!Number.isInteger(value.descuento)){
                   value.descuento = 0;
@@ -167,49 +168,21 @@ export class BuscarProdDirectoComponent  {
    }
    //BUSCAR_MARCAS
    
-   getCategorias(){ 
-    this.MaestroClienteServices.setCategoriasPrd().subscribe((datos:any|select)=>{
-       console.log('setCategorias ODDO' , JSON.stringify(datos));
-      this.loading.show()
-      this.categorias = [];
-      datos.data.forEach((value:any)=>{ 
-        
-       /* this.categorias[index].dato = value.id;
-        this.categorias[index].label = value.display_name;*/
-        this.categorias.push({
-          "dato": value.id,
-          "label":value.display_name,
-          "color":value.color,
-          "display":true
-        })  
-    
-      })       
+   getCategorias(){  this.loading.show()
+    this.MaestroClienteServices.getCategoriasPrdAux().subscribe((datos:any|select)=>{     
+      this.categorias = datos.data;          
       this.loading.hide() ;
-      console.log(this.categorias);
+      console.log('categorias ',this.categorias);
     });
 
   }
-  getMarcas(){ 
-    this.MaestroClienteServices.setMarcas().subscribe(
+  getMarcas(){  this.loading.show()
+    this.MaestroClienteServices.getMarcasPrdAux().subscribe(
       (datos:any|select)=>{
-       console.log('setMarcas ODDO' , JSON.stringify(datos));
-      this.loading.show()
-      this.marcas = [];
-      datos.data.forEach((value:any,index:number)=>{
-        console.log('value' , value,'index',index);
-        
-       /* this.categorias[index].dato = value.id;
-        this.categorias[index].label = value.display_name;*/
-        this.marcas.push({
-          "dato": value.id,
-          "label":value.display_name,
-          "color":value.color,
-          "display":true
-        })  
-    
-      }) 
+       console.log('setMarcas ODDO' , JSON.stringify(datos)); 
+      this.marcas =datos.data; 
       this.marcasAux = this.marcas;
-      console.log(this.categorias);
+      console.log('marcas',this.marcas);
       
       this.loading.hide() ;
     });
