@@ -80,16 +80,21 @@ getMediosP(){
   console.log('DocumentoActivo',this.Documento)
   this.listo = false;
   this.loading.show()
-  this.serviceCaja.getMediosCajaActiva()
+  let ref :string = this.Documento.referencia! ;
+  this.serviceCaja.getMediosCajaActivaReferenciaDoc(ref)
   .subscribe({next: (datos:any|select)=>{
     if (datos.numdata > 0 ){ 
       datos.data.forEach((dato:MediosDePago , index:number )=>{
+        if(this.Documento.referencia !== 'LIBRANZA')
+        {
         this.pagos[index] = new DocpagosModel();
         this.pagos[index].idMedioDePago = dato.id;
         this.pagos[index].nombreMedio =dato.nombre;
         this.pagos[index].valorRecibido = 0;
         this.pagos[index].vueltos = 0; 
         this.pagos[index].valorTotalAPagar = 0; 
+
+        
         if (dato.nombre === 'Efectivo')
          { this.indexEfectivo = index;
             this.pagos[index].valorPagado = this.Documento.totalFactura;
@@ -97,7 +102,33 @@ getMediosP(){
             this.pagos[index].vueltos = 0; 
           }
         else
-          {this.pagos[index].valorPagado = 0;}}) 
+          {this.pagos[index].valorPagado = 0;}
+        }else{
+          this.pagos[index] = new DocpagosModel();
+        this.pagos[index].idMedioDePago = dato.id;
+        this.pagos[index].nombreMedio =dato.nombre;
+        this.pagos[index].valorRecibido = 0;
+        this.pagos[index].vueltos = 0; 
+        this.pagos[index].valorTotalAPagar = 0; 
+
+        
+        if (dato.nombre === 'libranza')
+         {  
+            this.pagos[index].valorPagado = this.Documento.totalFactura;
+            this.pagos[index].valorRecibido = this.pagos[index].valorPagado;
+            this.pagos[index].vueltos = 0; 
+          }
+        else
+          {  if (dato.nombre === 'Efectivo')
+          { this.indexEfectivo = index;
+            this.pagos[index].valorPagado = 0;
+           }
+         else
+           {this.pagos[index].valorPagado = 0;}}
+        }
+        
+        
+        }) 
     }else{
       this.MedioP = [];
     } 

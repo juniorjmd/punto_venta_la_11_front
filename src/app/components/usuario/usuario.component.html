@@ -21,6 +21,7 @@
                     <th>Usuario</th>
                     <th>Correo Electronico</th>
                     <th>Activo Libranza</th>
+                    <th>Empleado</th>
                     <th>Ultimo ingreso</th>
                     <th>Fecha modificación</th>
                     <th colspan="2">
@@ -32,6 +33,7 @@
                     <td>{{usuario.Login }}</td>
                     <td>{{usuario.mail}}</td>
                     <td>{{usuario.libranza|booleanP}}</td>
+                    <td>{{usuario.empleado|booleanP}}</td>
                     <td *ngIf="usuario.ultimo_ingreso != '' && usuario.ultimo_ingreso != '0000-00-00 00:00:00' ">{{usuario.ultimo_ingreso | date: 'MMMM d, y, h:mm:ss'}}</td>
                     <td *ngIf="usuario.ultimo_ingreso == '' || usuario.ultimo_ingreso == '0000-00-00 00:00:00' ">ingreso no registrado</td>
 

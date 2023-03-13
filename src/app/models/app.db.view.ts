@@ -1,4 +1,11 @@
  export const vistas = {
+  documentos_listado_productos_por_cierre : 'vw_documentos_listado_productos_por_cierre',
+  corte_de_caja : 'vw_corte_de_caja',
+  corte_de_caja_parcial : 'vw_corte_de_caja_parcial',
+  corte_de_caja_pagos : 'vw_corte_de_caja_pagos',
+
+  personas_disponibles_para_libranza : 'vw_personas_disponibles_para_libranza',
+  personas_disponibles_para_usuarios : 'vw_personas_disponibles_para_usuarios',
   prd_product_con_existencia : 'vw_productos_con_existencia',
    aux_prd_product: 'vw_aux_prd_product',
   cajas : "vw_cajas" ,

@@ -11,4 +11,5 @@ export interface MediosDePago {
     nombreCaja?:string,
     usuarioCaja?:number,
     usuarioCajaNombre?:string,
+    visible:string,
 }

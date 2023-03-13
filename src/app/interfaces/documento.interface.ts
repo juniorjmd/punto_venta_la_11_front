@@ -39,8 +39,11 @@ export interface Documento   {
     'resolucion'?:string,
     'fechaInicioResolucion'?:number|Date,
     'fechaFinResolucion'?:number|Date,
-    'nombreUsuarioResolucion'?:string
-    'id_cliente'?:Clientes
+    'nombreUsuarioResolucion'?:string,
+    'id_cliente'?:Clientes,
+    'referencia'?:string,
+    'referencia_codigo'?:number
+
  }
 export interface DocumentoImpuestos{
     'id' : number,

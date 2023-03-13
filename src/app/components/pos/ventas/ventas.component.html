@@ -52,8 +52,13 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-7" style="min-height: 285px;  overflow:auto;">
 
+        <div class="col-sm-8" style="min-height: 285px;  overflow:auto;">
+            <div class="row" *ngIf="documentoActivo.referencia != '0'">
+                <div class="col-sm-12">
+                    <h4 style="color: red;">{{documentoActivo.referencia}}</h4>
+                </div>
+            </div>
             <table class="table table-striped ">
                 <thead class="thead-inverse">
                     <tr>
@@ -67,7 +72,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of documentoActivo.listado">
+                    <tr *ngFor="let item of documentoActivo.listado" style="font-size: 12px ;">
                         <td>
                             <fa-icon [icon]="faTimesCircle " title="" *ngIf="item.estado_linea_venta == 'A' " style="cursor:pointer" (click)="eliminarLinea(item)"></fa-icon>
                         </td>
@@ -81,20 +86,19 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-4">
             <div class="btn-group" role="group" aria-label="Basic example">
                 <button type="button" class="btn btn-success" title="Facturar" (click)='asignarPagosAVenta()'> <fa-icon [icon]="faCheckDouble " title=""></fa-icon></button>
                 <button type="button" class="btn btn-primary" title="Crear Documento" (click)='crearDocumento()'> <fa-icon [icon]="faPlus " title=""></fa-icon>&nbsp;<fa-icon [icon]="faFileAlt" title=""></fa-icon> </button>
                 <button type="button" class="btn btn-info" title="Añadir cliente al  Documento" (click)='buscarCliente()'> <fa-icon [icon]="faUser " title=""></fa-icon>&nbsp;<fa-icon [icon]="faFileAlt" title=""></fa-icon> </button>
                 <button type="button" class="btn btn-danger" title="Eliminar Documento" (click)='cancelarDocumento()'> <fa-icon [icon]="faTrash " title=""></fa-icon> &nbsp;<fa-icon [icon]="faFileAlt" title=""></fa-icon> </button>
                 <button type="button" class="btn btn-warning" title="Busqueda Producto" (click)='busquedaAuxiliarProducto()'> <fa-icon [icon]="faSearch " title=""></fa-icon> &nbsp;<fa-icon [icon]="faFileAlt" title=""></fa-icon> </button>
+                <!--<button type="button" class="btn btn-warning" title="Busqueda Producto" (click)='busquedaAuxiliarProducto()'> <fa-icon [icon]="faBookmarkO " title=""></fa-icon> &nbsp;<fa-icon [icon]="faFileAlt" title=""></fa-icon> </button>-->
 
 
 
                 <button type="button" class="btn btn-success" style="background-color: #67b4e0;" title="plan separe"> 
                         <fa-icon [icon]="faHandPointUp " title=""></fa-icon> &nbsp;
-                            
-                            
                             <fa-icon [icon]="faShopify " title=""></fa-icon>
                         
                         </button>
@@ -111,7 +115,7 @@
                 <button type="button" class="btn " (click)="generarEnvio()" style="background-color: rgb(41, 39, 39);" title="Guardar como Envio"> 
                     <img src="assets/img/img_menu_interno/deliveri_truck.png" style="width:100%;height:30px "/></button>
 
-                <button type="button" class="btn btn-success" title="Libranza"> <fa-icon [icon]=" faHandPointUp " title=""></fa-icon> Libranza</button>
+                <button type="button" (click)="asignarLibranza()" class="btn btn-success" title="Libranza"> <fa-icon [icon]=" faHandPointUp " title=""></fa-icon> Libranza</button>
             </div>
             <table class="table">
                 <tr>
@@ -129,6 +133,7 @@
         </div>
     </div>
     <div class="row">
+
         <div class="col-sm-12">
             <table class="table">
                 <thead>

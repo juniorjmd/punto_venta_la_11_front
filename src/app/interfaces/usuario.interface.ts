@@ -34,6 +34,7 @@ export interface Usuarios{
     descripcion?:string;
     perfil?:number;
     libranza?:boolean;
+    empleado?:boolean;
 }
 
 export interface Permisos{

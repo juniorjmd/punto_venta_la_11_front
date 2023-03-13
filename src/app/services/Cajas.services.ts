@@ -21,7 +21,7 @@ export class cajasServices {
     requestOptions:any
        constructor(private http: HttpClient,
         private _Router : Router){ 
-        let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+        let llaveDeRegistro =   localStorage.getItem('sis41254#2@')  ; 
         if (!llaveDeRegistro){
               this._Router.navigate(['login']);
         }
@@ -164,6 +164,23 @@ export class cajasServices {
                      "_tabla" : vistas.cajas,
                      "_where" : [{columna : 'id' , tipocomp : '=' , dato : cajaId}]
                     };
+        console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
+        return this.http.post(url.get , datos,this.requestOptions) ;
+    }  
+    
+    getMediosCajaActivaReferenciaDoc(referencia:string){
+        let datos:any;
+        if( referencia  !== 'LIBRANZA'){
+          datos = {"action": actions.actionSelectPorUsuario ,
+            "_tabla" : vistas.mediosPorCajaActiva,
+            "_columnaUsuario": 'usuarioCaja',
+            "_where" : [{columna : 'nombre' , tipocomp : '!=' , dato : 'libranza'}]
+           };  
+        }else{  datos = {"action": actions.actionSelectPorUsuario ,
+        "_tabla" : vistas.mediosPorCajaActiva,
+        "_columnaUsuario": 'usuarioCaja'
+       };}
+       
         console.log('servicios de cajas activo ' ,url.get , datos,this.requestOptions);
         return this.http.post(url.get , datos,this.requestOptions) ;
     } 

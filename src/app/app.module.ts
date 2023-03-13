@@ -97,6 +97,10 @@ import { NciudadComponent } from './components/maestros/new/nciudad/nciudad.comp
 import { NpaisComponent } from './components/maestros/new/npais/npais.component';
 import { NdepartamentoComponent } from './components/maestros/new/ndepartamento/ndepartamento.component';
 import { NavbarUbicacionComponent } from './components/maestros/navbar-ubicacion/navbar-ubicacion.component';
+import { ClientesDisponiblesComponent } from './components/clientes/clientes-disponibles/clientes-disponibles.component';
+import { CambioPassComponent } from './components/login/cambio-pass/cambio-pass.component';
+import { ClientesDispoLibranzaComponent } from './components/clientes/clientes-dispo-libranza/clientes-dispo-libranza.component';
+import { LibranzasComponent } from './components/pos/libranzas/libranzas.component';
 
 @NgModule({
   declarations: [
@@ -162,7 +166,7 @@ import { NavbarUbicacionComponent } from './components/maestros/navbar-ubicacion
     MoverDocumentosComponent,
     PagosVentaComponent,
     ResumenCajaComponent,  
-    NciudadComponent, NpaisComponent, NdepartamentoComponent, NavbarUbicacionComponent,
+    NciudadComponent, NpaisComponent, NdepartamentoComponent, NavbarUbicacionComponent, ClientesDisponiblesComponent, CambioPassComponent, ClientesDispoLibranzaComponent, LibranzasComponent,
   ],
   imports: [
     BrowserModule,

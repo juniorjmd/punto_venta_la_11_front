@@ -9,6 +9,7 @@ import { actions } from '../models/app.db.actions';
 import { TABLA } from '../models/app.db.tables';
 import { httpOptions, url } from '../models/app.db.url';
 import { vistas } from '../models/app.db.view';
+import { DocumentosModel } from '../models/documento.model';
 import { UsuarioModel } from '../models/usuario.model';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class ProductoService {
   loading = new loading() 
   constructor(private http: HttpClient ,
     private _Router : Router){ 
-      let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+      let llaveDeRegistro =  localStorage.getItem('sis41254#2@') ; 
       if (!llaveDeRegistro){
             this._Router.navigate(['login']);
       }
@@ -103,7 +104,7 @@ getProductosPorNombre(limit:number , texto:string){
 } 
 //actionStockMoveDevolucion
 
-guardarPrdCompra(producto : OdooPrd){
+guardarPrdCompra(producto : OdooPrd ,documento:DocumentosModel){
 let impuestos:number = (producto.impuestos)? producto.impuestos[0].amount:0                                                          ;
 
   let datos = {"action": actions.actionStockMove , 
@@ -114,9 +115,13 @@ let impuestos:number = (producto.impuestos)? producto.impuestos[0].amount:0     
    "_cantidad" : producto.cantidadVendida ,
    "_descuento" : producto.descuento ,
     "_cod_prd" :   producto.id ,
-    "_id_bodega" : producto.codigoExistencia
+    "_id_bodega" : producto.codigoExistencia,
+    '_orden' : documento.orden, 
+    '_idStockOdooPOS' : documento.idStockOdooPOS,
+    '_idStockOdooVtl' : documento.idStockOdooVtl,
+
 };
-  console.log('servicios getProductosCodBarrasVCnt' ,url.action , datos,this.requestOptions);
+  console.log('servicios guardarPrdCompra' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 }
 

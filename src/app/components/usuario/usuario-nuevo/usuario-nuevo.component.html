@@ -1,49 +1,40 @@
-<div class="container-fluid">
+<div class="container-fluid" style="min-width: 600px;padding: 40px;">
     <br>
     <div class="row">
         <div class="col-sm-12  ">
 
-            <h2 class='centrado'>Editar Usuario</h2>
+            <h2 class='centrado'>Nuevo Usuario</h2>
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
+        <div class="col-sm-10">
             <div class="form-group">
-                <label for="email">Pri. nombre: </label>
-                <input type="email" [email]="true" class="o_input" [(ngModel)]="newUsuario.Nombre1" placeholder="Primer Nombre...">
+                <label for="email">Persona: </label>
+                <input readonly type="email" [email]="true" class="o_input" [(ngModel)]="newUsuario.Nombre1" placeholder="Primer Nombre...">
             </div>
         </div>
-
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="email">Segundo nombre: </label>
-
-
-                <input type="text" class="o_input" [(ngModel)]="newUsuario.Nombre2" placeholder="Segundo Nombre...">
-            </div>
+        <div class="col-sm-2">
+            <input name="" id="" class="btn btn-primary" type="button" value="Agregar" (click)="buscarPersonaDisponible()">
         </div>
-        <div class="col-sm-3">
+    </div>
+    <div class="row">
+        <div class="col-sm-10">
             <div class="form-group">
-                <label for="email">Primer Apellido: </label>
-                <input type="text" class="o_input" [(ngModel)]="newUsuario.Apellido1" placeholder="Primer Apellido...">
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div class="form-group">
-                <label for="email">Segundo Apellido: </label>
-                <input type="text" class="o_input" [(ngModel)]="newUsuario.Apellido2" placeholder="Segundo Apellido...">
+                <label for="email">Mail: </label>
+                <input readonly type="text" class="o_input" [(ngModel)]="newUsuario.mail" placeholder="correo Electronico...">
+
             </div>
         </div>
 
     </div><br>
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="email">Usuario: </label>
                 <input type="text" class="o_input" [(ngModel)]="newUsuario.Login" placeholder="Usuario...">
             </div>
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="email">Estado: </label>
                 <select class=" o_input " [(ngModel)]="newUsuario.estado">
@@ -53,17 +44,20 @@
             </select>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <label for="email">Mail: </label>
-                <input type="text" class="o_input" [(ngModel)]="newUsuario.mail" placeholder="correo Electronico...">
 
-            </div>
-        </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <div class="form-group">
                 <label for="email">Libranza: </label>
                 <select class=" o_input " [(ngModel)]="newUsuario.libranza">
+                <option value=0>No</option>
+                <option value=1>Si</option> 
+            </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="form-group">
+                <label for="email">Empleado: </label>
+                <select class=" o_input " [(ngModel)]="newUsuario.empleado">
                 <option value=0>No</option>
                 <option value=1>Si</option> 
             </select>

@@ -52,7 +52,7 @@ export class BuscarProductosComponent implements OnInit {
     if ( this.cantidadPrd > 0 && this.prdBusqueda.cantidad! >= this.cantidadPrd){  
             this.prdBusqueda.cantidadVendida = this.cantidadPrd;
             this.loading.show() 
-            this.prdService.guardarPrdCompra(this.prdBusqueda ).subscribe({ next:
+            this.prdService.guardarPrdCompra(this.prdBusqueda , this.DocumentoActivo  ).subscribe({ next:
               (respuesta:any|select)=>{
                 if (respuesta.error !== 'ok'){
                     Swal.fire(  'ERROR',respuesta.error, 'error') ;
@@ -64,15 +64,11 @@ export class BuscarProductosComponent implements OnInit {
                   this.loading.hide() 
 
                 },error : 
-                (error:errorOdoo) =>{
-                  console.log(JSON.stringify( error) );
-                  
-                  alert(error.error.error +"\n" + error.error.msg); 
+                (error:errorOdoo) =>{ 
+                  Swal.fire(  'ERROR',JSON.stringify( error), 'error') ; 
                   this.dialogo.close(false); 
                   this.loading.hide() 
                 } } ) 
-       
-        
     }
   }
 

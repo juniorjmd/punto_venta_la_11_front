@@ -11,4 +11,5 @@ export class  MediosDePagoModel {
     nombreCaja?:string;
     usuarioCaja?:number;
     usuarioCajaNombre?:string;
+    visible!:string;
 }

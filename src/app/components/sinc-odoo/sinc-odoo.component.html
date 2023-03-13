@@ -12,7 +12,7 @@ margin-right: auto;">
                         <fa-icon [icon]="facog " *ngIf="!proceso.estado" class="fa-spin"></fa-icon>
                         <fa-icon [icon]="faWarning " *ngIf="proceso.estado && !proceso.resultado"></fa-icon>
                         <fa-icon [icon]="faCheck " *ngIf="proceso.estado && proceso.resultado"></fa-icon>
-                        <p style="font-size: 11px;" *ngIf="proceso.detalle != '' ">{{proceso.detalle}}</p>
+                        <div style="font-size: 11px;" *ngIf="proceso.detalle != '' ">{{proceso.detalle}}</div>
                     </li>
 
                 </ul>

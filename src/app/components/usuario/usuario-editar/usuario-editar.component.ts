@@ -23,6 +23,7 @@ export class UsuarioEditarComponent {
     private userService : usuarioService
   ) {
    this.newUsuario = userImport;
+   console.log('usuario a editar ',this.newUsuario);
    
    this.newUsuario.Usr_Modif =  parseInt(localStorage.getItem('#2@56YH7H82BF')!) ; 
    }
@@ -34,15 +35,7 @@ export class UsuarioEditarComponent {
     
     console.log('nueva caja',this.newUsuario.Nombre1)
     this.newUsuario.usr_registro =  parseInt(localStorage.getItem('#2@56YH7H82BF')!); 
-    if (typeof(this.newUsuario.Nombre1) === 'undefined'){
-     this.loading.hide();
-      
-     Swal.fire(
-      'ERROR','Debe ingresar el Nombre de la caja',
-      'error'
-    ) ;
-     return;
-    }
+   
     if (typeof(this.newUsuario.Login) === 'undefined'){
       this.loading.hide(); 
       Swal.fire(
@@ -61,7 +54,7 @@ export class UsuarioEditarComponent {
   
     
     this.loading.show(); 
-    console.log(this.newUsuario);
+    console.log('usuario enviado' , this.newUsuario);
     
     this.userService.updateUsuarios(this.newUsuario).subscribe(
      (respuesta:any)=>{console.log(respuesta)

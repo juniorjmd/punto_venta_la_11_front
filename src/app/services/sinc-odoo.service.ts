@@ -36,7 +36,7 @@ export class SincOdooService {
     return  retorno
   } 
   actualizarClientes(): Promise<select|any>{
-    let datos = {"action": actions.actionActualizarMarcasOdoo };
+    let datos = {"action": actions.actionActualizarPersonasOdoo };
     console.log('servicios actualizarMarcas ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
@@ -53,6 +53,16 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
+
+  GenerarCGS(): Promise<select|any>{
+    let datos = {"action": actions.actionGenerarCGS };
+    console.log('servicios finalizarActulizacion ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
+    const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
+    return  retorno
+  } 
+
+
+  
   actualizarCategorias(): Promise<select|any>{
     let datos = {"action": actions.actionActualizarCategoriasOdoo };
     console.log('servicios actualizar categorias ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);

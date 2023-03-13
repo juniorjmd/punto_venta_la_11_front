@@ -65,4 +65,6 @@ resolucion?:string;
 fechaInicioResolucion?:number|Date;
 fechaFinResolucion?:number|Date;
 nombreUsuarioResolucion ?:string;
+referencia ?:string ;
+ referencia_codigo ?:number;
 }

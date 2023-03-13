@@ -46,15 +46,20 @@ export class SincOdooComponent {
   bodegas:any[] =[]
   bodegasNombre:any[] =[]
   contProce:number = 0 ; 
-  constructor(private _sincService : SincOdooService,
-    
-    private _Router : Router) {
-   
-
+  constructor(private _sincService : SincOdooService, private _Router : Router) {
       this.generarActualizacion();
     } 
-    async finalizarProcesos(){
+async finalizarProcesos(){
       if(this.terminoBien){
+      const retornoCGS = await this._sincService.GenerarCGS();
+      console.log(retornoCGS);
+
+      if (retornoCGS.error !== 'ok') {
+        this.procesosFinal.resultado = false;
+        this.procesos[0].resultado = false;
+        this.terminoBien= false;
+        return;
+      }
       const retornoEsta = await this._sincService.finalizarActulizacion();
       console.log(retornoEsta);
       this.procesos[0].estado = true;
@@ -71,7 +76,7 @@ export class SincOdooComponent {
     this.procesos[0].resultado = false;}
   }
   
-  async validaGenearActualizacion(){
+async validaGenearActualizacion(){
     try { 
       
       this.procesos[this.contProce] = this.procesosInicio;
@@ -79,14 +84,15 @@ export class SincOdooComponent {
          console.log(retornoEsta); 
    
      if (retornoEsta.error == 'ok'){ 
-      console.log( 'codEstado', retornoEsta.datos[0].codEstado )
+      console.log( 'codEstado', retornoEsta.datos[0].codEstado , 'datos retornados', retornoEsta.datos[0] )
       if( retornoEsta.datos[0].codEstado == 1 ){ 
          this.terminoBien= false;   
         this.contProce++
         this.procesos[this.contProce] = {
           nombre: 'Actualmente se encuentra Activo un proceso de actualizacion ',
           estado: true,
-          detalle: 'por favor espere un momento',
+          detalle: `usuario : ${retornoEsta.datos[0].nombreUsuario},
+          por favor espere un momento` ,
           resultado: false
         }; 
             setTimeout(()=>{
@@ -96,17 +102,16 @@ export class SincOdooComponent {
   
    }else{
     alert(retornoEsta.error);
-    
    }
     } catch (error:any) {
       console.log(error); 
     }
     
   }
-  retornoLogin(){
+retornoLogin(){
     this._Router.navigate(['login']);
   }
-    async  generarActualizacion(){
+async  generarActualizacion(){
     try {
       this.procesos[this.contProce] =  this.procesosInicio ;
       await this.validaGenearActualizacion(); 
@@ -209,7 +214,7 @@ async actulizarMarcas(){
    this.contProce++;
     
    this.procesos[this.contProce] = {
-     nombre:  'Actulizando listado de Taxes desde Odoo' ,
+     nombre:  'Actulizando listado de Marcas desde Odoo' ,
      estado: false,
      detalle: "",
      resultado: false

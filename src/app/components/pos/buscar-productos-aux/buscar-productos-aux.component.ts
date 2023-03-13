@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { select } from 'src/app/interfaces/generales';
 import { errorOdoo, OdooPrd } from 'src/app/interfaces/odoo-prd';
 import { loading } from 'src/app/models/app.loading';
+import { DocumentosModel } from 'src/app/models/documento.model';
 import { ProductoService } from 'src/app/services/producto.service';
 import Swal from 'sweetalert2';
 
@@ -15,15 +16,19 @@ import Swal from 'sweetalert2';
 export class BuscarProductosAuxComponent implements OnInit {
   parceros : OdooPrd[] = [];
   prdBusqueda !:OdooPrd   ;
+  DocumentoActivo:DocumentosModel;
   codPrd:string ;  
   show = false ;
   cantidadPrd:number ;  loading = new loading();
   disabled:boolean[]
   constructor(   private prdService : ProductoService, 
-    public dialogo: MatDialogRef<BuscarProductosAuxComponent>) { 
+    public dialogo: MatDialogRef<BuscarProductosAuxComponent>,
+    @Inject(MAT_DIALOG_DATA) public codPrdInser:{codigo:string , doc:DocumentosModel}
+    ) { 
       this.cantidadPrd = 0 ;
      // this.codPrd =  codPrdInser ;
-     this.codPrd = '';
+     this.codPrd = codPrdInser.codigo;
+     this.DocumentoActivo =  codPrdInser.doc;
       this.buscarProducto();
       this.disabled = [true,true,true,true,true,true,true,true,true,true];
     }
@@ -42,7 +47,7 @@ export class BuscarProductosAuxComponent implements OnInit {
     if ( this.cantidadPrd > 0 && this.prdBusqueda.cantidad! >= this.cantidadPrd){  
             this.prdBusqueda.cantidadVendida = this.cantidadPrd;
             this.loading.show() 
-            this.prdService.guardarPrdCompra(this.prdBusqueda ).subscribe(
+            this.prdService.guardarPrdCompra(this.prdBusqueda, this.DocumentoActivo  ).subscribe(
               {next:(respuesta:any|select)=>{
                 if (respuesta.error !== 'ok'){
                     Swal.fire(  'ERROR',respuesta.error, 'error') ;

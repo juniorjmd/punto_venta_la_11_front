@@ -79,10 +79,10 @@
                     <td>{{caja.cuentaContable}}</td>
                     <td>{{caja.nombreEstado}}</td>
                     <td>{{caja.nombreEsta}}</td>
-                    <td *ngIf="caja.nombre !== 'Efectivo'">
+                    <td *ngIf="caja.visible === 'SI'">
                         <fa-icon [icon]="faPencilAlt " class="fas fa-pencil-alt boton_activo" (click)="setActualizaCaja(caja)"></fa-icon>
                     </td>
-                    <td *ngIf="caja.nombre === 'Efectivo'">
+                    <td *ngIf="caja.visible === 'NO'">
                         <span class="fa-stack fa-1x"> 
                             <fa-icon [icon]="faBan "   style="color:Tomato" title=""></fa-icon> 
                                              </span>

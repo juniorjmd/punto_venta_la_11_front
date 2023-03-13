@@ -2,6 +2,7 @@
  
 
  export const TABLA = {
+   cgs:'CODIGO_DEL_SISTEMA',
    products : 'prd_productos',
    documentos_clientes : 'documentos_clientes',
    tipoDeIdentificacion : 'documentos_clientes_tipos',

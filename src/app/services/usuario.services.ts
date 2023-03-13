@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { loading } from 'src/app/models/app.loading';
-import { Usuarios } from '../interfaces/usuario.interface';
+import { Usuarios, Usuario } from '../interfaces/usuario.interface';
 import { actions } from '../models/app.db.actions';
 import { TABLA } from '../models/app.db.tables';
 import { httpOptions, url } from '../models/app.db.url';
@@ -17,7 +17,7 @@ export class usuarioService {
     loading = new loading();
     constructor(private http: HttpClient ,
         private _Router : Router){ 
-            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            let llaveDeRegistro =  localStorage.getItem('sis41254#2@') ; 
             if (!llaveDeRegistro){
                   this._Router.navigate(['login']);
             }
@@ -25,7 +25,23 @@ export class usuarioService {
         const headers = httpOptions() ; ;
             this.requestOptions = { headers: headers };
     }
-    
+    getPersonasDisponibles(){ 
+        let datos = {"action": actions.actionSelect ,
+    "_tabla" : vistas.personas_disponibles_para_usuarios
+   };
+console.log('servicios de usuarios activo - getUsuarios' ,url.action , datos,this.requestOptions);
+return this.http.post(url.action , datos,this.requestOptions) ;
+}
+
+  getPersonasDisponiblesLibranza(){ 
+        let datos = {"action": actions.actionSelect ,
+    "_tabla" : vistas.personas_disponibles_para_libranza
+   };
+console.log('servicios de usuarios activo - getUsuarios' ,url.action , datos,this.requestOptions);
+return this.http.post(url.get , datos,this.requestOptions) ;
+}
+
+
     getPerfiles(){
         let datos = {"action": actions.actionSelect ,
                      "_tabla" : TABLA.perfiles
@@ -44,7 +60,7 @@ export class usuarioService {
     guardarUsuarios(usuario :any){
         let arrayDatos:any=new Object()  ;
         for (let key in usuario){
-            if (key !== 'ID'){
+            if (key !== 'ID' && key !== 'mail' ){
           arrayDatos[key] = usuario[key] ;
             
         }}
@@ -52,11 +68,11 @@ export class usuarioService {
         
         let datos = {"action": actions.actionInsert ,
                      "_tabla" : TABLA.usuarios,
-                     "_arraydatos" : arrayDatos
+                     "_arraydatos" : arrayDatos,
                     };
 
         console.log('servicios de usuarios activo - getUsuarios' ,url.action , datos,this.requestOptions);
-        return this.http.post(url.action , datos,this.requestOptions) ;
+        return this.http.post(url.create , datos,this.requestOptions) ;
     }
     guardarUsuarioPerfil(usuario : UsuarioModel ,  perfil:number){
       
@@ -70,16 +86,29 @@ export class usuarioService {
         console.log('servicios de usuarios activo - guardarUsuarioPerfil' ,url.action , datos,this.requestOptions);
         return this.http.post(url.action , datos,this.requestOptions) ;
     }
+
+    cambiarContraseña(Usuario:UsuarioModel){
+        
+        /**  if ( trim($_qazxswe) === '' or !isset($_qazxswe) or  
+         trim($_wsxedc) === '' or !isset ($_wsxedc) or       
+         trim($_kjhgtyuhybv) === '' or !isset($_kjhgtyuhybv) ) */
+        let datos = {"action": actions.actionCambioPass ,
+                     "_qazxswe" : Usuario.Login,
+                     "_wsxedc" : Usuario.passNew,
+                     "_kjhgtyuhybv": Usuario.passNewConfirm
+                    };
+
+        console.log('servicios de usuarios activo - cambiarContraseña' ,url.create , datos,this.requestOptions);
+        return this.http.post(url.create , datos,this.requestOptions) ;
+    }
     updateUsuarios(usuario : any){
         let arrayDatos:any = {} ;
         let where:any[] = []
        
 
     for (const [key, valor] of Object.entries(usuario)) {
-        console.log("Iterando...");
-        console.log("La clave es: " + key);
-        console.log("El valor es: " + valor);
-        if (key !== 'perfil'){
+        
+        if (key !== 'perfil' && key !== 'mail' && key !== 'idPersona'){
             if (key !== 'ID'){
           arrayDatos[key] = valor;
             

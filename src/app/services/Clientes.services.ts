@@ -8,6 +8,7 @@ import { httpOptions, url } from '../models/app.db.url';
 import { vistas } from '../models/app.db.view';
 import { DocumentosModel } from '../models/documento.model';
 import { TABLA } from '../models/app.db.tables';
+import { Persona } from '../interfaces/persona';
 
 @Injectable({
     providedIn: 'root'
@@ -37,7 +38,7 @@ export class ClientesService {
     requestOptions:any;
     constructor(private http: HttpClient ,
         private _Router : Router){ 
-            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            let llaveDeRegistro =  localStorage.getItem('sis41254#2@') ; 
             if (!llaveDeRegistro){
                   this._Router.navigate(['login']);
             }
@@ -115,6 +116,15 @@ export class ClientesService {
        }
         console.log('setClienteOdoo  ' ,JSON.stringify(cliente),url.createOdoo , datos,this.requestOptions);
         return this.http.post(url.action , datos,this.requestOptions) ;
+    }
+    generarMarcacionLibranza( cliente:Persona , documento : DocumentosModel ){
+        let datos = {"action": actions.actionPasarDocumentoALibranza ,
+        "_id_persona" : cliente.id , 
+          "_documento_orden" : documento.orden 
+       }
+        console.log('setClienteOdoo  ' ,JSON.stringify(cliente),url.createOdoo , datos,this.requestOptions);
+        return this.http.post(url.create , datos,this.requestOptions) ;
+    
     }
     updateClienteOdoo( cliente:ClientesOdoo   ){
 

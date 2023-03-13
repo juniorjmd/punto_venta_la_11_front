@@ -24,7 +24,7 @@ export class MaestroClienteServices {
     requestOptions:any
     constructor(private http: HttpClient ,
          private _Router : Router){ 
-            let llaveDeRegistro =  parseInt(localStorage.getItem('sis41254#2@')!) ; 
+            let llaveDeRegistro =  localStorage.getItem('sis41254#2@') ; 
             if (!llaveDeRegistro){
                   this._Router.navigate(['login']);
             }

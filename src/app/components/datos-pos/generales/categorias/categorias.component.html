@@ -17,28 +17,17 @@
                 <tr>
 
                     <th>Nombre</th>
-                    <th>Letra</th>
+                    <th>padre</th>
                     <th>Tipo</th>
-                    <th>Descripción</th>
-                    <th colspan="2">
-                        opcion
-                    </th>
+                    <th>parent path</th>
+
                 </tr>
                 <tr *ngFor="let categoria of categorias">
-                    <td>{{categoria.nombre }}</td>
-                    <td>{{categoria.letra}}</td>
+                    <td>{{categoria.name }}</td>
+                    <td>{{categoria. parent_id}}</td>
                     <td>{{categoria.tipoDescripcion }}</td>
-                    <td>{{categoria.descripcion.trim()}}</td>
-                    <td title="editar categoria">
-                        <fa-icon [icon]="faPencilAlt  " class="boton_activo" (click)="setActualizacategoria(categoria)"></fa-icon>
-                    </td>
+                    <td>{{categoria. parent_path.trim()}}</td>
 
-                    <td title="Asignar caracteristicas de categoria">
-                        <fa-icon [icon]="faAddressCard  " class="boton_activo" (click)="setAgregarPerfil(categoria)"></fa-icon>
-
-
-
-                    </td>
 
                 </tr>
 

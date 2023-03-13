@@ -19,7 +19,9 @@ import { BuscarProdDirectoComponent } from '../buscar-prod-directo/buscar-prod-d
 import Swal from 'sweetalert2';
 import { select } from 'src/app/interfaces/generales';
 import { FndClienteComponent } from '../../clientes/fnd-cliente/fnd-cliente.component';
-import { faCashRegister, faCheckDouble, faExchangeAlt, faFileAlt, faHandPointUp, faPlus, faSave, faSearch, faShoppingBag, faSyncAlt, faTimesCircle, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark, faCashRegister, faCheckDouble, faExchangeAlt, faFileAlt, faHandPointUp, faPlus, faSave, faSearch, faShoppingBag, faSyncAlt, faTimesCircle, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
+import { SistemaService } from '../../../services/sistema.service';
+import { ClientesDispoLibranzaComponent } from '../../clientes/clientes-dispo-libranza/clientes-dispo-libranza.component';
 
 
 @Component({
@@ -31,8 +33,10 @@ export class VentasComponent implements AfterViewInit  {
   faTimesCircle = faTimesCircle;
   faFileAlt = faFileAlt;
   faSave = faSave; 
+  faBookmarkO = faBookmark;
   faSyncAlt  = faSyncAlt;
 faSearch = faSearch;
+
 faHandPointUp = faHandPointUp;
 faShopify = faShoppingBag;
 faExchangeAlt = faExchangeAlt;
@@ -57,11 +61,53 @@ faTrash = faTrash;
     private newAbrirDialog : MatDialog,
     private documentoService : DocumentoService,
     private productoService : ProductoService,
+    private SistemaService :SistemaService
     
  ) {  
    
   
     this.getDocumentos(); 
+  }
+
+  asignarLibranza(){
+    Swal.fire({
+      title: 'validar CGS',
+      input: 'password',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Validar',
+      cancelButtonText: 'Cancelar',
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+        return  this.SistemaService.validarCGS(login)
+          .then(response => {
+            console.log('response',response);
+            
+            if ( response.error != 'ok') {
+              throw new Error( response.error)
+            }else{
+              if(response.numdata > 0 ){
+                this.newAbrirDialog.open(ClientesDispoLibranzaComponent ,{data:this.documentoActivo })
+                .afterClosed()
+                .subscribe(( response:{confirmado:boolean , doc:DocumentosModel}  )=>{
+                  console.log(response);
+                  
+                  if (response.confirmado){
+                    this.documentoActivo = response.doc;
+                  } 
+                })  
+              }else{ throw new Error( 'CGS invalido')}
+            } 
+          })
+          .catch(error => {
+            Swal.showValidationMessage(
+              `Request failed: ${error}`
+            )
+          })
+      }
+    })  
   }
   ngAfterViewInit(): void {
     this.irbuscarProducto();
@@ -85,7 +131,7 @@ faTrash = faTrash;
             })
             .afterClosed()
             .subscribe((confirmado: Boolean)=>{ 
-             // this.crearDocumento();
+              this.getDocumentos();
               this.codigoProducto = ''; 
               this.buscarClose = true;
             })  

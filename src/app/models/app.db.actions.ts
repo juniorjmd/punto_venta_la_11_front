@@ -5,8 +5,10 @@
  const actionUpdate = '9d9fa03fe878f82f47b0befd5421049b989eb5d2';
  const actionAsignarCajas = 'qwer12356yhn7ujm8ik';
  const actionInsert = 'da5cbea2f73b029d0ce3a1dc2a05a46e7f0461c4';
+ const actionCambioPass = '52444d9072f7ec12aJEE8FFJJKVNASDHQWFLKA';
  const actionProcedure = 'da5195132f73b029d0ce3a1dc2a05a46e7f0461c4';
  const actionSelect = 'e06c06e7e4ef58bdb0cf1858541b3017fdd35473';
+ const actionSelects = 'e06c06e7e4ef58bdb0kieujfñ541b3017fdd35473';
  const actionlogin = 'ef2e1d89937fba9f888516293ab1e19e7ed789a5';
  const actionSelectPorUsuario = 'e06c06e7e4ef58bdbdd35473wdc741qaz';
  const actionTipDocOdoo = 'BUSCAR_ODOO_TIPO_ID' ;
@@ -45,6 +47,7 @@
  const actionCambiarDocADomicilio = 'CAMBIAR_DOCUMENTO_A_ENVIO'; 
 
  export const actions = {
+   'actionCambioPass':actionCambioPass, 
   'actionCambiarDocADomicilio' : actionCambiarDocADomicilio,
   'actionCancelarDocumentos' : actionCancelarDocumentos,
   'actionCerarCajaParcial' : actionCerarCajaParcial,
@@ -61,15 +64,17 @@
     'actionUpdate' :actionUpdate ,
     'actionInsert' :actionInsert ,
     'actionProcedure' :actionProcedure,
-    'actionSelect' :actionSelect ,
-    
+    'actionSelect' :actionSelect,
+    'actionSelects' :actionSelects ,
     'actionActualizarBodegasOdoo' :'ACTUALIZAR_EXISTENCIA_POR_BODEGA',
     'actionActualizarProductosOdoo' :'ACTUALIZAR_LISTADO_DE_PRODUCTOS',
     'actionActualizarCategoriasOdoo' :'ACTUALIZAR_LISTADO_DE_CATEGORIAS',
     'actionActualizarTaxesOdoo' :'ACTUALIZAR_LISTADO_DE_TAXES',
     'actionActualizarMarcasOdoo' :'ACTUALIZAR_LISTADO_DE_MARCAS',
+    'actionActualizarPersonasOdoo' :'ACTUALIZAR_LISTADO_DE_PERSONAS',
     'actionActualizarTiposIdOdoo' :'ACTUALIZAR_TIPOS_DOCUMENTOS',
     'actionActualizarClientessOdoo' :'ACTUALIZAR_LISTADO_DE_PERSONAS',
+    'actionGenerarCGS' : 'ACTUALIZAR_CODIGOS_DEL_SISTEMA',
     'actionFinalizarActualizacion' :'FINALIZAR_ACTUALIZACION_ODOO',
     'actionBuscarPaisesOdoo' : 'BUSCAR_ODOO_PAIS',
     'actionBuscarStatesOdoo' : 'BUSCAR_ODOO_DEP',
@@ -102,5 +107,6 @@
     'actionCrearClienteOdoo' : 'CREAR_CLIENTE_NUEVO_ODOO',
     'actionCrearClienteOdooPlusDoc' : 'CREAR_CLIENTE_NUEVO_ODOO_PLUS_DOC',
     'actionActualizarClienteOdoo' : 'ACTUALIZAR_CLIENTE_ODOO',
-    'actionPasarClienteAControl' : 'CREAR_CLIENTE_ODOO_A_CONTROL'
+    'actionPasarClienteAControl' : 'CREAR_CLIENTE_ODOO_A_CONTROL',
+    'actionPasarDocumentoALibranza' : 'CREAR_LIBRANZA'
     }

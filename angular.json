@@ -46,7 +46,7 @@
                             "node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ],
                         "allowedCommonJsDependencies": [
-                            "leaflet", "sweetalert2"
+                            "leaflet", "sweetalert2", "jquery"
                         ]
                     },
                     "configurations": {
@@ -58,8 +58,8 @@
                                 },
                                 {
                                     "type": "anyComponentStyle",
-                                    "maximumWarning": "2kb",
-                                    "maximumError": "4kb"
+                                    "maximumWarning": "2000kb",
+                                    "maximumError": "2mb"
                                 }
                             ],
                             "outputHashing": "all"

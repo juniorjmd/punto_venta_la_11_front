@@ -14,15 +14,20 @@ export class UsuarioModel {
     Usr_Modif!: number;
     Fecha_Modif!: string;
     pass!: string;
+    passNew?: string;
+    passNewConfirm?: string;
     change_pass!: number;
     ultimo_ingreso!: string;
     mail!: string;
+    empleado?:boolean;
     descripcion?:string;
     perfil?:number;
     libranza?:boolean;
+    idPersona:number = 0;
     constructor( cargaUsuario ?: Usuarios ){
       if(typeof(cargaUsuario) !== 'undefined'){
         this.ID= cargaUsuario.ID	;
+        this.empleado = cargaUsuario.empleado
         this.Login= cargaUsuario.Login	;
         this.Nombre1= cargaUsuario.Nombre1	;
         this.Nombre2= cargaUsuario.Nombre2	;

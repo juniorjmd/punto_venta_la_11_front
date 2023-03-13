@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { faUser, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import { vwsucursal } from 'src/app/models/app.db.interfaces';
@@ -7,6 +8,7 @@ import { UsuarioModel } from 'src/app/models/usuario.model';
 import { DatosInicialesService } from 'src/app/services/datos-iniciales.service';
 import { LoginService } from 'src/app/services/login.service';
 import { SincOdooService } from '../../services/sinc-odoo.service';
+import { CambioPassComponent } from './cambio-pass/cambio-pass.component';
 
 @Component({
   selector: 'app-login',
@@ -17,48 +19,34 @@ export class LoginComponent implements OnInit
 {
   faUser = faUser ;
 faEnvelope = faEnvelope ;
- usuario:UsuarioModel = {
-   ID: 0,
-   Login: '',
-   Nombre1: '',
-   Nombre2: '',
-   Apellido1: '',
-   Apellido2: '',
-   nombreCompleto: '',
-   estado: 0,
-   usr_registro: 0,
-   Fecha_Registro: '',
-   Usr_Modif: 0,
-   Fecha_Modif: '',
-   pass: '',
-   change_pass: 0,
-   ultimo_ingreso: '',
-   mail: ''
- }
+ usuario!: UsuarioModel;
  sucursal:vwsucursal[]=[]; 
  valSincronizar =  localStorage.getItem('E9PZJrrrRy5UVx7oqf+s9E0buds=')! ; 
- constructor(private _datosInicialesService : DatosInicialesService,
+ constructor(private _datosInicialesService : DatosInicialesService, private loginDialog : MatDialog ,
    private _loginService: LoginService,private _sincService :SincOdooService,
-   private _Router : Router) {
-
-
-    
+   private _Router : Router) {    
      localStorage.clear();
 this.inicioLogin();
-
-
   }
   
+  cambiarClaveUsuario( usuario:UsuarioModel){
+  console.log('nuevo usuario');
+  usuario.Login = this.usuario.Login;
+    this.loginDialog.open(CambioPassComponent,{data:{usuario , sucursal : this.sucursal}})
+  .afterClosed()
+  .subscribe(( confirmado:boolean   )=>{
+    if ( confirmado){  
+      this._Router.navigate(['home']);
+  }
+  })
+  }
+
+
   async inicioLogin(){
     await this.validaGenearActualizacion();
-
-
-
     this._datosInicialesService.getDatosIniSucursal(this.valSincronizar).subscribe(
       { next : (data:any)=>{  this.sucursal = data.sucursal; 
        console.log(data);
-       
-        
        if( !data.datosActualizacion || data.datosActualizacion.estado !=="activa") {
          this._Router.navigate(['sincronizar']);
         }
@@ -115,8 +103,15 @@ this.inicioLogin();
        }else{
          console.log('getLogin',datos.data.usuario);  
          localStorage.setItem('sis41254#2@', datos.data.usuario.key_registro );
-         localStorage.setItem('#2@56YH7H82BF', datos.data.usuario.id );
-         this._Router.navigate(['home']);
+         localStorage.setItem('#2@56YH7H82BF', datos.data.usuario.id ); 
+         
+           if(datos.data.usuario.change_pass > 0){ 
+             this._Router.navigate(['home']);
+            }
+           else{
+            this.cambiarClaveUsuario(datos.data.usuario);
+         }
+       
        }
      
    } ,

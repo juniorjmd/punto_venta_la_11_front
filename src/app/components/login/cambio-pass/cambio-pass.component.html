@@ -1,0 +1,56 @@
+<body>
+    <br><br><br>
+
+
+    <h1>
+        {{sucursal[0].nombre_suc}}
+        <img [src]="sucursal[0].logo" alt="" width="50px" height="50px" /></h1>
+    <div class="w3ls-login box box--big">
+        <!-- form starts here -->
+        <form (ngSubmit)="login()" #f="ngForm">
+            <div>
+                <h3> <label>Cambio de contraseña
+                </label>
+                </h3>
+            </div>
+            <div class="agile-field-txt">
+                <label>
+                <fa-icon [icon]="faUser" ></fa-icon>Username </label>
+                <input type="text" readonly id="identificacion" [(ngModel)]="usuario.Login" value='ADMIN' name="name" placeholder="Enter your name " required>
+            </div>
+            <div class="agile-field-txt">
+                <label> 
+                <fa-icon [icon]="faEnvelope" ></fa-icon>Nuevo password </label>
+                <input type="password" name="passwordNew" [(ngModel)]="usuario.passNew" placeholder="Enter your password " #password required id="passwordnew">
+
+            </div>
+            <div class="agile-field-txt">
+                <label>
+                <fa-icon [icon]="faEnvelope" ></fa-icon>Confirmar password </label>
+                <input type="password" name="password2" [(ngModel)]="usuario.passNewConfirm" placeholder="Enter your password " #password required id="password2">
+
+            </div>
+            <!-- script for show password -->
+            <!-- //script ends here -->
+            <div class="w3ls-bot">
+
+                <div class="form-end">
+                    <button id="btnIngresar" class='submit'>
+                        LOGIN
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div style="font-size: 9px;font-family: cursive;font-weight: 500;">
+                JDS-Soluciones &#169;2020</div>
+        </form>
+    </div>
+
+
+
+
+
+    <div>
+
+    </div>
+</body>

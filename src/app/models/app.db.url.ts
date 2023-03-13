@@ -22,7 +22,7 @@ export let httpOptions = ()=>{
   
     return new HttpHeaders({
       'Content-type': 'application/json' ,
-      'AUTORIZACION' :localStorage.getItem('sis41254#2@')! 
+      'AUTORIZACION': localStorage.getItem('sis41254#2@')! 
   })
   
 }
