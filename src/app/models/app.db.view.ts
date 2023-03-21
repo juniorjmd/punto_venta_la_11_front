@@ -1,4 +1,6 @@
  export const vistas = {
+  adm_cartera_con_pagos :'vw_adm_cartera_libranza_con_pagos',
+  pagos_con_cierre : 'vw_pagos_con_cierre',
   documentos_listado_productos_por_cierre : 'vw_documentos_listado_productos_por_cierre',
   corte_de_caja : 'vw_corte_de_caja',
   corte_de_caja_parcial : 'vw_corte_de_caja_parcial',

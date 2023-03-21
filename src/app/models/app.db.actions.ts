@@ -33,6 +33,7 @@
  const actionCrearDocumentos = 'CREAR_DOCUMENTO_POR_USUARIO' ; 
 
  const actionCerarDocumentos = 'CREAR_STOCK_PICKING_FINAL' ; 
+ const actionCerrarDocumentoPago = 'CERRAR_DOCUMENTO_PAGO' ; 
  const actionChangeDocumentos = 'CAMBIAR_DOCUMENTO_ACTIVO_POR_USUARIO' ; 
  const actionCancelarDocumentos = 'CANCELAR_DOCUMENTO_POR_USUARIO' ; 
  const actionCambioCajaDocumento = 'CAMBIAR_DOCUMENTO_POR_CAJA';
@@ -42,6 +43,7 @@
  const actionAsignarPagosDoc = 'ASIGNAR_PAGOS_DOCUMENTOS';
  const STOCK_MOVE = 'STOCK_MOVE';
  const STOCK_MOVE_DEVOLUCION = 'STOCK_MOVE_DEVOLUCION';
+ const DEVOLUCION_EN_VENTA = 'DEVOLUCION_EN_VENTA';
  const actionBuscarMarcas = 'BUSCAR_MARCAS';
  const actionCerarCajaParcial = 'CERRAR_CAJA_PARCIAL';
  const actionCambiarDocADomicilio = 'CAMBIAR_DOCUMENTO_A_ENVIO'; 
@@ -56,6 +58,7 @@
    'actionResumenCaja': actionResumenCaja,
     'actionCerarCaja': actionCerarCaja, 
     'actionCerarDocumentos':actionCerarDocumentos,
+    'actionCerrarDocumentoPago':actionCerrarDocumentoPago,
     'datosInicialesSucursal' : datosInicialesSucursal,
     'actionAsignarDocumentosPagos':actionAsignarPagosDoc , 
     'actionBuscarMarcas' : actionBuscarMarcas,
@@ -66,6 +69,7 @@
     'actionProcedure' :actionProcedure,
     'actionSelect' :actionSelect,
     'actionSelects' :actionSelects ,
+    'actionIngresarPagosLibranza' :'INGRESAR_PAGOS_LIBRANZA',
     'actionActualizarBodegasOdoo' :'ACTUALIZAR_EXISTENCIA_POR_BODEGA',
     'actionActualizarProductosOdoo' :'ACTUALIZAR_LISTADO_DE_PRODUCTOS',
     'actionActualizarCategoriasOdoo' :'ACTUALIZAR_LISTADO_DE_CATEGORIAS',
@@ -103,6 +107,7 @@
     'actionChangeDocumentos' : actionChangeDocumentos , 
     'actionStockMove' : STOCK_MOVE ,
     'actionStockMoveDevolucion' : STOCK_MOVE_DEVOLUCION ,
+    'actionDevolucionEnVenta' :DEVOLUCION_EN_VENTA,
     'actionSelectClienteOdoo' : 'BUSCAR_ODOO_CLIENTES' ,
     'actionCrearClienteOdoo' : 'CREAR_CLIENTE_NUEVO_ODOO',
     'actionCrearClienteOdooPlusDoc' : 'CREAR_CLIENTE_NUEVO_ODOO_PLUS_DOC',

@@ -60,7 +60,7 @@ async finalizarProcesos(){
         this.terminoBien= false;
         return;
       }
-      const retornoEsta = await this._sincService.finalizarActulizacion();
+      const retornoEsta = await this._sincService.finalizarActulizacion(this.procesos);
       console.log(retornoEsta);
       this.procesos[0].estado = true;
       this.procesos[0].resultado = true;

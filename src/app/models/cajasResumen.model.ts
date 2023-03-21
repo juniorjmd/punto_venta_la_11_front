@@ -19,4 +19,13 @@ export class cajasResumenModel{
     caja!: caja;
     NusuarioApertura ?:string;
     NusuarioCierre ?:string; 
+    pagos ?:{
+        id :number ,
+        tipo_pago :number,
+        valor:number ,
+        cod_cierre :number ,
+        nombre: string,
+        descripcion : string,
+        fecha_apertura :Date,
+        fecha_cierre :Date  }[]
 }

@@ -1,6 +1,6 @@
-<div class="container-fluit">
+<div class="container-fluid">
     <div *ngIf="listo">
-        <table class="table" style="min-width: 350px;">
+        <table class="table" style="min-width: 650px;">
             <tr>
                 <th>Medio de Pago</th>
                 <th>Cantidad</th>
@@ -41,8 +41,8 @@
             <tr>
                 <td colspan="2" style="text-align: center;">
                     <hr>
-                    <button class="btn btn-success" (click)="finalizarOk()">Cerrar Factura</button>
-                    <button class="btn btn-warning" style="margin-left: 5%;" (click)="cancelar()">Continuar Facturando</button>
+                    <button class="btn btn-outline-success" (click)="finalizarOk()">Cerrar Factura</button>
+                    <button class="btn btn-outline-warning" style="margin-left: 5%;" (click)="cancelar()">Continuar Facturando</button>
                     <hr>
                 </td>
             </tr>

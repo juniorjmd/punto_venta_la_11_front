@@ -15,7 +15,7 @@
                         </div>
                         <div class="col-sm-6 centrado">
                             <div class="form-group">
-                                <select class="form-control" name="" id="">
+                                <select [(ngModel)]="tipoBusqueda" class="form-control" name="" id="">
                                <option value="1">Fecha Inicio del Cierre</option>
                                <option value="2">Fecha Fin del Cierre</option>
                              </select>
@@ -23,12 +23,15 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6 centrado">
+                        <div class="col-sm-4 centrado">
                             <label class=" col-sm-12">Inicio</label>
-                            <input type="date" class="form-control col-sm-12"></div>
-                        <div class="col-sm-6 centrado">
+                            <input [(ngModel)]="fecha1" type="date" class="form-control col-sm-12"></div>
+                        <div class="col-sm-4 centrado">
                             <label class=" col-sm-12">Fin</label>
-                            <input type="date" class="form-control col-sm-12">
+                            <input [(ngModel)]="fecha2" type="date" class="form-control col-sm-12">
+                        </div>
+                        <div class="col-sm-4 centrado">
+                            <input (click)="GET_CIERRES_TOTALES_Y_PARCIALES_POR_FECHA()" value="filtar" type="button" class="form-control col-sm-12">
                         </div>
                     </div>
                 </div>

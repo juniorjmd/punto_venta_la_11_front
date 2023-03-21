@@ -128,7 +128,7 @@ let impuestos:number = (producto.impuestos)? producto.impuestos[0].amount:0     
 
 devolverPrdCompra(producto : DocumentoListado){
 
-  let datos = {"action": actions.actionStockMoveDevolucion , 
+  let datos = {"action": actions.actionDevolucionEnVenta , 
   "_precio_brt_prd" : producto.presioVenta    , 
   "_iva_porc" : producto.porcent_iva  ,
    "_precio_siniva_prd" : producto.presioSinIVa    ,

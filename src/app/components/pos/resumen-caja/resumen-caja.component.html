@@ -29,37 +29,6 @@
         cierre : {{cajaResumen.fecha_cierre}} usuario : {{cajaResumen.NusuarioCierre}}
     </div>
 </div>
-
-<div class="row">
-    <div class="col-sm-12">
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-
-    </div>
-</div>
-
 <div class="row">
     <div class="col-sm-12">
         Descripcion : {{caja.descripcion}}
@@ -68,7 +37,21 @@
 
 <div class="row">
     <div class="col-sm-12">
+        <table class="table table-striped table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>pagos recibidos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let pago of cajaResumen.pagos">
+                    <td scope="row">
+                        {{pago.nombre}} : {{pago.valor}}
+                    </td>
+                </tr>
 
+            </tbody>
+        </table>
     </div>
 </div>
 

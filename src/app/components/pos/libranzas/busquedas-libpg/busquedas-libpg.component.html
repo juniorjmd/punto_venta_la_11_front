@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="row align-items-start">
+
+        <div class="col">
+            <h3 class="nowrap">buscar libanza</h3>
+        </div>
+
+
+    </div>
+    <div class="row align-items-start" *ngIf="cantCarteraLib == 0">
+        <div class="input-group">
+            <span class="input-group-text">Identificacion : </span>
+
+            <input [(ngModel)]="numeroLib" class="form-control" type="number" (keyup.enter)="buscarLibranzaPorCedula()" placeholder="Identificacion" aria-label="Username" aria-describedby="basic-addon1">
+            <button class="btn btn-outline-secondary" (click)="buscarLibranzaPorCedula()" type="button">Buscar</button>
+        </div>
+    </div>
+    <div class="row" *ngIf="cantCarteraLib != 0">
+        <table class="table table-bordered table-inverse table-responsive">
+            <thead class="thead-inverse">
+                <tr>
+                    <th>idCuenta</th>
+                    <th>descripcion</th>
+                    <th>empleado</th>
+                    <th>valorInicial</th>
+                    <th>abonoInicial</th>
+                    <th>numero de pagos</th>
+                    <th>total pagado</th>
+                    <th>saldo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cartera of carteras ; let i = index ;">
+                    <td scope="row">{{cartera.idCuenta}}</td>
+                    <td>{{cartera.descripcion}}</td>
+                    <td>{{cartera.display_name}}</td>
+                    <td>{{cartera.valorInicial}}</td>
+                    <td>{{cartera.abonoInicial}}</td>
+                    <td>{{cartera.numPagosRealizados}}</td>
+                    <td>{{cartera.totalPagos}}</td>
+                    <td>{{cartera.TotalActual}}</td>
+                    <td><input type='number' [(ngModel)]="carteras[i].totalAPagar" (change)="carteras[i].totalAPagar! < 0 ? carteras[i].totalAPagar = 0 : carteras[i].totalAPagar; carteras[i].totalAPagar! > cartera.TotalActual ? carteras[i].totalAPagar = cartera.TotalActual : carteras[i].totalAPagar;"
+                            (max)='cartera.TotalActual' min=0 /> </td>
+                </tr>
+            </tbody>
+            <tr>
+                <td colspan="9">
+
+                    <button type="button" (click)="guardarPagoLibranza()" class="btn btn-outline-success">Procesar</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

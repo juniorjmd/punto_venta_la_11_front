@@ -33,6 +33,7 @@ export class PagosVentaComponent implements OnInit {
   }
   finalizarOk(){
     //documentos_pagos
+    //if(this.Documento.referencia == 'PAGO_LIBRANZA'){}
     this.serviceCaja.setPagoDocumento(this.Documento.orden ,this.pagos )
      .subscribe( {next:
       (datos:any|select)=>{
@@ -129,6 +130,7 @@ getMediosP(){
         
         
         }) 
+        this.ordenarPagos();
     }else{
       this.MedioP = [];
     } 
@@ -142,5 +144,31 @@ getMediosP(){
           'error');
       }}
       );
+  }
+
+
+
+  ordenarPagos(){
+    let index = 1;
+    if(this.Documento.referencia === 'LIBRANZA'){index = 2;}
+    let aux_pagos:DocpagosModel[] = [];
+ 
+    this.pagos.forEach((pago)=>{
+      switch(pago.nombreMedio){
+        case 'libranza':
+          aux_pagos[1] = pago;
+          break;
+          case 'Efectivo':
+            aux_pagos[0] = pago;
+            this.indexEfectivo = 0;
+          break;
+          default:
+            aux_pagos[index] = pago;
+          break;
+
+      } 
+
+    })
+    this.pagos = aux_pagos;
   }
 }

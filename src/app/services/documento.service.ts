@@ -111,6 +111,16 @@ generarDomicilioDocumento(documento:number){
   console.log('actionCambiarDocADomicilio ' ,url.action , datos,this.requestOptions);
   return this.http.post(url.action , datos,this.requestOptions) ;
 }
+cerrarDocumentoPago(documento:number){
+  /* {"action": "CREAR_STOCK_PICKING_FINAL"   ,
+ "_documento" : 17
+  }*/
+   let datos = {"action": actions.actionCerrarDocumentoPago ,
+   "_id_documento" : documento }
+   console.log('cerrarDocumentoPago activo ' ,url.create , datos,this.requestOptions);
+   return this.http.post(url.create , datos,this.requestOptions) ;
+ }
+
 cerrarDocumento(documento:number){
  /* {"action": "CREAR_STOCK_PICKING_FINAL"   ,
 "_documento" : 17

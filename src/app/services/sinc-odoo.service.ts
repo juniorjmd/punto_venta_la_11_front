@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { select } from '../interfaces/generales';
+import { ProcesoSinc } from '../interfaces/proceso-sinc';
 import { actions } from '../models/app.db.actions';
 import { PROCEDURE } from '../models/app.db.tables';
 import { httpOptions, url } from '../models/app.db.url';
@@ -47,8 +48,8 @@ export class SincOdooService {
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno
   } 
-  finalizarActulizacion(): Promise<select|any>{
-    let datos = {"action": actions.actionFinalizarActualizacion };
+  finalizarActulizacion(procesos:ProcesoSinc[]): Promise<select|any>{
+    let datos = {"action": actions.actionFinalizarActualizacion , procesos};
     console.log('servicios finalizarActulizacion ' ,url.actionSincOdoo , datos, url.httpOptionsSinAutorizacion);
     const retorno =  this.http.post<select>(url.actionSincOdoo, datos, url.httpOptionsSinAutorizacion).toPromise();
     return  retorno

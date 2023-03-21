@@ -101,6 +101,8 @@ import { ClientesDisponiblesComponent } from './components/clientes/clientes-dis
 import { CambioPassComponent } from './components/login/cambio-pass/cambio-pass.component';
 import { ClientesDispoLibranzaComponent } from './components/clientes/clientes-dispo-libranza/clientes-dispo-libranza.component';
 import { LibranzasComponent } from './components/pos/libranzas/libranzas.component';
+import { BusquedasLibComponent } from './components/pos/libranzas/busquedas-lib/busquedas-lib.component';
+import { BusquedasLibpgComponent } from './components/pos/libranzas/busquedas-libpg/busquedas-libpg.component';
 
 @NgModule({
   declarations: [
@@ -166,7 +168,7 @@ import { LibranzasComponent } from './components/pos/libranzas/libranzas.compone
     MoverDocumentosComponent,
     PagosVentaComponent,
     ResumenCajaComponent,  
-    NciudadComponent, NpaisComponent, NdepartamentoComponent, NavbarUbicacionComponent, ClientesDisponiblesComponent, CambioPassComponent, ClientesDispoLibranzaComponent, LibranzasComponent,
+    NciudadComponent, NpaisComponent, NdepartamentoComponent, NavbarUbicacionComponent, ClientesDisponiblesComponent, CambioPassComponent, ClientesDispoLibranzaComponent, LibranzasComponent, BusquedasLibComponent, BusquedasLibpgComponent,
   ],
   imports: [
     BrowserModule,

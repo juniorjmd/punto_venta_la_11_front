@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
   styleUrls: ['./cierres.component.css']
 })
 export class CierresComponent { 
+  tipoBusqueda:string = "1";
+  fecha1:string = "";
+  fecha2:string = "";
   faMoneyBill = faMoneyBill; 
   faFolderClosed= faFolderClosed;
   faRightFromBracket = faRightFromBracket;
@@ -25,6 +28,40 @@ export class CierresComponent {
 
   ngOnInit(): void {
     
+  }
+
+
+
+  GET_CIERRES_TOTALES_Y_PARCIALES_POR_FECHA(){ 
+   if(this.fecha1.trim() == '') return
+   if(this.fecha2.trim() == '') this.fecha2 = this.fecha1 ; 
+
+   this.loading.show();
+   this._serviceCierre.getCierresPorFecha(this.tipoBusqueda , this.fecha1 , this.fecha2  ).subscribe(
+    (respuesta:any|select)=>{
+      let cont = 0;
+       console.log('getCierresPorFecha',respuesta); 
+       if (respuesta[0].error === 'ok' || respuesta[1].error === 'ok' || respuesta[2].error === 'ok'){ 
+         if (respuesta[0].numdata > 0)
+         {//respuesta.data[0]; 
+        console.log('datos cierres',respuesta[0].data);
+        this.cierres = respuesta[0].data;
+        this.cierresP = respuesta[1].data;
+        this.cierresPagos = respuesta[2].data;
+       console.log('getCierresTotalesYparciales' ,
+        this.cierres,     this.cierresP = respuesta[1].data ,this.cierresPagos = respuesta[2].data)
+        }else{
+          this.cierres = [];
+        this.cierresP =  [];
+        this.cierresPagos =  [];
+        }
+
+       }else{
+         alert(respuesta.error);
+       }
+       this.loading.hide();
+  }) 
+
   }
 
   getCierresTotalesYparciales(){
@@ -145,6 +182,7 @@ mostrarProductosVendidosPorCierre(cierreActual:CortesDeCajaModule){
   Swal.fire({html:pagosHtml, width: '1000px'});
 
   }
+  
   mostrarCierresPagos(item2:CortesDeCajaModule){ 
     
    let pagosHtml:string =  `<h1>Total de pagos relizados en el Cierre de caja # ${item2.id} <br>de la caja${item2.nombreCajaCierre}</h1>

@@ -22,6 +22,7 @@ import { FndClienteComponent } from '../../clientes/fnd-cliente/fnd-cliente.comp
 import { faBookmark, faCashRegister, faCheckDouble, faExchangeAlt, faFileAlt, faHandPointUp, faPlus, faSave, faSearch, faShoppingBag, faSyncAlt, faTimesCircle, faTrash, faUser } from '@fortawesome/free-solid-svg-icons';
 import { SistemaService } from '../../../services/sistema.service';
 import { ClientesDispoLibranzaComponent } from '../../clientes/clientes-dispo-libranza/clientes-dispo-libranza.component';
+import { BusquedasLibpgComponent } from '../libranzas/busquedas-libpg/busquedas-libpg.component';
 
 
 @Component({
@@ -155,6 +156,9 @@ faTrash = faTrash;
     let auxStr:string;
 let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
     this.documentoRetorno = this.documentoActivo
+    try {
+      
+   
    let nombreImpresora = printer.namePrinterGenerico;
    if (!nombreImpresora) return console.log("Selecciona una impresora");
    let conector = new ConectorPlugin('');
@@ -224,6 +228,9 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
    } else {
        console.log("Error. La respuesta es: " + respuestaAlImprimir);
    }
+  } catch (error) {
+      
+  }
   } 
   getMediosP(){ 
   this.loading.show()
@@ -307,7 +314,16 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
 
     console.log('buscarProducto',this.codigoProducto)
     if (this.codigoProducto.trim() !== '' &&  this.buscarClose){
-      this.buscarClose = false ;
+      if(this.codigoProducto.trim().toUpperCase() === 'PG01'){
+        this.newAbrirDialog.open(BusquedasLibpgComponent ,{data:this.documentoActivo}  )
+        .afterClosed()
+        .subscribe((confirmado: Boolean)=>{
+          this.getDocumentos();
+          this.codigoProducto = '';
+          this.irbuscarProducto();
+          this.buscarClose = true;
+        })  
+      }else{this.buscarClose = false ;
       this.newAbrirDialog.open(BuscarProductosComponent ,{data:{codigo:this.codigoProducto , doc:  this.documentoActivo} })
       .afterClosed()
       .subscribe((confirmado: Boolean)=>{
@@ -315,7 +331,8 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
         this.codigoProducto = '';
         this.irbuscarProducto();
         this.buscarClose = true;
-      })  
+      })  }
+      
     }
   }
   moverDocumentoCaja(){
@@ -403,6 +420,28 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
   //  documentoActivo
 
   this.loading.show() 
+
+  if(this.documentoActivo.referencia === 'PAGO_LIBRANZA'){
+    this.documentoService.cerrarDocumentoPago(this.documentoActivo.orden).subscribe({next:
+      (respuesta:any|select)=>{
+       let cont = 0;
+        console.log('cerrarDocumento',respuesta); 
+        if (respuesta.error === 'ok'){
+         //this.documentoRetorno = respuesta.data.documentoFinal;
+         this.printer_factura_final()
+         this.crearDocumento();
+         
+        }else{
+          Swal.fire(  'ERROR',respuesta.error, 'error') ;
+        }
+        this.loading.hide();
+        this.irbuscarProducto();
+ 
+ },error: (error)=>{   Swal.fire(  'ERROR', JSON.stringify(error), 'error') ; 
+  this.loading.hide();
+ this.irbuscarProducto();}} );
+   
+  }else{
   this.documentoService.cerrarDocumento(this.documentoActivo.orden).subscribe(
      (respuesta:any|select)=>{
       let cont = 0;
@@ -419,7 +458,7 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
        this.irbuscarProducto();
 
 } );
-  
+}
   }
   crearDocumento(){
     this.loading.show() 
@@ -519,6 +558,8 @@ let fechaStr =  dayOfMonth + "/" + month +"/" + year +' '+ hour +':'+minutes;
    // this.documentoActivo 
     this.irbuscarProducto();
    // this.printer_factura_final()
+ }else{
+  this.crearDocumento();
  }
  
  this.vueltas =false;

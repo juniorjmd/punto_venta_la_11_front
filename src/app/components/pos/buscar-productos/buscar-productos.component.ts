@@ -31,7 +31,7 @@ export class BuscarProductosComponent implements OnInit {
       this.cantidadPrd = 0 ;
       this.codPrd =  codPrdInser.codigo ;
       this.DocumentoActivo =  codPrdInser.doc ;
-      console.log('busquedaprd - documento',codPrdInser);
+      //console.log('busquedaprd - documento',codPrdInser);
       
       this.buscarProducto();
       this.disabled = [true,true,true,true,true,true,true,true,true,true];
@@ -56,11 +56,12 @@ export class BuscarProductosComponent implements OnInit {
               (respuesta:any|select)=>{
                 if (respuesta.error !== 'ok'){
                     Swal.fire(  'ERROR',respuesta.error, 'error') ;
-                    console.log(JSON.stringify(respuesta));
+                    //console.log(JSON.stringify(respuesta));
                     this.dialogo.close(false); 
                   }
                   else{ this.dialogo.close(true); 
-                    console.log('productoVendido',JSON.stringify(respuesta));}
+                    //console.log('productoVendido',JSON.stringify(respuesta));
+                  }
                   this.loading.hide() 
 
                 },error : 
@@ -74,13 +75,13 @@ export class BuscarProductosComponent implements OnInit {
 
    
    buscarProducto(){
-    console.clear()
+    //console.clear()
     this.loading.show() 
     this.prdService.getProductosCodBarrasVCnt(this.codPrd  ).subscribe(
       {next :  (respuesta:any|select)=>{
         if (respuesta.error === 'ok'){
            if (respuesta.numdata > 0 ){ 
-console.log('getProductosCodBarrasVCnt',respuesta.data[0]);
+//console.log('buscarProducto',respuesta.data[0]);
            this.prdBusqueda =  respuesta.data[0] ; 
             if(typeof(this.prdBusqueda.impuestos) === 'string')
             this.prdBusqueda.impuestos =JSON.parse(this.prdBusqueda.impuestos );
@@ -91,8 +92,11 @@ console.log('getProductosCodBarrasVCnt',respuesta.data[0]);
       this.prdBusqueda.descuento = 0;
     }
     this.prdBusqueda.cantidad= 0;
+////console.log('documento activo',this.DocumentoActivo,  this.DocumentoActivo.idStockOdooPOS);
 
     respuesta.data.forEach((element:any) => {
+    //console.log( element.bodega , this.DocumentoActivo.idStockOdooPOS , element.bodega == this.DocumentoActivo.idStockOdooPOS);
+     element.bodega == this.DocumentoActivo.idStockOdooPOS
      if( element.bodega == this.DocumentoActivo.idStockOdooPOS ){
       this.prdBusqueda.cantidad= element.cantidad_real;
       this.prdBusqueda.codigoExistencia= element.idExistencia;
@@ -156,7 +160,7 @@ console.log('getProductosCodBarrasVCnt',respuesta.data[0]);
          }else{
            Swal.fire(  'ERROR',respuesta.error, 'error') ;
          } 
-         console.log('getProductosCodBarrasVCnt',JSON.stringify(respuesta));
+         //console.log('getProductosCodBarrasVCnt',JSON.stringify(respuesta));
          this.loading.hide();
         
          },
